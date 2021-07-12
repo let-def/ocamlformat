@@ -246,24 +246,22 @@ let set_lexeme_length buf n = (
                      with pos_cnum = buf.lex_abs_pos + buf.lex_curr_pos};
 )
 
-let disambiguate lexbuf txt =
+let do_disambiguate txt =
   let pos = ref 0 in
   let len = String.length txt in
   let is_digit c = c >= '0' && c <= '9' in
   while !pos < len && is_digit txt.[!pos] do incr pos done;
-  let txt =
-    if !pos < len then (
-      set_lexeme_length lexbuf !pos;
-      String.sub txt 0 !pos
-    ) else
-      txt
-  in
+  let txt = if !pos < len then (String.sub txt 0 !pos) else txt in
   TYPE_DISAMBIGUATOR txt
 
-let try_disambiguate lexbuf = function
-  | INT (txt, None) -> Some (disambiguate lexbuf txt)
-  | FLOAT (txt, _)  -> Some (disambiguate lexbuf txt)
+let try_disambiguate = function
+  | INT (txt, None) -> Some (do_disambiguate txt)
+  | FLOAT (txt, _)  -> Some (do_disambiguate txt)
   | _ -> None
+
+let rewind_after_disambiguation lexbuf = function
+  | TYPE_DISAMBIGUATOR txt -> set_lexeme_length lexbuf (String.length txt)
+  | _ -> assert false
 
 (* Update the current location with file name and line number. *)
 

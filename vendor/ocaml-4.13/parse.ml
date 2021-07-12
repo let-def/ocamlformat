@@ -52,9 +52,11 @@ let wrap (parser : 'a parser) lexbuf : 'a =
       | Shifting (_, _, _) | AboutToReduce (_, _) as cp ->
         fix_resume (resume ~strategy:`Simplified cp)
     in
+    let get_token lexbuf tok =
+      Lexing.(tok, lexbuf.lex_start_p, lexbuf.lex_curr_p)
+    in
     let rec offer_input lexbuf cp tok =
-      let ptok = Lexing.(tok, lexbuf.lex_start_p, lexbuf.lex_curr_p) in
-      match fix_resume (offer cp ptok) with
+      match fix_resume (offer cp (get_token lexbuf tok)) with
       | InputNeeded _ as cp ->
           offer_input lexbuf cp (token lexbuf)
       | Accepted x -> Some x
@@ -62,9 +64,21 @@ let wrap (parser : 'a parser) lexbuf : 'a =
       | Shifting (_, _, _) | AboutToReduce (_, _) ->
           assert false
       | HandlingError _ as cp' ->
-        match Lexer.try_disambiguate lexbuf tok with
-        | Some tok' -> offer_input lexbuf cp tok'
+        match Lexer.try_disambiguate tok with
         | None -> main_loop lexbuf cp'
+        | Some tok' ->
+          let cp'' = match fix_resume (offer cp (get_token lexbuf tok')) with
+            (* Treat error state from cp', the original one, not from the
+               attempt at disambiguating.
+               Error messages should match better the upstream parser (... not
+               sure that this really is an improvement). *)
+            | HandlingError _ ->
+              cp'
+            | cp'' ->
+              Lexer.rewind_after_disambiguation lexbuf tok';
+              cp''
+          in
+          main_loop lexbuf cp''
     and main_loop lexbuf = function
       | InputNeeded _ as cp ->
           offer_input lexbuf cp (token lexbuf)
