@@ -216,8 +216,7 @@ let print_updating_num_loc_lines ppf f arg =
   pp_print_flush ppf ();
   pp_set_formatter_out_functions ppf out_functions
 
-let setup_tags () =
-  Misc.Style.setup !Clflags.color
+let setup_tags () = ()
 
 (******************************************************************************)
 (* Printing locations, e.g. 'File "foo.ml", line 3, characters 10-12' *)
@@ -578,8 +577,29 @@ let highlight_quote ppf
         done;
         Format.fprintf ppf "@}@,"
     | _ ->
+        let pp_two_columns ?(sep = "|") ?max_lines ppf (lines: (string * string) list) =
+          let left_column_size =
+            List.fold_left (fun acc (s, _) -> Int.max acc (String.length s)) 0 lines in
+          let lines_nb = List.length lines in
+          let ellipsed_first, ellipsed_last =
+            match max_lines with
+            | Some max_lines when lines_nb > max_lines ->
+                let printed_lines = max_lines - 1 in (* the ellipsis uses one line *)
+                let lines_before = printed_lines / 2 + printed_lines mod 2 in
+                let lines_after = printed_lines / 2 in
+                (lines_before, lines_nb - lines_after - 1)
+            | _ -> (-1, -1)
+          in
+          Format.fprintf ppf "@[<v>";
+          List.iteri (fun k (line_l, line_r) ->
+              if k = ellipsed_first then Format.fprintf ppf "...@,";
+              if ellipsed_first <= k && k <= ellipsed_last then ()
+              else Format.fprintf ppf "%*s %s %s@," left_column_size line_l sep line_r
+            ) lines;
+          Format.fprintf ppf "@]"
+        in
         (* Multi-line error *)
-        Misc.pp_two_columns ~sep:"|" ~max_lines ppf
+        pp_two_columns ~sep:"|" ~max_lines ppf
         @@ List.map (fun (line, line_nb, line_start_cnum) ->
           let line = String.mapi (fun i car ->
             if ISet.mem iset ~pos:(line_start_cnum + i) then car else '.'
@@ -982,7 +1002,10 @@ let alert ?(def = none) ?(use = none) ~kind loc message =
 let deprecated ?def ?use loc message =
   alert ?def ?use ~kind:"deprecated" loc message
 
-module Style = Misc.Style
+module Style = struct
+  let inline_code ppf str =
+    Format.fprintf ppf "%s" str
+end
 
 let auto_include_alert lib =
   let message = Format.asprintf "\
