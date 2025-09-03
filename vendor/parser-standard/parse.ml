@@ -138,7 +138,12 @@ let type_ident = wrap Parser.Incremental.parse_mty_longident
 (* Error reporting for Syntaxerr *)
 (* The code has been moved here so that one can reuse Pprintast.tyvar *)
 
-module Style = Misc.Style
+module Style = struct
+  let inline_code ppf str =
+    Format.fprintf ppf "%s" str
+  let as_inline_code f ppf x =
+    f ppf x
+end
 
 let prepare_error err =
   let open Syntaxerr in

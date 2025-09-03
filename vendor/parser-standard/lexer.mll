@@ -513,7 +513,7 @@ let prepare_error loc = function
       Location.error ~loc ~sub msg
   | Keyword_as_label kwd ->
       Location.errorf ~loc
-        "%a is a keyword, it cannot be used as label name" Style.inline_code kwd
+        "%s is a keyword, it cannot be used as label name" kwd
   | Invalid_literal s ->
       Location.errorf ~loc "Invalid literal %s" s
   | Invalid_directive (dir, explanation) ->

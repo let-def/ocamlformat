@@ -15,6 +15,13 @@
 
 (* Entry points in the parser *)
 
+module Style = struct
+  let inline_code ppf str =
+    Format.fprintf ppf "%s" str
+  let as_inline_code f ppf x =
+    f ppf x
+end
+
 (* Skip tokens to the end of the phrase *)
 
 let last_token = ref Parser.EOF
@@ -137,8 +144,6 @@ let type_ident = wrap Parser.Incremental.parse_mty_longident
 
 (* Error reporting for Syntaxerr *)
 (* The code has been moved here so that one can reuse Pprintast.tyvar *)
-
-module Style = Misc.Style
 
 let prepare_error err =
   let open Syntaxerr in
