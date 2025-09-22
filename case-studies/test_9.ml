@@ -1,1 +1,2 @@
-object method ! lident false @ lident = UIdent inherit lident end let false = UIdent
+(* The mode translate to a Pexp_constraint *)
+object method lident lident @ lident = UIdent end
