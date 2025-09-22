@@ -11,4 +11,4 @@
   ```
 *)
 
-lident # lident let false = UIdent
+lident (* X *) # (* X *) lident
