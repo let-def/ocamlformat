@@ -684,11 +684,13 @@ let rec fmt_extension_aux c ctx ~key (ext, pld) =
       (* Comments and attributes are not allowed by the parser *)
       assert (not (Cmts.has_before c.cmts loc)) ;
       (*assert (not (Cmts.has_after c.cmts loc)) ;*)
-      assert (not (Cmts.has_before c.cmts pexp_loc)) ;
+      (*assert (not (Cmts.has_before c.cmts pexp_loc)) ;*)
       assert (not (Cmts.has_after c.cmts pexp_loc)) ;
-      assert (not (Cmts.has_before c.cmts pstr_loc)) ;
+      (*assert (not (Cmts.has_before c.cmts pstr_loc)) ;*)
       assert (not (Cmts.has_after c.cmts pstr_loc)) ;
-      hvbox 0 (fmt_quoted_string (Ext.Key.to_string key) ext str delim $
+      hvbox 0 (Cmts.fmt_before c pstr_loc $
+               Cmts.fmt_before c pexp_loc $
+               fmt_quoted_string (Ext.Key.to_string key) ext str delim $
                Cmts.fmt_after c loc)
 
   | _, PStr [({pstr_loc; _} as si)], (Pld _ | Str _ | Top)
