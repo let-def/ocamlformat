@@ -1618,6 +1618,14 @@ and fmt_pattern ?ext c ?pro ?parens ?(box = false)
         $ fmt_extension_suffix c ext
         $ char ' ' $ fmt_str_loc_opt c name )
   | Ppat_exception pat ->
+      let parens =
+        (* An exception pattern inside a `let`-binding would be
+           parsed as a `let exception` if not parenthesized. *)
+        match ctx0 with
+        | Exp {pexp_desc= Pexp_let _; _}
+        | Str {pstr_desc= Pstr_value _; _} -> true
+        | _ -> parens
+      in
       cbox 2
         (Params.parens_if parens c.conf
            ( fmt "exception"
