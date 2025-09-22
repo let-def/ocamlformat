@@ -22622,9 +22622,9 @@ The location is guessed by examining the syntactic constructions that appear mos
   val lident : ( ' lident . {%hello|world|} ) @ lident -> {%hello|world|} let false = UIdent
   ```
 
-## BUG: formatting did not stabilize after 10 iterations. (15241 errors)
+## BUG: formatting did not stabilize after 10 iterations. (15245 errors)
 
-### Item `pattern_gen: . simple_pattern` (in 9616 errors)
+### Item `pattern_gen: . simple_pattern` (in 9620 errors)
 
 - Derivation (2114 occurrences):
   ```
@@ -22658,7 +22658,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   UIdent mod stack_ function false -> UIdent let false = UIdent
   ```
-- Derivation (848 occurrences):
+- Derivation (852 occurrences):
   ```
   let_bindings(ext): LET ext . list(attribute) mutable_flag rec_flag let_binding_body list(post_item_attribute)
     let_binding_body: . let_binding_body_no_punning
@@ -25856,31 +25856,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   module UIdent : UIdent @ lident -> functor ( ) -> UIdent = {%hello|world|} let false = UIdent
   ```
 
-## BUG: generating invalid ocaml syntax. (2574 errors)
-
-### Item `simple_expr: simple_expr . HASH LIDENT` (in 1651 errors)
-
-- Derivation (1651 occurrences):
-  ```
-  simple_expr: simple_expr . HASH LIDENT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  lident # lident let false = UIdent
-  ```
-
-
-### Item `simple_expr: simple_expr . HASH_SUFFIX LIDENT` (in 755 errors)
-
-- Derivation (755 occurrences):
-  ```
-  simple_expr: simple_expr . HASH_SUFFIX LIDENT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  UIdent # lident let false = UIdent
-  ```
-
+## BUG: generating invalid ocaml syntax. (168 errors)
 
 ### Item `pattern: EXCEPTION ext . list(attribute) pattern` (in 95 errors)
 
@@ -26220,7 +26196,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  include struct let local_ lident @ lident = fun false -> UIdent ; ; end let false = UIdent
+  let local_ lident @ lident = fun false -> UIdent ; ; [@@ and ] let false = UIdent
   ```
 - Derivation (2 occurrences):
   ```
@@ -26232,7 +26208,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  include struct let local_ lident @ lident = fun false -> function false -> . % UIdent end let false = UIdent
+  let local_ lident @ lident = fun false -> function false -> . % UIdent [@@ and ] let false = UIdent
   ```
 - Derivation (2 occurrences):
   ```
@@ -26244,7 +26220,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  include struct let local_ lident @ lident = fun false -> function false -> . - UIdent end let false = UIdent
+  let local_ lident @ lident = fun false -> function false -> . - UIdent [@@ and ] let false = UIdent
   ```
 - Derivation (1 occurrence):
   ```
