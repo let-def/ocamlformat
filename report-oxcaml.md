@@ -14363,7 +14363,7 @@ The location is guessed by examining the syntactic constructions that appear mos
 
 ## Exception: "Assert_failure lib/Fmt_ast.ml:684:6" (315151 errors)
 
-### Item `seq_expr: . fun_seq_expr` (in 178498 errors)
+### Item `seq_expr: . fun_seq_expr` (in 178502 errors)
 
 - Derivation (1965 occurrences):
   ```
@@ -15301,7 +15301,7 @@ The location is guessed by examining the syntactic constructions that appear mos
 - ...
 
 
-### Item `simple_pattern: . simple_pattern_not_ident` (in 3925 errors)
+### Item `simple_pattern: . simple_pattern_not_ident` (in 3924 errors)
 
 - Derivation (1428 occurrences):
   ```
@@ -21788,72 +21788,6 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
 
 
-### Item `pattern: . reversed_labeled_tuple_pattern(pattern)` (in 11 errors)
-
-- Derivation (3 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . reversed_labeled_tuple_pattern(pattern)
-      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception ~ lident , ~ ( lident : {%hello|world|} ) ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  fun_expr: fun_expr OR STACK FUNCTION ext . list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
-    reversed_preceded_or_separated_nonempty_llist(BAR,match_case): . match_case
-      match_case: . pattern MINUSGREATER seq_expr
-        pattern: . reversed_labeled_tuple_pattern(pattern)
-          reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
-            labeled_tuple_pat_element_list(pattern): . TILDE LIDENT COMMA TILDE LPAREN LIDENT COLON core_type RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  UIdent or stack_ function ~ lident , ~ ( lident : {%hello|world|} ) -> UIdent let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  fun_expr: fun_expr MOD STACK FUNCTION ext . list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
-    reversed_preceded_or_separated_nonempty_llist(BAR,match_case): . match_case
-      match_case: . pattern MINUSGREATER seq_expr
-        pattern: . reversed_labeled_tuple_pattern(pattern)
-          reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
-            labeled_tuple_pat_element_list(pattern): . TILDE LIDENT COMMA TILDE LPAREN LIDENT COLON core_type RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  UIdent mod stack_ function ~ lident , ~ ( lident : {%hello|world|} ) -> UIdent let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  fun_expr: fun_expr OR STACK FUNCTION ext . list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
-    reversed_preceded_or_separated_nonempty_llist(BAR,match_case): . match_case
-      match_case: . pattern MINUSGREATER seq_expr
-        pattern: . reversed_labeled_tuple_pattern(pattern)
-          reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
-            labeled_tuple_pat_element_list(pattern): . LABEL simple_pattern COMMA TILDE LPAREN LIDENT COLON core_type RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  UIdent or stack_ function ~label: false , ~ ( lident : {%hello|world|} ) -> UIdent let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  fun_expr: fun_expr MOD STACK FUNCTION ext . list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
-    reversed_preceded_or_separated_nonempty_llist(BAR,match_case): . match_case
-      match_case: . pattern MINUSGREATER seq_expr
-        pattern: . reversed_labeled_tuple_pattern(pattern)
-          reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
-            labeled_tuple_pat_element_list(pattern): . LABEL simple_pattern COMMA TILDE LPAREN LIDENT COLON core_type RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  UIdent mod stack_ function ~label: false , ~ ( lident : {%hello|world|} ) -> UIdent let false = UIdent
-  ```
-
-
 ### Item `mod_ext_longident: mod_ext_longident . LPAREN mod_ext_longident RPAREN` (in 10 errors)
 
 - Derivation (10 occurrences):
@@ -21939,6 +21873,62 @@ The location is guessed by examining the syntactic constructions that appear mos
   Sample sentence (interface):
   ```ocaml
   class lident : {%hello|world|} and [ _ ] lident : {%hello|world|}
+  ```
+
+
+### Item `match_case: . pattern MINUSGREATER seq_expr` (in 8 errors)
+
+- Derivation (2 occurrences):
+  ```
+  fun_expr: fun_expr OR STACK FUNCTION ext . list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+    reversed_preceded_or_separated_nonempty_llist(BAR,match_case): . match_case
+      match_case: . pattern MINUSGREATER seq_expr
+        pattern: . reversed_labeled_tuple_pattern(pattern)
+          reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+            labeled_tuple_pat_element_list(pattern): . TILDE LIDENT COMMA TILDE LPAREN LIDENT COLON core_type RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  UIdent or stack_ function ~ lident , ~ ( lident : {%hello|world|} ) -> UIdent let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  fun_expr: fun_expr MOD STACK FUNCTION ext . list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+    reversed_preceded_or_separated_nonempty_llist(BAR,match_case): . match_case
+      match_case: . pattern MINUSGREATER seq_expr
+        pattern: . reversed_labeled_tuple_pattern(pattern)
+          reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+            labeled_tuple_pat_element_list(pattern): . TILDE LIDENT COMMA TILDE LPAREN LIDENT COLON core_type RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  UIdent mod stack_ function ~ lident , ~ ( lident : {%hello|world|} ) -> UIdent let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  fun_expr: fun_expr OR STACK FUNCTION ext . list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+    reversed_preceded_or_separated_nonempty_llist(BAR,match_case): . match_case
+      match_case: . pattern MINUSGREATER seq_expr
+        pattern: . reversed_labeled_tuple_pattern(pattern)
+          reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+            labeled_tuple_pat_element_list(pattern): . LABEL simple_pattern COMMA TILDE LPAREN LIDENT COLON core_type RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  UIdent or stack_ function ~label: false , ~ ( lident : {%hello|world|} ) -> UIdent let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  fun_expr: fun_expr MOD STACK FUNCTION ext . list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+    reversed_preceded_or_separated_nonempty_llist(BAR,match_case): . match_case
+      match_case: . pattern MINUSGREATER seq_expr
+        pattern: . reversed_labeled_tuple_pattern(pattern)
+          reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+            labeled_tuple_pat_element_list(pattern): . LABEL simple_pattern COMMA TILDE LPAREN LIDENT COLON core_type RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  UIdent mod stack_ function ~label: false , ~ ( lident : {%hello|world|} ) -> UIdent let false = UIdent
   ```
 
 
@@ -25856,275 +25846,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   module UIdent : UIdent @ lident -> functor ( ) -> UIdent = {%hello|world|} let false = UIdent
   ```
 
-## BUG: generating invalid ocaml syntax. (168 errors)
-
-### Item `pattern: EXCEPTION ext . list(attribute) pattern` (in 95 errors)
-
-- Derivation (19 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception false ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (11 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . reversed_labeled_tuple_pattern(pattern)
-      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception ~ lident , false ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (8 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . constr_longident
-            constr_longident: . constr_extra_nonprefix_ident
-              constr_extra_nonprefix_ident: . FALSE
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception false ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (6 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . reversed_labeled_tuple_pattern(pattern)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception ~label: false , .. ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . simple_delimited_pattern
-            simple_delimited_pattern: . HASHLPAREN reversed_labeled_tuple_pattern(pattern) RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception #( false , .. ) ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . simple_delimited_pattern
-            simple_delimited_pattern: . LBRACKETBAR BARRBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception [| |] ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . simple_delimited_pattern
-            simple_delimited_pattern: . HASHLBRACE listx(SEMI,record_pat_field,UNDERSCORE) RBRACE
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception #{ lident } ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . simple_delimited_pattern
-            simple_delimited_pattern: . LBRACE listx(SEMI,record_pat_field,UNDERSCORE) RBRACE
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception { lident } ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . signed_constant
-            signed_constant: . PLUS HASH_INT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception + #1l ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . signed_constant
-            signed_constant: . MINUS HASH_INT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception - #1l ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . reversed_labeled_tuple_pattern(pattern)
-      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern) COMMA DOTDOT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception ~label: false , false , .. ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . constr_longident pattern
-        constr_longident: . mod_longident
-          mod_longident: . mk_longident(mod_longident,UIDENT)
-            mk_longident(mod_longident,UIDENT): . UIDENT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception UIdent false ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . extension
-            extension: . LBRACKETPERCENT attr_id payload RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception [% and ] ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . constr_longident pattern
-        constr_longident: . constr_extra_nonprefix_ident
-          constr_extra_nonprefix_ident: . LBRACKET RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception [ ] false ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . signed_value_constant DOTDOT signed_value_constant
-            signed_value_constant: . value_constant
-              value_constant: . FLOAT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception 42.0 .. 'a' ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . signed_value_constant DOTDOT signed_value_constant
-            signed_value_constant: . value_constant
-              value_constant: . STRING
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception "hello" .. 'a' ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . signed_value_constant DOTDOT signed_value_constant
-            signed_value_constant: . value_constant
-              value_constant: . CHAR
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception 'a' .. 'a' ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . signed_constant
-            signed_constant: . signed_value_constant
-              signed_value_constant: . value_constant
-                value_constant: . CHAR
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception 'a' ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . simple_pattern_not_ident
-          simple_pattern_not_ident: . signed_value_constant DOTDOT signed_value_constant
-            signed_value_constant: . value_constant
-              value_constant: . INT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception 42 .. 'a' ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . val_ident
-          val_ident: . LIDENT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception lident ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  pattern: EXCEPTION ext . list(attribute) pattern
-    pattern: . pattern_gen
-      pattern_gen: . simple_pattern
-        simple_pattern: . val_ident
-          val_ident: . val_extra_ident
-            val_extra_ident: . LPAREN operator RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( exception ( - ) ) @ lident = UIdent [@@ and ] let false = UIdent
-  ```
-- ...
-
+## BUG: generating invalid ocaml syntax. (73 errors)
 
 ### Item `module_expr: . FUNCTOR list(attribute) reversed_nonempty_llist(functor_arg) MINUSGREATER module_expr` (in 25 errors)
 
@@ -26196,7 +25918,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  let local_ lident @ lident = fun false -> UIdent ; ; [@@ and ] let false = UIdent
+  include struct let local_ lident @ lident = fun false -> UIdent ; ; end let false = UIdent
   ```
 - Derivation (2 occurrences):
   ```
@@ -26208,7 +25930,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  let local_ lident @ lident = fun false -> function false -> . % UIdent [@@ and ] let false = UIdent
+  include struct let local_ lident @ lident = fun false -> function false -> . % UIdent end let false = UIdent
   ```
 - Derivation (2 occurrences):
   ```
@@ -26220,7 +25942,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  let local_ lident @ lident = fun false -> function false -> . - UIdent [@@ and ] let false = UIdent
+  include struct let local_ lident @ lident = fun false -> function false -> . - UIdent end let false = UIdent
   ```
 - Derivation (1 occurrence):
   ```
@@ -26297,7 +26019,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   fun false -> {%hello|world|} [@@ and ] let false = UIdent
   ```
 
-## Exception: "Assert_failure lib/Fmt_ast.ml:2670:36" (1 error)
+## Exception: "Assert_failure lib/Fmt_ast.ml:2678:36" (1 error)
 
 ### Item `at_mode_expr: . AT nonempty_list(mode)` (in 1 error)
 
