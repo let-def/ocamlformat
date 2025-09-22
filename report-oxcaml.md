@@ -776,248 +776,6 @@ it is usually the exact point where the parser could not continue.
   ```
 
 
-### Item `at_mode_expr: . AT nonempty_list(mode)` (in 776 errors)
-
-- Derivation (256 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: optlabel nonempty_list(mode_legacy) tuple_type . at_mode_expr MINUSGREATER tuple_type
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  val lident : ?label: local_ lident # @ lident -> {%hello|world|} let false = UIdent
-                                       ^
-  ```
-- Derivation (66 occurrences):
-  ```
-  simple_expr: LPAREN seq_expr COLON tuple_type . at_mode_expr RPAREN
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  ( UIdent : lident # @ lident ) let false = UIdent
-                      ^
-  ```
-- Derivation (48 occurrences):
-  ```
-  pattern_with_modes_or_poly: pattern COLON tuple_type . at_mode_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  class lident ( false : lident # @ lident ) : {%hello|world|} = lident let false = UIdent
-                                  ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: simple_pattern_not_ident COLON tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let false : lident # @ lident = UIdent end let false = UIdent
-                                      ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: LPAREN val_ident at_mode_expr RPAREN COLON TYPE newtypes DOT tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let ( lident @ lident ) : type lident . lident # @ lident = UIdent end let false = UIdent
-                                                                  ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: nonempty_list(mode_legacy) val_ident COLON TYPE newtypes DOT tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let local_ lident : type lident . lident # @ lident = UIdent end let false = UIdent
-                                                            ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: val_ident COLON TYPE newtypes DOT tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let lident : type lident . lident # @ lident = UIdent end let false = UIdent
-                                                     ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: LPAREN val_ident at_mode_expr RPAREN COLON reversed_nonempty_llist(typevar) DOT tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let ( lident @ lident ) : ' lident . lident # @ lident = UIdent end let false = UIdent
-                                                               ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: nonempty_list(mode_legacy) val_ident COLON reversed_nonempty_llist(typevar) DOT tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let local_ lident : ' lident . lident # @ lident = UIdent end let false = UIdent
-                                                         ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: val_ident COLON reversed_nonempty_llist(typevar) DOT tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let lident : ' lident . lident # @ lident = UIdent end let false = UIdent
-                                                  ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: LPAREN val_ident at_mode_expr RPAREN COLONGREATER tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let ( lident @ lident ) :> lident # @ lident = UIdent end let false = UIdent
-                                                     ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: LPAREN val_ident at_mode_expr RPAREN COLON core_type COLONGREATER tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let ( lident @ lident ) : {%hello|world|} :> lident # @ lident = UIdent end let false = UIdent
-                                                                       ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: LPAREN val_ident at_mode_expr RPAREN COLON tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let ( lident @ lident ) : lident # @ lident = UIdent end let false = UIdent
-                                                    ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: nonempty_list(mode_legacy) val_ident COLONGREATER tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let local_ lident :> lident # @ lident = UIdent end let false = UIdent
-                                               ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: nonempty_list(mode_legacy) val_ident COLON core_type COLONGREATER tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let local_ lident : {%hello|world|} :> lident # @ lident = UIdent end let false = UIdent
-                                                                 ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: nonempty_list(mode_legacy) val_ident COLON tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let local_ lident : lident # @ lident = UIdent end let false = UIdent
-                                              ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: val_ident COLONGREATER tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let lident :> lident # @ lident = UIdent end let false = UIdent
-                                        ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: val_ident COLON core_type COLONGREATER tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let lident : {%hello|world|} :> lident # @ lident = UIdent end let false = UIdent
-                                                          ^
-  ```
-- Derivation (20 occurrences):
-  ```
-  let_binding_body_no_punning: val_ident COLON tuple_type . at_mode_expr EQUAL seq_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct let lident : lident # @ lident = UIdent end let false = UIdent
-                                       ^
-  ```
-- Derivation (15 occurrences):
-  ```
-  simple_expr: LPAREN seq_expr COLONGREATER tuple_type . at_mode_expr RPAREN
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  ( UIdent :> lident # @ lident ) let false = UIdent
-                       ^
-  ```
-- Derivation (11 occurrences):
-  ```
-  optional_poly_type_and_modes: COLON tuple_type . at_mode_expr
-    at_mode_expr: . AT nonempty_list(mode)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  class lident ( local_ false : lident # @ lident ) : {%hello|world|} = lident let false = UIdent
-                                         ^
-  ```
-- ...
-
-
-### Item `let_bindings(ext): . LET ext list(attribute) mutable_flag rec_flag let_binding_body list(post_item_attribute)` (in 696 errors)
-
-- Derivation (695 occurrences):
-  ```
-  list(structure_element): structure_item . list(structure_element)
-    list(structure_element): . structure_item list(structure_element)
-      structure_item: . let_bindings(ext)
-        let_bindings(ext): . LET ext list(attribute) mutable_flag rec_flag let_binding_body list(post_item_attribute)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  val lident : lident # let false = UIdent
-                        ^^^
-  ```
-- Derivation (1 occurrence):
-  ```
-  fun_expr: OVERWRITE ext list(attribute) seq_expr WITH . fun_expr
-    fun_expr: . let_bindings(ext) IN seq_expr
-      let_bindings(ext): . LET ext list(attribute) mutable_flag rec_flag let_binding_body list(post_item_attribute)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  match overwrite_ UIdent with let false = UIdent in UIdent with false -> UIdent [@@ and ] let false = UIdent
-                               ^^^
-  ```
-
-
 ### Item `nonempty_list(mode_legacy): . LOCAL` (in 684 errors)
 
 - Derivation (244 occurrences):
@@ -1444,64 +1202,6 @@ it is usually the exact point where the parser could not continue.
 - ...
 
 
-### Item `attribute: . LBRACKETAT attr_id attr_payload RBRACKET` (in 311 errors)
-
-- Derivation (267 occurrences):
-  ```
-  fun_expr: fun_expr . attribute
-    attribute: . LBRACKETAT attr_id attr_payload RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  unique_ UIdent ; [@ and ] let false = UIdent
-                   ^^
-  ```
-- Derivation (24 occurrences):
-  ```
-  sig_exception_declaration: EXCEPTION ext list(attribute) constr_ident generalized_constructor_arguments . list(attribute) list(post_item_attribute)
-    list(attribute): . attribute list(attribute)
-      attribute: . LBRACKETAT attr_id attr_payload RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct exception false of global_ lident # [@ and ] let false = UIdent end let false = UIdent
-                                                     ^^
-  ```
-- Derivation (10 occurrences):
-  ```
-  tag_field: name_tag OF opt_ampersand reversed_separated_nonempty_llist(AMPERSAND,core_type_no_attr) . list(attribute)
-    list(attribute): . attribute list(attribute)
-      attribute: . LBRACKETAT attr_id attr_payload RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> [ ` lident of lident # [@ and ] ] let false = UIdent
-                                                                         ^^
-  ```
-- Derivation (5 occurrences):
-  ```
-  meth_list: LIDENT COLON possibly_poly(core_type_no_attr) . list(attribute)
-    list(attribute): . attribute list(attribute)
-      attribute: . LBRACKETAT attr_id attr_payload RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> < lident : lident # [@ and ] > let false = UIdent
-                                                                      ^^
-  ```
-- Derivation (5 occurrences):
-  ```
-  label_declaration: mutable_or_global_flag LIDENT COLON possibly_poly(core_type_no_attr) optional_atat_modalities_expr . list(attribute)
-    list(attribute): . attribute list(attribute)
-      attribute: . LBRACKETAT attr_id attr_payload RBRACKET
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  type lident := { lident : ' lident . lident # [@ and ] }
-                                                ^^
-  ```
-
-
 ### Item `fun_seq_expr: fun_expr . SEMI PERCENT attr_id seq_expr` (in 290 errors)
 
 - Derivation (290 occurrences):
@@ -1528,16 +1228,17 @@ it is usually the exact point where the parser could not continue.
   ```
 
 
-### Item `strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) tuple_type . MINUSGREATER tuple_type` (in 270 errors)
+### Item `attribute: . LBRACKETAT attr_id attr_payload RBRACKET` (in 267 errors)
 
-- Derivation (270 occurrences):
+- Derivation (267 occurrences):
   ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) tuple_type . MINUSGREATER tuple_type
+  fun_expr: fun_expr . attribute
+    attribute: . LBRACKETAT attr_id attr_payload RBRACKET
   ```
   Sample sentence (implementation):
   ```ocaml
-  val lident : lident : local_ lident # -> {%hello|world|} let false = UIdent
-                                        ^^
+  unique_ UIdent ; [@ and ] let false = UIdent
+                   ^^
   ```
 
 
@@ -1645,19 +1346,6 @@ it is usually the exact point where the parser could not continue.
   ```
 
 
-### Item `delimited_type_supporting_local_open: LPAREN core_type . RPAREN` (in 210 errors)
-
-- Derivation (210 occurrences):
-  ```
-  delimited_type_supporting_local_open: LPAREN core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ( lident # ) let false = UIdent
-                               ^
-  ```
-
-
 ### Item `fun_seq_expr: fun_expr . SEMI seq_expr` (in 186 errors)
 
 - Derivation (186 occurrences):
@@ -1668,32 +1356,6 @@ it is usually the exact point where the parser could not continue.
   ```ocaml
   #( UIdent , once_ UIdent ; UIdent ) let false = UIdent
                            ^
-  ```
-
-
-### Item `class_type: tuple_type . MINUSGREATER class_type` (in 142 errors)
-
-- Derivation (142 occurrences):
-  ```
-  class_type: tuple_type . MINUSGREATER class_type
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  class lident : lident # -> {%hello|world|}
-                          ^^
-  ```
-
-
-### Item `strict_function_or_labeled_tuple_type: nonempty_list(mode_legacy) tuple_type . MINUSGREATER tuple_type` (in 133 errors)
-
-- Derivation (133 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: nonempty_list(mode_legacy) tuple_type . MINUSGREATER tuple_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  val lident : local_ lident # -> {%hello|world|} let false = UIdent
-                               ^^
   ```
 
 
@@ -1984,32 +1646,6 @@ it is usually the exact point where the parser could not continue.
   ```ocaml
   match overwrite_ UIdent with UIdent with false -> UIdent [@@ and ] let false = UIdent
                                       ^^^^
-  ```
-
-
-### Item `reversed_llist(preceded(CONSTRAINT,constrain)): reversed_llist(preceded(CONSTRAINT,constrain)) . CONSTRAINT core_type EQUAL core_type` (in 67 errors)
-
-- Derivation (67 occurrences):
-  ```
-  reversed_llist(preceded(CONSTRAINT,constrain)): reversed_llist(preceded(CONSTRAINT,constrain)) . CONSTRAINT core_type EQUAL core_type
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  type lident := lident # constraint {%hello|world|} = {%hello|world|} and lident := false
-                          ^^^^^^^^^^
-  ```
-
-
-### Item `class_signature: LBRACKET reversed_separated_nonempty_llist(COMMA,core_type) . RBRACKET clty_longident` (in 65 errors)
-
-- Derivation (65 occurrences):
-  ```
-  class_signature: LBRACKET reversed_separated_nonempty_llist(COMMA,core_type) . RBRACKET clty_longident
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  class lident : [ lident # ] lident
-                            ^
   ```
 
 
@@ -2452,129 +2088,7 @@ it is usually the exact point where the parser could not continue.
   ```
 
 
-### Item `object_type: LESS meth_list . GREATER` (in 44 errors)
-
-- Derivation (44 occurrences):
-  ```
-  object_type: LESS meth_list . GREATER
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> < lident # > let false = UIdent
-                                                             ^
-  ```
-
-
-### Item `atomic_type: LPAREN reversed_separated_nontrivial_llist(COMMA,one_type_parameter_of_several) . RPAREN type_longident` (in 41 errors)
-
-- Derivation (41 occurrences):
-  ```
-  atomic_type: LPAREN reversed_separated_nontrivial_llist(COMMA,one_type_parameter_of_several) . RPAREN type_longident
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : {%hello|world|} -> ( {%hello|world|} , lident # ) lident let false = UIdent
-                                                                    ^
-  ```
-
-
-### Item `atat_modalities_expr: . ATAT nonempty_list(modality)` (in 38 errors)
-
-- Derivation (20 occurrences):
-  ```
-  primitive_declaration: EXTERNAL ext list(attribute) val_ident COLON possibly_poly(core_type) . optional_atat_modalities_expr EQUAL nonempty_list(raw_string) list(post_item_attribute)
-    optional_atat_modalities_expr: . atat_modalities_expr
-      atat_modalities_expr: . ATAT nonempty_list(modality)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  external lident : lident # @@ lident = "hello" let false = UIdent
-                             ^^
-  ```
-- Derivation (10 occurrences):
-  ```
-  label_declaration: mutable_or_global_flag LIDENT COLON possibly_poly(core_type_no_attr) . optional_atat_modalities_expr list(attribute)
-    optional_atat_modalities_expr: . atat_modalities_expr
-      atat_modalities_expr: . ATAT nonempty_list(modality)
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  type lident := { lident : lident # @@ lident [@ and ] }
-                                     ^^
-  ```
-- Derivation (8 occurrences):
-  ```
-  constructor_arguments: atomic_type . optional_atat_modalities_expr
-    optional_atat_modalities_expr: . atat_modalities_expr
-      atat_modalities_expr: . ATAT nonempty_list(modality)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct exception false of lident # @@ lident [@ and ] let false = UIdent end let false = UIdent
-                                             ^^
-  ```
-
-
-### Item `list(post_item_attribute): . post_item_attribute list(post_item_attribute)` (in 35 errors)
-
-- Derivation (10 occurrences):
-  ```
-  signature_item: include_kind ext list(attribute) . module_type list(post_item_attribute) optional_atat_modalities_expr
-    list(post_item_attribute): . post_item_attribute list(post_item_attribute)
-      post_item_attribute: . LBRACKETATAT attr_id attr_payload RBRACKET
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  include {%hello|world|} with type lident := lident # [@@ and ] @@ lident
-                                                       ^^^
-  ```
-- Derivation (10 occurrences):
-  ```
-  generic_type_declaration(nonrec_flag,type_kind): TYPE ext list(attribute) type_parameters LIDENT option(jkind_constraint) type_kind . reversed_llist(preceded(CONSTRAINT,constrain)) list(post_item_attribute)
-    list(post_item_attribute): . post_item_attribute list(post_item_attribute)
-      post_item_attribute: . LBRACKETATAT attr_id attr_payload RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  type lident constraint {%hello|world|} = lident # [@@ and ] let false = UIdent
-                                                    ^^^
-  ```
-- Derivation (5 occurrences):
-  ```
-  class_sig_field: METHOD list(attribute) private_virtual_flags LIDENT COLON . possibly_poly(core_type) list(post_item_attribute)
-    list(post_item_attribute): . post_item_attribute list(post_item_attribute)
-      post_item_attribute: . LBRACKETATAT attr_id attr_payload RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  class type lident = object method lident : lident # [@@ and ] inherit lident end let false = UIdent
-                                                      ^^^
-  ```
-- Derivation (5 occurrences):
-  ```
-  class_field: CONSTRAINT list(attribute) constrain_field . list(post_item_attribute)
-    list(post_item_attribute): . post_item_attribute list(post_item_attribute)
-      post_item_attribute: . LBRACKETATAT attr_id attr_payload RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  object constraint {%hello|world|} = lident # [@@ and ] inherit lident end let false = UIdent
-                                               ^^^
-  ```
-- Derivation (5 occurrences):
-  ```
-  class_field: METHOD method_ . list(post_item_attribute)
-    list(post_item_attribute): . post_item_attribute list(post_item_attribute)
-      post_item_attribute: . LBRACKETATAT attr_id attr_payload RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  object method virtual lident : lident # [@@ and ] inherit lident end let false = UIdent
-                                          ^^^
-  ```
-
-
-### Item `fun_expr: OVERWRITE ext list(attribute) seq_expr WITH . fun_expr` (in 34 errors)
+### Item `fun_expr: OVERWRITE ext list(attribute) seq_expr WITH . fun_expr` (in 35 errors)
 
 - Derivation (1 occurrence):
   ```
@@ -2663,6 +2177,17 @@ it is usually the exact point where the parser could not continue.
   ```ocaml
   match overwrite_ UIdent with function false -> . , UIdent with false -> UIdent [@@ and ] let false = UIdent
                                ^^^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) seq_expr WITH . fun_expr
+    fun_expr: . let_bindings(ext) IN seq_expr
+      let_bindings(ext): . LET ext list(attribute) mutable_flag rec_flag let_binding_body list(post_item_attribute)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  match overwrite_ UIdent with let false = UIdent in UIdent with false -> UIdent [@@ and ] let false = UIdent
+                               ^^^
   ```
 - Derivation (1 occurrence):
   ```
@@ -2784,16 +2309,6 @@ it is usually the exact point where the parser could not continue.
   match overwrite_ UIdent with if UIdent then stack_ function false -> UIdent else UIdent with false -> UIdent [@@ and ] let false = UIdent
                                ^^
   ```
-- Derivation (1 occurrence):
-  ```
-  fun_expr: OVERWRITE ext list(attribute) seq_expr WITH . fun_expr
-    fun_expr: . IF ext list(attribute) seq_expr THEN FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case) ELSE STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  match overwrite_ UIdent with if UIdent then function false -> UIdent else stack_ function false -> UIdent with false -> UIdent [@@ and ] let false = UIdent
-                               ^^
-  ```
 - ...
 
 
@@ -2807,45 +2322,6 @@ it is usually the exact point where the parser could not continue.
   ```ocaml
   while once_ UIdent ; , ~ ( lident :> {%hello|world|} ) do UIdent done let false = UIdent
                        ^
-  ```
-
-
-### Item `delimited_type_supporting_local_open: LBRACKET row_field . BAR reversed_separated_nonempty_llist(BAR,row_field) RBRACKET` (in 30 errors)
-
-- Derivation (30 occurrences):
-  ```
-  delimited_type_supporting_local_open: LBRACKET row_field . BAR reversed_separated_nonempty_llist(BAR,row_field) RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct type lident = [ lident # | {%hello|world|} ] and lident end let false = UIdent
-                                          ^
-  ```
-
-
-### Item `reversed_labeled_tuple_body: reversed_labeled_tuple_body COMMA TILDE LPAREN LIDENT type_constraint . RPAREN` (in 30 errors)
-
-- Derivation (30 occurrences):
-  ```
-  reversed_labeled_tuple_body: reversed_labeled_tuple_body COMMA TILDE LPAREN LIDENT type_constraint . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  UIdent , UIdent , ~ ( lident : lident # ) [@@ and ] let false = UIdent
-                                          ^
-  ```
-
-
-### Item `strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type . STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)` (in 30 errors)
-
-- Derivation (30 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type . STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  val lident : lident : lident # * {%hello|world|} let false = UIdent
-                                 ^
   ```
 
 
@@ -2939,58 +2415,6 @@ it is usually the exact point where the parser could not continue.
   ```
 
 
-### Item `class_simple_expr: LBRACKET reversed_separated_nonempty_llist(COMMA,core_type) . RBRACKET class_longident` (in 26 errors)
-
-- Derivation (26 occurrences):
-  ```
-  class_simple_expr: LBRACKET reversed_separated_nonempty_llist(COMMA,core_type) . RBRACKET class_longident
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  class lident : {%hello|world|} = [ lident # ] lident let false = UIdent
-                                              ^
-  ```
-
-
-### Item `constrain_field: core_type . EQUAL core_type` (in 26 errors)
-
-- Derivation (26 occurrences):
-  ```
-  constrain_field: core_type . EQUAL core_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  object constraint lident # = {%hello|world|} inherit lident end let false = UIdent
-                             ^
-  ```
-
-
-### Item `reversed_llist(preceded(CONSTRAINT,constrain)): reversed_llist(preceded(CONSTRAINT,constrain)) CONSTRAINT core_type . EQUAL core_type` (in 26 errors)
-
-- Derivation (26 occurrences):
-  ```
-  reversed_llist(preceded(CONSTRAINT,constrain)): reversed_llist(preceded(CONSTRAINT,constrain)) CONSTRAINT core_type . EQUAL core_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  type nonrec lident constraint lident # = {%hello|world|} let false = UIdent
-                                         ^
-  ```
-
-
-### Item `delimited_type_supporting_local_open: LBRACKET BAR reversed_separated_nonempty_llist(BAR,row_field) . RBRACKET` (in 23 errors)
-
-- Derivation (23 occurrences):
-  ```
-  delimited_type_supporting_local_open: LBRACKET BAR reversed_separated_nonempty_llist(BAR,row_field) . RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> [ | lident # ] let false = UIdent
-                                                               ^
-  ```
-
-
 ### Item `fun_expr: LIDENT . LESSMINUS fun_expr` (in 23 errors)
 
 - Derivation (23 occurrences):
@@ -3001,19 +2425,6 @@ it is usually the exact point where the parser could not continue.
   ```ocaml
   once_ lident <- UIdent let false = UIdent
                ^^
-  ```
-
-
-### Item `strict_function_or_labeled_tuple_type: optlabel tuple_type . MINUSGREATER tuple_type` (in 22 errors)
-
-- Derivation (22 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: optlabel tuple_type . MINUSGREATER tuple_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  val lident : ?label: lident # -> {%hello|world|} let false = UIdent
-                                ^^
   ```
 
 
@@ -3147,214 +2558,6 @@ it is usually the exact point where the parser could not continue.
   ```
 
 
-### Item `class_type: optlabel tuple_type . MINUSGREATER class_type` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  class_type: optlabel tuple_type . MINUSGREATER class_type
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  class lident : ?label: lident # -> {%hello|world|}
-                                  ^^
-  ```
-
-
-### Item `class_type: LIDENT COLON tuple_type . MINUSGREATER class_type` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  class_type: LIDENT COLON tuple_type . MINUSGREATER class_type
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  class lident : lident : lident # -> {%hello|world|}
-                                   ^^
-  ```
-
-
-### Item `labeled_tuple_pat_element_list(pattern): labeled_tuple_pat_element_list(pattern) COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  labeled_tuple_pat_element_list(pattern): labeled_tuple_pat_element_list(pattern) COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  function false , false , ~ ( lident : lident # ) -> UIdent let false = UIdent
-                                                 ^
-  ```
-
-
-### Item `labeled_tuple_pat_element_list(pattern): pattern COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  labeled_tuple_pat_element_list(pattern): pattern COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  function false , ~ ( lident : lident # ) -> UIdent let false = UIdent
-                                         ^
-  ```
-
-
-### Item `labeled_tuple_pat_element_list(pattern): LABEL simple_pattern COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  labeled_tuple_pat_element_list(pattern): LABEL simple_pattern COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  function ~label: false , ~ ( lident : lident # ) -> UIdent let false = UIdent
-                                                 ^
-  ```
-
-
-### Item `labeled_tuple_pat_element_list(pattern): TILDE LIDENT COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  labeled_tuple_pat_element_list(pattern): TILDE LIDENT COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  function ~ lident , ~ ( lident : lident # ) -> UIdent let false = UIdent
-                                            ^
-  ```
-
-
-### Item `labeled_tuple_pat_element_list(pattern): TILDE LPAREN LIDENT COLON core_type RPAREN COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  labeled_tuple_pat_element_list(pattern): TILDE LPAREN LIDENT COLON core_type RPAREN COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  function ~ ( lident : {%hello|world|} ) , ~ ( lident : lident # ) -> UIdent let false = UIdent
-                                                                  ^
-  ```
-
-
-### Item `reversed_labeled_tuple_pattern(pattern): TILDE LPAREN LIDENT COLON core_type . RPAREN COMMA DOTDOT` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  reversed_labeled_tuple_pattern(pattern): TILDE LPAREN LIDENT COLON core_type . RPAREN COMMA DOTDOT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  stack_ function ~ ( lident : lident # ) , .. -> UIdent let false = UIdent
-                                        ^
-  ```
-
-
-### Item `strict_function_or_labeled_tuple_type: optlabel LPAREN reversed_nonempty_llist(typevar) DOT core_type . RPAREN MINUSGREATER tuple_type` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: optlabel LPAREN reversed_nonempty_llist(typevar) DOT core_type . RPAREN MINUSGREATER tuple_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  val lident : ?label: ( ' lident . lident # ) -> {%hello|world|} let false = UIdent
-                                             ^
-  ```
-
-
-### Item `strict_function_or_labeled_tuple_type: optlabel nonempty_list(mode_legacy) LPAREN reversed_nonempty_llist(typevar) DOT core_type . RPAREN MINUSGREATER tuple_type` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: optlabel nonempty_list(mode_legacy) LPAREN reversed_nonempty_llist(typevar) DOT core_type . RPAREN MINUSGREATER tuple_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  val lident : ?label: local_ ( ' lident . lident # ) -> {%hello|world|} let false = UIdent
-                                                    ^
-  ```
-
-
-### Item `strict_function_or_labeled_tuple_type: LIDENT COLON LPAREN reversed_nonempty_llist(typevar) DOT core_type . RPAREN at_mode_expr MINUSGREATER tuple_type` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON LPAREN reversed_nonempty_llist(typevar) DOT core_type . RPAREN at_mode_expr MINUSGREATER tuple_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  val lident : lident : ( ' lident . lident # ) @ lident -> {%hello|world|} let false = UIdent
-                                              ^
-  ```
-
-
-### Item `strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) LPAREN reversed_nonempty_llist(typevar) DOT core_type . RPAREN at_mode_expr MINUSGREATER tuple_type` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) LPAREN reversed_nonempty_llist(typevar) DOT core_type . RPAREN at_mode_expr MINUSGREATER tuple_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  val lident : lident : local_ ( ' lident . lident # ) @ lident -> {%hello|world|} let false = UIdent
-                                                     ^
-  ```
-
-
-### Item `strict_function_or_labeled_tuple_type: LPAREN reversed_nonempty_llist(typevar) DOT core_type . RPAREN at_mode_expr MINUSGREATER tuple_type` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LPAREN reversed_nonempty_llist(typevar) DOT core_type . RPAREN at_mode_expr MINUSGREATER tuple_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ ( ' lident . lident # ) @ lident -> {%hello|world|} let false = UIdent
-                                                       ^
-  ```
-
-
-### Item `strict_function_or_labeled_tuple_type: nonempty_list(mode_legacy) LPAREN reversed_nonempty_llist(typevar) DOT core_type . RPAREN at_mode_expr MINUSGREATER tuple_type` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: nonempty_list(mode_legacy) LPAREN reversed_nonempty_llist(typevar) DOT core_type . RPAREN at_mode_expr MINUSGREATER tuple_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  val lident : local_ ( ' lident . lident # ) @ lident -> {%hello|world|} let false = UIdent
-                                            ^
-  ```
-
-
-### Item `strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) . MINUSGREATER tuple_type` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) . MINUSGREATER tuple_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  val lident : lident : local_ {%hello|world|} * lident # -> {%hello|world|} let false = UIdent
-                                                          ^^
-  ```
-
-
-### Item `separated_or_terminated_nonempty_list(SEMI,record_expr_field): label_longident option(type_constraint) option(preceded(EQUAL,expr)) . SEMI` (in 17 errors)
-
-- Derivation (17 occurrences):
-  ```
-  separated_or_terminated_nonempty_list(SEMI,record_expr_field): label_longident option(type_constraint) option(preceded(EQUAL,expr)) . SEMI
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  { lident :> lident # ; } let false = UIdent
-                       ^
-  ```
-
-
 ### Item `fun_expr: fun_expr . PERCENT fun_expr` (in 16 errors)
 
 - Derivation (16 occurrences):
@@ -3365,20 +2568,6 @@ it is usually the exact point where the parser could not continue.
   ```ocaml
   #{ lident = unique_ UIdent ; UIdent % UIdent } let false = UIdent
                                       ^
-  ```
-
-
-### Item `list(generic_and_type_declaration(type_kind)): . AND list(attribute) type_parameters LIDENT option(jkind_constraint) type_kind reversed_llist(preceded(CONSTRAINT,constrain)) list(post_item_attribute) list(generic_and_type_declaration(type_kind))` (in 16 errors)
-
-- Derivation (16 occurrences):
-  ```
-  structure_item: generic_type_declaration(nonrec_flag,type_kind) . list(generic_and_type_declaration(type_kind))
-    list(generic_and_type_declaration(type_kind)): . AND list(attribute) type_parameters LIDENT option(jkind_constraint) type_kind reversed_llist(preceded(CONSTRAINT,constrain)) list(post_item_attribute) list(generic_and_type_declaration(type_kind))
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  type nonrec lident = lident # and lident
-                                ^^^
   ```
 
 
@@ -3406,45 +2595,6 @@ it is usually the exact point where the parser could not continue.
   ```ocaml
   [ unique_ <[ UIdent ]> for false in UIdent ] let false = UIdent
                                    ^^
-  ```
-
-
-### Item `delimited_type_supporting_local_open: HASHLPAREN atomic_type . STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) RPAREN` (in 14 errors)
-
-- Derivation (14 occurrences):
-  ```
-  delimited_type_supporting_local_open: HASHLPAREN atomic_type . STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> #( lident # * {%hello|world|} ) let false = UIdent
-                                                              ^
-  ```
-
-
-### Item `delimited_type_supporting_local_open: HASHLPAREN LIDENT COLON atomic_type . STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) RPAREN` (in 14 errors)
-
-- Derivation (14 occurrences):
-  ```
-  delimited_type_supporting_local_open: HASHLPAREN LIDENT COLON atomic_type . STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> #( lident : lident # * {%hello|world|} ) let false = UIdent
-                                                                       ^
-  ```
-
-
-### Item `fun_: FUN ext list(attribute) fun_params optional_atomic_constraint_ . MINUSGREATER fun_body` (in 14 errors)
-
-- Derivation (14 occurrences):
-  ```
-  fun_: FUN ext list(attribute) fun_params optional_atomic_constraint_ . MINUSGREATER fun_body
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  fun false : lident # -> UIdent let false = UIdent
-                       ^^
   ```
 
 
@@ -3539,45 +2689,6 @@ it is usually the exact point where the parser could not continue.
   ```
 
 
-### Item `delimited_type_supporting_local_open: LBRACKET tag_field . RBRACKET` (in 13 errors)
-
-- Derivation (13 occurrences):
-  ```
-  delimited_type_supporting_local_open: LBRACKET tag_field . RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> [ ` lident of {%hello|world|} & lident # ] let false = UIdent
-                                                                                           ^
-  ```
-
-
-### Item `delimited_type_supporting_local_open: LBRACKET row_field BAR reversed_separated_nonempty_llist(BAR,row_field) . RBRACKET` (in 13 errors)
-
-- Derivation (13 occurrences):
-  ```
-  delimited_type_supporting_local_open: LBRACKET row_field BAR reversed_separated_nonempty_llist(BAR,row_field) . RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> [ {%hello|world|} | lident # ] let false = UIdent
-                                                                               ^
-  ```
-
-
-### Item `delimited_type_supporting_local_open: LBRACKETGREATER option(BAR) reversed_separated_nonempty_llist(BAR,row_field) . RBRACKET` (in 13 errors)
-
-- Derivation (13 occurrences):
-  ```
-  delimited_type_supporting_local_open: LBRACKETGREATER option(BAR) reversed_separated_nonempty_llist(BAR,row_field) . RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> [> lident # ] let false = UIdent
-                                                              ^
-  ```
-
-
 ### Item `fun_expr: TRY ext list(attribute) seq_expr . WITH reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 13 errors)
 
 - Derivation (13 occurrences):
@@ -3604,84 +2715,6 @@ it is usually the exact point where the parser could not continue.
   ```
 
 
-### Item `item_extension: LBRACKETPERCENTPERCENT attr_id payload . RBRACKET` (in 13 errors)
-
-- Derivation (13 occurrences):
-  ```
-  item_extension: LBRACKETPERCENTPERCENT attr_id payload . RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  [%% and : lident # ] let false = UIdent
-                     ^
-  ```
-
-
-### Item `letop_binding_body: simple_pattern COLON core_type . EQUAL seq_expr` (in 13 errors)
-
-- Derivation (13 occurrences):
-  ```
-  letop_binding_body: simple_pattern COLON core_type . EQUAL seq_expr
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let* lident : lident # = UIdent in UIdent [@@ and ] let false = UIdent
-                         ^
-  ```
-
-
-### Item `method_: list(attribute) private_flag LIDENT COLON . possibly_poly(core_type) EQUAL seq_expr` (in 13 errors)
-
-- Derivation (13 occurrences):
-  ```
-  method_: list(attribute) private_flag LIDENT COLON . possibly_poly(core_type) EQUAL seq_expr
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  object method lident : lident # = UIdent inherit lident end let false = UIdent
-                                  ^
-  ```
-
-
-### Item `method_: BANG list(attribute) private_flag LIDENT COLON . possibly_poly(core_type) EQUAL seq_expr` (in 13 errors)
-
-- Derivation (13 occurrences):
-  ```
-  method_: BANG list(attribute) private_flag LIDENT COLON . possibly_poly(core_type) EQUAL seq_expr
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  object method ! lident : lident # = UIdent inherit lident end let false = UIdent
-                                    ^
-  ```
-
-
-### Item `method_: list(attribute) private_flag LIDENT COLON TYPE newtypes DOT . core_type EQUAL seq_expr` (in 13 errors)
-
-- Derivation (13 occurrences):
-  ```
-  method_: list(attribute) private_flag LIDENT COLON TYPE newtypes DOT . core_type EQUAL seq_expr
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  object method lident : type lident . lident # = UIdent inherit lident end let false = UIdent
-                                                ^
-  ```
-
-
-### Item `method_: BANG list(attribute) private_flag LIDENT COLON TYPE newtypes DOT . core_type EQUAL seq_expr` (in 13 errors)
-
-- Derivation (13 occurrences):
-  ```
-  method_: BANG list(attribute) private_flag LIDENT COLON TYPE newtypes DOT . core_type EQUAL seq_expr
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  object method ! lident : type lident . lident # = UIdent inherit lident end let false = UIdent
-                                                  ^
-  ```
-
-
 ### Item `strict_function_or_labeled_tuple_type: nonempty_list(mode_legacy) . LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN at_mode_expr MINUSGREATER tuple_type` (in 12 errors)
 
 - Derivation (12 occurrences):
@@ -3692,244 +2725,6 @@ it is usually the exact point where the parser could not continue.
   ```ocaml
   object constraint unique_ ( ' lident . {%hello|world|} ) @ lident -> {%hello|world|} = {%hello|world|} inherit lident end let false = UIdent
                             ^
-  ```
-
-
-### Item `class_self_pattern: LPAREN pattern COLON core_type . RPAREN` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  class_self_pattern: LPAREN pattern COLON core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  object ( false : lident # ) end let false = UIdent
-                            ^
-  ```
-
-
-### Item `class_self_type: LPAREN core_type . RPAREN` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  class_self_type: LPAREN core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  class type lident = object ( lident # ) end let false = UIdent
-                                        ^
-  ```
-
-
-### Item `class_sig_field: . INHERIT list(attribute) class_signature list(post_item_attribute)` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  list(text_csig(class_sig_field)): class_sig_field . list(text_csig(class_sig_field))
-    list(text_csig(class_sig_field)): . class_sig_field list(text_csig(class_sig_field))
-      class_sig_field: . INHERIT list(attribute) class_signature list(post_item_attribute)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  class type lident = object val lident : lident # inherit lident end let false = UIdent
-                                                   ^^^^^^^
-  ```
-
-
-### Item `delimited_type_supporting_local_open: LBRACKETLESS option(BAR) reversed_separated_nonempty_llist(BAR,row_field) . RBRACKET` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  delimited_type_supporting_local_open: LBRACKETLESS option(BAR) reversed_separated_nonempty_llist(BAR,row_field) . RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> [< lident # ] let false = UIdent
-                                                              ^
-  ```
-
-
-### Item `delimited_type_supporting_local_open: HASHLPAREN atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) . RPAREN` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  delimited_type_supporting_local_open: HASHLPAREN atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> #( {%hello|world|} * lident # ) let false = UIdent
-                                                                                ^
-  ```
-
-
-### Item `delimited_type_supporting_local_open: HASHLPAREN LIDENT COLON atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) . RPAREN` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  delimited_type_supporting_local_open: HASHLPAREN LIDENT COLON atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> #( lident : {%hello|world|} * lident # ) let false = UIdent
-                                                                                         ^
-  ```
-
-
-### Item `labeled_tuple_pat_element_list(pattern_no_exn): labeled_tuple_pat_element_list(pattern_no_exn) COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  labeled_tuple_pat_element_list(pattern_no_exn): labeled_tuple_pat_element_list(pattern_no_exn) COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let false , false , ~ ( lident : lident # ) = UIdent [@@ and ] let false = UIdent
-                                            ^
-  ```
-
-
-### Item `labeled_tuple_pat_element_list(pattern_no_exn): pattern_no_exn COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  labeled_tuple_pat_element_list(pattern_no_exn): pattern_no_exn COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let false , ~ ( lident : lident # ) = UIdent [@@ and ] let false = UIdent
-                                    ^
-  ```
-
-
-### Item `labeled_tuple_pat_element_list(pattern_no_exn): LABEL simple_pattern COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  labeled_tuple_pat_element_list(pattern_no_exn): LABEL simple_pattern COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ~label: false , ~ ( lident : lident # ) = UIdent [@@ and ] let false = UIdent
-                                            ^
-  ```
-
-
-### Item `labeled_tuple_pat_element_list(pattern_no_exn): TILDE LIDENT COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  labeled_tuple_pat_element_list(pattern_no_exn): TILDE LIDENT COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ~ lident , ~ ( lident : lident # ) = UIdent [@@ and ] let false = UIdent
-                                       ^
-  ```
-
-
-### Item `labeled_tuple_pat_element_list(pattern_no_exn): TILDE LPAREN LIDENT COLON core_type RPAREN COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  labeled_tuple_pat_element_list(pattern_no_exn): TILDE LPAREN LIDENT COLON core_type RPAREN COMMA TILDE LPAREN LIDENT COLON core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ~ ( lident : {%hello|world|} ) , ~ ( lident : lident # ) = UIdent [@@ and ] let false = UIdent
-                                                             ^
-  ```
-
-
-### Item `module_expr: STRUCT list(attribute) structure . END` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  module_expr: STRUCT list(attribute) structure . END
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct val lident : lident # end let false = UIdent
-                                       ^^^
-  ```
-
-
-### Item `paren_module_expr: LPAREN module_expr COLON module_type . RPAREN` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  paren_module_expr: LPAREN module_expr COLON module_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include ( {%hello|world|} : UIdent with type lident := lident # ) let false = UIdent
-                                                                  ^
-  ```
-
-
-### Item `reversed_labeled_tuple_pattern(pattern_no_exn): TILDE LPAREN LIDENT COLON core_type . RPAREN COMMA DOTDOT` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  reversed_labeled_tuple_pattern(pattern_no_exn): TILDE LPAREN LIDENT COLON core_type . RPAREN COMMA DOTDOT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ~ ( lident : lident # ) , .. = UIdent [@@ and ] let false = UIdent
-                            ^
-  ```
-
-
-### Item `simple_delimited_pattern: HASHLBRACE listx(SEMI,record_pat_field,UNDERSCORE) . RBRACE` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  simple_delimited_pattern: HASHLBRACE listx(SEMI,record_pat_field,UNDERSCORE) . RBRACE
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let #{ lident : lident # } @ lident = UIdent [@@ and ] let false = UIdent
-                           ^
-  ```
-
-
-### Item `simple_pattern_not_ident: LPAREN pattern COLON core_type . RPAREN` (in 10 errors)
-
-- Derivation (10 occurrences):
-  ```
-  simple_pattern_not_ident: LPAREN pattern COLON core_type . RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let ( lident : lident # ) @ lident = UIdent [@@ and ] let false = UIdent
-                          ^
-  ```
-
-
-### Item `class_field: . INHERIT list(attribute) class_expr option(preceded(AS,mkrhs(LIDENT))) list(post_item_attribute)` (in 5 errors)
-
-- Derivation (5 occurrences):
-  ```
-  list(text_cstr(class_field)): class_field . list(text_cstr(class_field))
-    list(text_cstr(class_field)): . class_field list(text_cstr(class_field))
-      class_field: . INHERIT list(attribute) class_expr option(preceded(AS,mkrhs(LIDENT))) list(post_item_attribute)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  object val virtual lident : lident # inherit lident end let false = UIdent
-                                       ^^^^^^^
-  ```
-
-
-### Item `listx(SEMI,record_pat_field,UNDERSCORE): label_longident option(preceded(COLON,core_type)) option(preceded(EQUAL,pattern)) . SEMI` (in 5 errors)
-
-- Derivation (5 occurrences):
-  ```
-  listx(SEMI,record_pat_field,UNDERSCORE): label_longident option(preceded(COLON,core_type)) option(preceded(EQUAL,pattern)) . SEMI
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  let { lident : lident # ; } @ lident = UIdent [@@ and ] let false = UIdent
-                          ^
   ```
 
 
@@ -4892,6 +3687,19 @@ it is usually the exact point where the parser could not continue.
   ```
 
 
+### Item `separated_or_terminated_nonempty_list(SEMI,record_expr_field): label_longident option(type_constraint) option(preceded(EQUAL,expr)) . SEMI` (in 2 errors)
+
+- Derivation (2 occurrences):
+  ```
+  separated_or_terminated_nonempty_list(SEMI,record_expr_field): label_longident option(type_constraint) option(preceded(EQUAL,expr)) . SEMI
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  #{ lident = unique_ UIdent ; ; } let false = UIdent
+                               ^
+  ```
+
+
 ### Item `constant: . unboxed_constant` (in 1 error)
 
 - Derivation (1 occurrence):
@@ -5362,6 +4170,19 @@ it is usually the exact point where the parser could not continue.
   ```ocaml
   match overwrite_ UIdent with false . UIdent .+ [ UIdent ] <- stack_ function false -> UIdent with false -> UIdent [@@ and ] let false = UIdent
                                      ^
+  ```
+
+
+### Item `payload: QUESTION pattern . WHEN seq_expr` (in 1 error)
+
+- Derivation (1 occurrence):
+  ```
+  payload: QUESTION pattern . WHEN seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [@@@ and ?# lident when UIdent ] let false = UIdent
+                     ^^^^
   ```
 
 
@@ -6841,9 +5662,9 @@ it is usually the exact point where the parser could not continue.
 
 ## Error: Syntax error: nonrec flag not expected.
 
-### Item `generic_type_declaration(no_nonrec_flag,type_subst_kind): TYPE ext list(attribute) . NONREC type_parameters LIDENT option(jkind_constraint) COLONEQUAL nonempty_type_kind reversed_llist(preceded(CONSTRAINT,constrain)) list(post_item_attribute)` (in 1917 errors)
+### Item `generic_type_declaration(no_nonrec_flag,type_subst_kind): TYPE ext list(attribute) . NONREC type_parameters LIDENT option(jkind_constraint) COLONEQUAL nonempty_type_kind reversed_llist(preceded(CONSTRAINT,constrain)) list(post_item_attribute)` (in 1953 errors)
 
-- Derivation (1917 occurrences):
+- Derivation (1953 occurrences):
   ```
   generic_type_declaration(no_nonrec_flag,type_subst_kind): TYPE ext list(attribute) . NONREC type_parameters LIDENT option(jkind_constraint) COLONEQUAL nonempty_type_kind reversed_llist(preceded(CONSTRAINT,constrain)) list(post_item_attribute)
   ```
@@ -9508,9 +8329,9 @@ The token at that spot is likely not properly recognized.
 - ...
 
 
-### Item `atomic_type: LESSLBRACKET core_type . RBRACKETGREATER` (in 15536 errors)
+### Item `atomic_type: LESSLBRACKET core_type . RBRACKETGREATER` (in 16093 errors)
 
-- Derivation (15536 occurrences):
+- Derivation (16093 occurrences):
   ```
   atomic_type: LESSLBRACKET core_type . RBRACKETGREATER
   ```
@@ -10473,6 +9294,33 @@ They usually mean that the comment was not preserved by the formatting process (
   ```
 
 
+### Item `class_field: METHOD . method_ list(post_item_attribute)` (in 26 errors)
+
+- Derivation (26 occurrences):
+  ```
+  class_field: METHOD . method_ list(post_item_attribute)
+    method_: . BANG list(attribute) private_flag LIDENT COLON TYPE newtypes DOT core_type EQUAL seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  object method (* ... *) ! lident : type lident . _ = UIdent inherit lident end let false = UIdent
+                ^^^^^^^^^
+  ```
+
+
+### Item `method_: list(attribute) . private_flag LIDENT COLON TYPE newtypes DOT core_type EQUAL seq_expr` (in 26 errors)
+
+- Derivation (26 occurrences):
+  ```
+  method_: list(attribute) . private_flag LIDENT COLON TYPE newtypes DOT core_type EQUAL seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  object method (* ... *) lident : type lident . _ = UIdent inherit lident end let false = UIdent
+                ^^^^^^^^^
+  ```
+
+
 ### Item `module_type: . module_type_atomic` (in 20 errors)
 
 - Derivation (7 occurrences):
@@ -10617,33 +9465,6 @@ They usually mean that the comment was not preserved by the formatting process (
   ```ocaml
   open ! % (* ... *) and UIdent
            ^^^^^^^^^
-  ```
-
-
-### Item `class_field: METHOD . method_ list(post_item_attribute)` (in 18 errors)
-
-- Derivation (18 occurrences):
-  ```
-  class_field: METHOD . method_ list(post_item_attribute)
-    method_: . BANG list(attribute) private_flag LIDENT COLON TYPE newtypes DOT core_type EQUAL seq_expr
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  object method (* ... *) ! lident : type lident . _ = UIdent inherit lident end let false = UIdent
-                ^^^^^^^^^
-  ```
-
-
-### Item `method_: list(attribute) . private_flag LIDENT COLON TYPE newtypes DOT core_type EQUAL seq_expr` (in 18 errors)
-
-- Derivation (18 occurrences):
-  ```
-  method_: list(attribute) . private_flag LIDENT COLON TYPE newtypes DOT core_type EQUAL seq_expr
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  object method (* ... *) lident : type lident . _ = UIdent inherit lident end let false = UIdent
-                ^^^^^^^^^
   ```
 
 
@@ -13262,9 +12083,9 @@ Because the fuzzer does not understand these finer invariants, such errors may a
 
 ## Error: Syntax error: mode annotations not expected.
 
-### Item `fun_expr: . simple_expr` (in 1135 errors)
+### Item `fun_expr: . simple_expr` (in 1170 errors)
 
-- Derivation (408 occurrences):
+- Derivation (433 occurrences):
   ```
   implementation: . structure EOF
     structure: . seq_expr list(post_item_attribute) list(structure_element)
@@ -13278,7 +12099,7 @@ Because the fuzzer does not understand these finer invariants, such errors may a
   ( UIdent :> {%hello|world|} @ lident ) let false = UIdent
   ^
   ```
-- Derivation (133 occurrences):
+- Derivation (143 occurrences):
   ```
   implementation: . structure EOF
     structure: . seq_expr list(post_item_attribute) list(structure_element)
@@ -13552,9 +12373,9 @@ Because the fuzzer does not understand these finer invariants, such errors may a
   ```
 
 
-### Item `strict_binding_modes: fun_params . option(constraint_) EQUAL fun_body` (in 93 errors)
+### Item `strict_binding_modes: fun_params . option(constraint_) EQUAL fun_body` (in 113 errors)
 
-- Derivation (47 occurrences):
+- Derivation (57 occurrences):
   ```
   strict_binding_modes: fun_params . option(constraint_) EQUAL fun_body
     option(constraint_): . COLON core_type COLONGREATER tuple_type at_mode_expr
@@ -13564,7 +12385,7 @@ Because the fuzzer does not understand these finer invariants, such errors may a
   object method ! lident false : {%hello|world|} :> {%hello|world|} @ lident = UIdent inherit lident end let false = UIdent
                                ^
   ```
-- Derivation (46 occurrences):
+- Derivation (56 occurrences):
   ```
   strict_binding_modes: fun_params . option(constraint_) EQUAL fun_body
     option(constraint_): . COLONGREATER tuple_type at_mode_expr
@@ -14361,9 +13182,9 @@ Because the fuzzer does not understand these finer invariants, such errors may a
 When OCamlformat fails with an internal error, the exact location of the problem cannot be determined.
 The location is guessed by examining the syntactic constructions that appear most frequently in the failing code.
 
-## Exception: "Assert_failure lib/Fmt_ast.ml:684:6" (315151 errors)
+## Exception: "Assert_failure lib/Fmt_ast.ml:684:6" (317144 errors)
 
-### Item `seq_expr: . fun_seq_expr` (in 178502 errors)
+### Item `seq_expr: . fun_seq_expr` (in 178570 errors)
 
 - Derivation (1965 occurrences):
   ```
@@ -14568,7 +13389,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   begin let open {%hello|world|} in UIdent end let false = UIdent
   ```
-- Derivation (282 occurrences):
+- Derivation (302 occurrences):
   ```
   let_binding_body_no_punning: nonempty_list(mode_legacy) val_ident COLON core_type COLONGREATER tuple_type at_mode_expr EQUAL . seq_expr
     seq_expr: . fun_seq_expr
@@ -14639,7 +13460,7 @@ The location is guessed by examining the syntactic constructions that appear mos
 - ...
 
 
-### Item `alias_type: . function_type` (in 86254 errors)
+### Item `alias_type: . function_type` (in 87505 errors)
 
 - Derivation (4247 occurrences):
   ```
@@ -14699,7 +13520,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   class lident : [ lident : {%hello|world|} * {%hello|world|} , {%hello|world|} ] lident
   ```
-- Derivation (1006 occurrences):
+- Derivation (1024 occurrences):
   ```
   with_constraint: TYPE type_parameters label_longident with_type_binder . alias_type reversed_llist(preceded(CONSTRAINT,constrain))
     alias_type: . function_type
@@ -14725,7 +13546,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   val lident : ( lident : {%hello|world|} * {%hello|world|} ) let false = UIdent
   ```
-- Derivation (727 occurrences):
+- Derivation (740 occurrences):
   ```
   delimited_type_supporting_local_open: LBRACKET . row_field BAR reversed_separated_nonempty_llist(BAR,row_field) RBRACKET
     row_field: . core_type
@@ -14741,6 +13562,23 @@ The location is guessed by examining the syntactic constructions that appear mos
   Sample sentence (interface):
   ```ocaml
   exception false of [ {%hello|world|} | {%hello|world|} ]
+  ```
+- Derivation (707 occurrences):
+  ```
+  atomic_type: LPAREN . reversed_separated_nontrivial_llist(COMMA,one_type_parameter_of_several) RPAREN type_longident
+    reversed_separated_nontrivial_llist(COMMA,one_type_parameter_of_several): . core_type COMMA core_type
+      core_type: . alias_type
+        alias_type: . function_type
+          function_type: . tuple_type
+            tuple_type: . atomic_type
+              atomic_type: . delimited_type
+                delimited_type: . extension_type
+                  extension_type: . extension
+                    extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (interface):
+  ```ocaml
+  exception false of ( {%hello|world|} , _ ) lident
   ```
 - Derivation (689 occurrences):
   ```
@@ -14763,7 +13601,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   ( UIdent :> {%hello|world|} ) let false = UIdent
   ```
-- Derivation (642 occurrences):
+- Derivation (652 occurrences):
   ```
   type_constraint: COLON . core_type COLONGREATER core_type
     core_type: . alias_type
@@ -14773,24 +13611,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   #{ lident : {%hello|world|} :> {%hello|world|} } let false = UIdent
   ```
-- Derivation (637 occurrences):
-  ```
-  atomic_type: LPAREN . reversed_separated_nontrivial_llist(COMMA,one_type_parameter_of_several) RPAREN type_longident
-    reversed_separated_nontrivial_llist(COMMA,one_type_parameter_of_several): . core_type COMMA core_type
-      core_type: . alias_type
-        alias_type: . function_type
-          function_type: . tuple_type
-            tuple_type: . atomic_type
-              atomic_type: . delimited_type
-                delimited_type: . extension_type
-                  extension_type: . extension
-                    extension: . QUOTED_STRING_EXPR
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  exception false of ( {%hello|world|} , _ ) lident
-  ```
-- Derivation (612 occurrences):
+- Derivation (625 occurrences):
   ```
   tag_field: name_tag OF opt_ampersand . reversed_separated_nonempty_llist(AMPERSAND,core_type_no_attr) list(attribute)
     reversed_separated_nonempty_llist(AMPERSAND,core_type_no_attr): . reversed_separated_nonempty_llist(AMPERSAND,core_type_no_attr) AMPERSAND alias_type
@@ -14818,7 +13639,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   let ( lident : lident : {%hello|world|} -> {%hello|world|} ) @ lident = UIdent [@@ and ] let false = UIdent
   ```
-- Derivation (485 occurrences):
+- Derivation (585 occurrences):
   ```
   atomic_type: LPAREN . reversed_separated_nontrivial_llist(COMMA,one_type_parameter_of_several) RPAREN type_longident
     reversed_separated_nontrivial_llist(COMMA,one_type_parameter_of_several): . core_type COMMA core_type
@@ -14829,7 +13650,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   kind_abbrev_ lident = lident with ( {%hello|world|} , _ ) lident
   ```
-- Derivation (442 occurrences):
+- Derivation (455 occurrences):
   ```
   class_signature: LBRACKET . reversed_separated_nonempty_llist(COMMA,core_type) RBRACKET clty_longident
     reversed_separated_nonempty_llist(COMMA,core_type): . reversed_separated_nonempty_llist(COMMA,core_type) COMMA core_type
@@ -14842,7 +13663,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   class lident : [ {%hello|world|} , {%hello|world|} ] lident
   ```
-- Derivation (440 occurrences):
+- Derivation (450 occurrences):
   ```
   delimited_type_supporting_local_open: LBRACKET BAR . reversed_separated_nonempty_llist(BAR,row_field) RBRACKET
     reversed_separated_nonempty_llist(BAR,row_field): . reversed_separated_nonempty_llist(BAR,row_field) BAR row_field
@@ -15050,9 +13871,9 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
 
 
-### Item `extension: . QUOTED_STRING_EXPR` (in 8879 errors)
+### Item `extension: . QUOTED_STRING_EXPR` (in 9295 errors)
 
-- Derivation (1815 occurrences):
+- Derivation (1912 occurrences):
   ```
   class_fun_binding: COLON . class_type EQUAL class_expr
     class_type: . class_signature
@@ -15063,7 +13884,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   class lident : {%hello|world|} = lident let false = UIdent
   ```
-- Derivation (247 occurrences):
+- Derivation (255 occurrences):
   ```
   delimited_type_supporting_local_open: HASHLPAREN LIDENT COLON . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) RPAREN
     atomic_type: . delimited_type
@@ -15074,6 +13895,17 @@ The location is guessed by examining the syntactic constructions that appear mos
   Sample sentence (interface):
   ```ocaml
   exception false of #( lident : {%hello|world|} * {%hello|world|} )
+  ```
+- Derivation (226 occurrences):
+  ```
+  class_type: tuple_type MINUSGREATER . class_type
+    class_type: . class_signature
+      class_signature: . extension
+        extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (interface):
+  ```ocaml
+  class lident : {%hello|world|} -> {%hello|world|}
   ```
 - Derivation (203 occurrences):
   ```
@@ -15131,17 +13963,6 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   ( ( module {%hello|world|} ) ) let false = UIdent
   ```
-- Derivation (178 occurrences):
-  ```
-  class_type: tuple_type MINUSGREATER . class_type
-    class_type: . class_signature
-      class_signature: . extension
-        extension: . QUOTED_STRING_EXPR
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  class lident : {%hello|world|} -> {%hello|world|}
-  ```
 - Derivation (173 occurrences):
   ```
   signature_item: MODULE ext list(attribute) REC module_name COLON . module_type optional_atat_modalities_expr list(post_item_attribute) list(and_module_declaration)
@@ -15163,7 +13984,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   include {%hello|world|} with module UIdent := UIdent @@ lident
   ```
-- Derivation (145 occurrences):
+- Derivation (153 occurrences):
   ```
   delimited_type_supporting_local_open: HASHLPAREN . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) RPAREN
     atomic_type: . delimited_type
@@ -15188,7 +14009,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   exception false of < {%hello|world|} >
   ```
-- Derivation (97 occurrences):
+- Derivation (105 occurrences):
   ```
   class_type: optlabel . tuple_type MINUSGREATER class_type
     tuple_type: . atomic_type
@@ -15201,7 +14022,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   class lident : ?label: {%hello|world|} -> {%hello|world|}
   ```
-- Derivation (93 occurrences):
+- Derivation (101 occurrences):
   ```
   strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) at_mode_expr MINUSGREATER tuple_type
     reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
@@ -15224,7 +14045,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   include ( ) -> {%hello|world|} @@ lident
   ```
-- Derivation (81 occurrences):
+- Derivation (89 occurrences):
   ```
   strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) MINUSGREATER tuple_type
     reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
@@ -15237,7 +14058,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   type nonrec lident = lident : local_ {%hello|world|} * {%hello|world|} -> {%hello|world|} and lident
   ```
-- Derivation (80 occurrences):
+- Derivation (88 occurrences):
   ```
   strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) at_mode_expr MINUSGREATER nonempty_list(mode_legacy) tuple_type
     reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
@@ -15250,7 +14071,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   type nonrec lident = lident : local_ {%hello|world|} * {%hello|world|} @ lident -> local_ {%hello|world|} and lident
   ```
-- Derivation (80 occurrences):
+- Derivation (88 occurrences):
   ```
   strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) MINUSGREATER nonempty_list(mode_legacy) tuple_type
     reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
@@ -15263,7 +14084,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   type nonrec lident = lident : local_ {%hello|world|} * {%hello|world|} -> local_ {%hello|world|} and lident
   ```
-- Derivation (77 occurrences):
+- Derivation (85 occurrences):
   ```
   class_type: LIDENT COLON . tuple_type MINUSGREATER class_type
     tuple_type: . atomic_type
@@ -15286,17 +14107,18 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   include UIdent @ lident -> {%hello|world|} @@ lident
   ```
-- Derivation (71 occurrences):
+- Derivation (73 occurrences):
   ```
-  constructor_arguments: reversed_separated_nonempty_llist(STAR,constructor_argument) STAR . atomic_type optional_atat_modalities_expr
-    atomic_type: . delimited_type
-      delimited_type: . extension_type
-        extension_type: . extension
-          extension: . QUOTED_STRING_EXPR
+  generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT . constructor_arguments MINUSGREATER atomic_type
+    constructor_arguments: . atomic_type optional_atat_modalities_expr
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
   ```
   Sample sentence (interface):
   ```ocaml
-  exception false of {%hello|world|} * {%hello|world|}
+  exception false : ' lident . {%hello|world|} -> {%hello|world|}
   ```
 - ...
 
@@ -15380,7 +14202,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  ( let* # lident : {%hello|world|} = UIdent in UIdent ) let false = UIdent
+  ( let*# lident : {%hello|world|} = UIdent in UIdent ) let false = UIdent
   ```
 - Derivation (17 occurrences):
   ```
@@ -15405,7 +14227,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  let* lident and* # lident : {%hello|world|} = UIdent in UIdent [@@ and ] let false = UIdent
+  let* lident and*# lident : {%hello|world|} = UIdent in UIdent [@@ and ] let false = UIdent
   ```
 - Derivation (10 occurrences):
   ```
@@ -15417,7 +14239,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  function ~ ( lident : {%hello|world|} ) , # lident -> UIdent let false = UIdent
+  function ~ ( lident : {%hello|world|} ) ,# lident -> UIdent let false = UIdent
   ```
 - Derivation (10 occurrences):
   ```
@@ -15427,7 +14249,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  function ~ ( lident : {%hello|world|} ) , ~label: # lident -> UIdent let false = UIdent
+  function ~ ( lident : {%hello|world|} ) , ~label:# lident -> UIdent let false = UIdent
   ```
 - Derivation (10 occurrences):
   ```
@@ -15460,7 +14282,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  let ( # lident : {%hello|world|} ) @ lident = UIdent [@@ and ] let false = UIdent
+  let (# lident : {%hello|world|} ) @ lident = UIdent [@@ and ] let false = UIdent
   ```
 - Derivation (6 occurrences):
   ```
@@ -15585,8 +14407,17 @@ The location is guessed by examining the syntactic constructions that appear mos
 - ...
 
 
-### Item `tuple_type: . atomic_type` (in 1076 errors)
+### Item `tuple_type: . atomic_type` (in 1241 errors)
 
+- Derivation (84 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON . tuple_type at_mode_expr MINUSGREATER tuple_type
+    tuple_type: . atomic_type
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  type nonrec lident = lident : {%hello|world|} @ lident -> {%hello|world|} and lident
+  ```
 - Derivation (84 occurrences):
   ```
   strict_function_or_labeled_tuple_type: LIDENT COLON . tuple_type at_mode_expr MINUSGREATER strict_function_or_labeled_tuple_type
@@ -15595,15 +14426,6 @@ The location is guessed by examining the syntactic constructions that appear mos
   Sample sentence (implementation):
   ```ocaml
   type nonrec lident = lident : {%hello|world|} @ lident -> {%hello|world|} -> {%hello|world|} and lident
-  ```
-- Derivation (76 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON . tuple_type at_mode_expr MINUSGREATER tuple_type
-    tuple_type: . atomic_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  type nonrec lident = lident : {%hello|world|} @ lident -> {%hello|world|} and lident
   ```
 - Derivation (69 occurrences):
   ```
@@ -15696,6 +14518,15 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   kind_abbrev_ lident = kind_of_ {%hello|world|} -> local_ lident -> {%hello|world|} let false = UIdent
   ```
+- Derivation (22 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON . tuple_type at_mode_expr MINUSGREATER nonempty_list(mode_legacy) tuple_type
+    tuple_type: . atomic_type
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} @ lident -> local_ lident let false = UIdent
+  ```
 - Derivation (20 occurrences):
   ```
   signature_item: CLASS ext list(attribute) virtual_flag formal_class_parameters . LIDENT COLON class_type list(post_item_attribute) list(and_class_description)
@@ -15706,15 +14537,6 @@ The location is guessed by examining the syntactic constructions that appear mos
   Sample sentence (interface):
   ```ocaml
   class lident : {%hello|world|} -> lident
-  ```
-- Derivation (17 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON . tuple_type at_mode_expr MINUSGREATER nonempty_list(mode_legacy) tuple_type
-    tuple_type: . atomic_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} @ lident -> local_ lident let false = UIdent
   ```
 - Derivation (15 occurrences):
   ```
@@ -16731,9 +15553,9 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
 
 
-### Item `clty_longident: . mk_longident(mod_ext_longident,LIDENT)` (in 360 errors)
+### Item `clty_longident: . mk_longident(mod_ext_longident,LIDENT)` (in 369 errors)
 
-- Derivation (339 occurrences):
+- Derivation (348 occurrences):
   ```
   atomic_type: atomic_type HASH . clty_longident
     clty_longident: . mk_longident(mod_ext_longident,LIDENT)
@@ -17598,21 +16420,69 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
 
 
-### Item `core_type: . alias_type` (in 187 errors)
+### Item `atomic_type: . type_longident` (in 188 errors)
 
-- Derivation (187 occurrences):
+- Derivation (10 occurrences):
   ```
-  simple_expr: LPAREN seq_expr COLON . core_type RPAREN
-    core_type: . alias_type
+  constructor_arguments: reversed_separated_nonempty_llist(STAR,constructor_argument) STAR GLOBAL . atomic_type optional_atat_modalities_expr
+    atomic_type: . type_longident
+      type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
+        mk_longident(mod_ext_longident,type_trailing_no_hash): . type_trailing_no_hash
+          type_trailing_no_hash: . LIDENT
+  ```
+  Sample sentence (interface):
+  ```ocaml
+  exception false of {%hello|world|} * global_ lident
+  ```
+- Derivation (10 occurrences):
+  ```
+  constructor_arguments: reversed_separated_nonempty_llist(STAR,constructor_argument) STAR . atomic_type optional_atat_modalities_expr
+    atomic_type: . type_longident
+      type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
+        mk_longident(mod_ext_longident,type_trailing_no_hash): . type_trailing_no_hash
+          type_trailing_no_hash: . LIDENT
+  ```
+  Sample sentence (interface):
+  ```ocaml
+  exception false of {%hello|world|} * lident
+  ```
+- Derivation (8 occurrences):
+  ```
+  generalized_constructor_arguments: COLON constructor_arguments MINUSGREATER . atomic_type
+    atomic_type: . type_longident
+      type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
+        mk_longident(mod_ext_longident,type_trailing_no_hash): . type_trailing_no_hash
+          type_trailing_no_hash: . LIDENT
   ```
   Sample sentence (implementation):
   ```ocaml
-  ( UIdent : {%hello|world|} ) let false = UIdent
+  exception false : {%hello|world|} -> lident let false = UIdent
   ```
-
-
-### Item `tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)` (in 175 errors)
-
+- Derivation (4 occurrences):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . type_longident
+        type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
+          mk_longident(mod_ext_longident,type_trailing_no_hash): . type_trailing_no_hash
+            type_trailing_no_hash: . LIDENT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  #{ lident :> {%hello|world|} * lident ; } let false = UIdent
+  ```
+- Derivation (4 occurrences):
+  ```
+  generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT constructor_arguments MINUSGREATER . atomic_type
+    atomic_type: . type_longident
+      type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
+        mk_longident(mod_ext_longident,type_trailing_no_hash): . type_trailing_no_hash
+          type_trailing_no_hash: . LIDENT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : ' lident . {%hello|world|} -> lident let false = UIdent
+  ```
 - Derivation (4 occurrences):
   ```
   let_binding_body_no_punning: simple_pattern_not_ident COLON . tuple_type at_mode_expr EQUAL seq_expr
@@ -17743,69 +16613,6 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   include struct let lident : lident * {%hello|world|} @ lident = UIdent end let false = UIdent
   ```
-- Derivation (3 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: tuple_type MINUSGREATER . tuple_type
-    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ {%hello|world|} -> {%hello|world|} * {%hello|world|} let false = UIdent
-  ```
-- Derivation (3 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN at_mode_expr MINUSGREATER . tuple_type
-    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ ( ' lident . {%hello|world|} ) @ lident -> {%hello|world|} * {%hello|world|} let false = UIdent
-  ```
-- Derivation (3 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) tuple_type at_mode_expr MINUSGREATER . tuple_type
-    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : local_ {%hello|world|} @ lident -> {%hello|world|} * {%hello|world|} let false = UIdent
-  ```
-- Derivation (3 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) tuple_type MINUSGREATER . tuple_type
-    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : local_ {%hello|world|} -> {%hello|world|} * {%hello|world|} let false = UIdent
-  ```
-- Derivation (3 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN at_mode_expr MINUSGREATER . tuple_type
-    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : local_ ( ' lident . {%hello|world|} ) @ lident -> {%hello|world|} * {%hello|world|} let false = UIdent
-  ```
-- Derivation (3 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON tuple_type MINUSGREATER . tuple_type
-    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} -> {%hello|world|} * {%hello|world|} let false = UIdent
-  ```
-- Derivation (3 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN at_mode_expr MINUSGREATER . tuple_type
-    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : ( ' lident . {%hello|world|} ) @ lident -> {%hello|world|} * {%hello|world|} let false = UIdent
-  ```
 - Derivation (2 occurrences):
   ```
   strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) MINUSGREATER nonempty_list(mode_legacy) . tuple_type
@@ -17818,6 +16625,283 @@ The location is guessed by examining the syntactic constructions that appear mos
   Sample sentence (implementation):
   ```ocaml
   kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * {%hello|world|} -> local_ lident * {%hello|world|} let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) MINUSGREATER . tuple_type
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+      atomic_type: . type_longident
+        type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
+          mk_longident(mod_ext_longident,type_trailing_no_hash): . type_trailing_no_hash
+            type_trailing_no_hash: . LIDENT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * {%hello|world|} -> lident * {%hello|world|} let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: tuple_type MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+      atomic_type: . type_longident
+        type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
+          mk_longident(mod_ext_longident,type_trailing_no_hash): . type_trailing_no_hash
+            type_trailing_no_hash: . LIDENT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ {%hello|world|} -> local_ lident * {%hello|world|} let false = UIdent
+  ```
+- ...
+
+
+### Item `core_type: . alias_type` (in 187 errors)
+
+- Derivation (187 occurrences):
+  ```
+  simple_expr: LPAREN seq_expr COLON . core_type RPAREN
+    core_type: . alias_type
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  ( UIdent : {%hello|world|} ) let false = UIdent
+  ```
+
+
+### Item `reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type` (in 145 errors)
+
+- Derivation (28 occurrences):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  type nonrec lident = {%hello|world|} * {%hello|world|} -> {%hello|world|} and lident
+  ```
+- Derivation (26 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) MINUSGREATER strict_function_or_labeled_tuple_type
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * {%hello|world|} -> ?label: {%hello|world|} -> {%hello|world|} let false = UIdent
+  ```
+- Derivation (17 occurrences):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) STAR LIDENT COLON atomic_type
+      reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  ( UIdent : {%hello|world|} * {%hello|world|} * lident : _ @ lident ) let false = UIdent
+  ```
+- Derivation (17 occurrences):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) STAR atomic_type
+      reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  ( UIdent : {%hello|world|} * {%hello|world|} * _ @ lident ) let false = UIdent
+  ```
+- Derivation (11 occurrences):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . atomic_type type_longident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  #{ lident :> {%hello|world|} * {%hello|world|} lident ; } let false = UIdent
+  ```
+- Derivation (4 occurrences):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . HASH clty_longident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ {%hello|world|} * # lident
+  ```
+- Derivation (4 occurrences):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . atomic_type type_unboxed_longident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  ( UIdent : {%hello|world|} * {%hello|world|} lident# @ lident ) let false = UIdent
+  ```
+- Derivation (3 occurrences):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . atomic_type type_unboxed_longident
+        atomic_type: . atomic_type type_longident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  ( UIdent : {%hello|world|} * {%hello|world|} lident lident# @ lident ) let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . type_unboxed_longident
+        type_unboxed_longident: . mk_longident(mod_ext_longident,type_trailing_hash)
+          mk_longident(mod_ext_longident,type_trailing_hash): . type_trailing_hash
+            type_trailing_hash: . LIDENT HASH_SUFFIX
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  ( UIdent : {%hello|world|} * lident# @ lident ) let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . type_unboxed_longident
+        type_unboxed_longident: . mk_longident(mod_ext_longident,type_trailing_hash)
+          mk_longident(mod_ext_longident,type_trailing_hash): . type_trailing_hash
+            type_trailing_hash: . LIDENT HASH_SUFFIX
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * lident# let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . LBRACKETPERCENT attr_id payload RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  ( UIdent : {%hello|world|} * [% and ] @ lident ) let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . LBRACKETPERCENT attr_id payload RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * [% and ] let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . LPAREN QUOTE ident COLON jkind_annotation RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  ( UIdent : {%hello|world|} * ( ' lident : lident ) @ lident ) let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . LPAREN QUOTE ident COLON jkind_annotation RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * ( ' lident : lident ) let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . QUOTE ident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  ( UIdent : {%hello|world|} * ' lident @ lident ) let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . QUOTE ident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * ' lident let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . atomic_type type_unboxed_longident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * {%hello|world|} lident# let false = UIdent
+  ```
+- Derivation (1 occurrence):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . object_type
+          object_type: . LESS GREATER
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  ( UIdent : {%hello|world|} * < > @ lident ) let false = UIdent
+  ```
+- Derivation (1 occurrence):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . object_type
+          object_type: . LESS GREATER
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * < > let false = UIdent
+  ```
+- Derivation (1 occurrence):
+  ```
+  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . type_unboxed_longident
+        type_unboxed_longident: . mk_longident(mod_ext_longident,type_trailing_hash)
+          mk_longident(mod_ext_longident,type_trailing_hash): . mod_ext_longident DOT type_trailing_hash
+            mod_ext_longident: . mk_longident(mod_ext_longident,UIDENT)
+              mk_longident(mod_ext_longident,UIDENT): . UIDENT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  ( UIdent : {%hello|world|} * UIdent . lident# @ lident ) let false = UIdent
+  ```
+- Derivation (1 occurrence):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
+      atomic_type: . type_unboxed_longident
+        type_unboxed_longident: . mk_longident(mod_ext_longident,type_trailing_hash)
+          mk_longident(mod_ext_longident,type_trailing_hash): . mod_ext_longident DOT type_trailing_hash
+            mod_ext_longident: . mk_longident(mod_ext_longident,UIDENT)
+              mk_longident(mod_ext_longident,UIDENT): . UIDENT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * UIdent . lident# let false = UIdent
   ```
 - ...
 
@@ -18086,250 +17170,7 @@ The location is guessed by examining the syntactic constructions that appear mos
 - ...
 
 
-### Item `reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type` (in 128 errors)
-
-- Derivation (26 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) MINUSGREATER strict_function_or_labeled_tuple_type
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * {%hello|world|} -> ?label: {%hello|world|} -> {%hello|world|} let false = UIdent
-  ```
-- Derivation (19 occurrences):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  type nonrec lident = {%hello|world|} * {%hello|world|} -> {%hello|world|} and lident
-  ```
-- Derivation (17 occurrences):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) STAR LIDENT COLON atomic_type
-      reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  ( UIdent : {%hello|world|} * {%hello|world|} * lident : _ @ lident ) let false = UIdent
-  ```
-- Derivation (17 occurrences):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) STAR atomic_type
-      reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  ( UIdent : {%hello|world|} * {%hello|world|} * _ @ lident ) let false = UIdent
-  ```
-- Derivation (11 occurrences):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . atomic_type type_longident
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  #{ lident :> {%hello|world|} * {%hello|world|} lident ; } let false = UIdent
-  ```
-- Derivation (4 occurrences):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . type_longident
-        type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
-          mk_longident(mod_ext_longident,type_trailing_no_hash): . type_trailing_no_hash
-            type_trailing_no_hash: . LIDENT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  #{ lident :> {%hello|world|} * lident ; } let false = UIdent
-  ```
-- Derivation (4 occurrences):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . HASH clty_longident
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ {%hello|world|} * # lident
-  ```
-- Derivation (2 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . type_longident
-        type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
-          mk_longident(mod_ext_longident,type_trailing_no_hash): . type_trailing_no_hash
-            type_trailing_no_hash: . LIDENT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * lident let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . delimited_type
-        delimited_type: . extension_type
-          extension_type: . extension
-            extension: . LBRACKETPERCENT attr_id payload RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  ( UIdent : {%hello|world|} * [% and ] @ lident ) let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . delimited_type
-        delimited_type: . extension_type
-          extension_type: . extension
-            extension: . LBRACKETPERCENT attr_id payload RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * [% and ] let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . LPAREN QUOTE ident COLON jkind_annotation RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  ( UIdent : {%hello|world|} * ( ' lident : lident ) @ lident ) let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . LPAREN QUOTE ident COLON jkind_annotation RPAREN
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * ( ' lident : lident ) let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . QUOTE ident
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  ( UIdent : {%hello|world|} * ' lident @ lident ) let false = UIdent
-  ```
-- Derivation (2 occurrences):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . QUOTE ident
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * ' lident let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . delimited_type
-        delimited_type: . object_type
-          object_type: . LESS GREATER
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  ( UIdent : {%hello|world|} * < > @ lident ) let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . delimited_type
-        delimited_type: . object_type
-          object_type: . LESS GREATER
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * < > let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . type_longident
-        type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
-          mk_longident(mod_ext_longident,type_trailing_no_hash): . mod_ext_longident DOT type_trailing_no_hash
-            mod_ext_longident: . mk_longident(mod_ext_longident,UIDENT)
-              mk_longident(mod_ext_longident,UIDENT): . UIDENT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  ( UIdent : {%hello|world|} * UIdent . lident @ lident ) let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . type_longident
-        type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
-          mk_longident(mod_ext_longident,type_trailing_no_hash): . mod_ext_longident DOT type_trailing_no_hash
-            mod_ext_longident: . mk_longident(mod_ext_longident,UIDENT)
-              mk_longident(mod_ext_longident,UIDENT): . UIDENT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * UIdent . lident let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . delimited_type
-        delimited_type: . delimited_type_supporting_local_open
-          delimited_type_supporting_local_open: . LBRACKETGREATER RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  ( UIdent : {%hello|world|} * [> ] @ lident ) let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . delimited_type
-        delimited_type: . delimited_type_supporting_local_open
-          delimited_type_supporting_local_open: . LBRACKETGREATER RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} * [> ] let false = UIdent
-  ```
-- Derivation (1 occurrence):
-  ```
-  tuple_type: atomic_type STAR . reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
-    reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element): . atomic_type
-      atomic_type: . delimited_type
-        delimited_type: . delimited_type_supporting_local_open
-          delimited_type_supporting_local_open: . LBRACKET tag_field RBRACKET
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  ( UIdent : {%hello|world|} * [ ` lident ] @ lident ) let false = UIdent
-  ```
-- ...
-
-
-### Item `generalized_constructor_arguments: COLON constructor_arguments MINUSGREATER . atomic_type` (in 114 errors)
+### Item `generalized_constructor_arguments: COLON constructor_arguments MINUSGREATER . atomic_type` (in 117 errors)
 
 - Derivation (64 occurrences):
   ```
@@ -18349,18 +17190,6 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   exception false : {%hello|world|} -> {%hello|world|} lident let false = UIdent
   ```
-- Derivation (8 occurrences):
-  ```
-  generalized_constructor_arguments: COLON constructor_arguments MINUSGREATER . atomic_type
-    atomic_type: . type_longident
-      type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
-        mk_longident(mod_ext_longident,type_trailing_no_hash): . type_trailing_no_hash
-          type_trailing_no_hash: . LIDENT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : {%hello|world|} -> lident let false = UIdent
-  ```
 - Derivation (6 occurrences):
   ```
   generalized_constructor_arguments: COLON constructor_arguments MINUSGREATER . atomic_type
@@ -18369,6 +17198,18 @@ The location is guessed by examining the syntactic constructions that appear mos
   Sample sentence (interface):
   ```ocaml
   exception false : {%hello|world|} -> # lident
+  ```
+- Derivation (4 occurrences):
+  ```
+  generalized_constructor_arguments: COLON constructor_arguments MINUSGREATER . atomic_type
+    atomic_type: . type_unboxed_longident
+      type_unboxed_longident: . mk_longident(mod_ext_longident,type_trailing_hash)
+        mk_longident(mod_ext_longident,type_trailing_hash): . type_trailing_hash
+          type_trailing_hash: . LIDENT HASH_SUFFIX
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : {%hello|world|} -> lident# let false = UIdent
   ```
 - Derivation (4 occurrences):
   ```
@@ -18391,6 +17232,15 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   exception false : {%hello|world|} -> ' lident let false = UIdent
   ```
+- Derivation (4 occurrences):
+  ```
+  generalized_constructor_arguments: COLON constructor_arguments MINUSGREATER . atomic_type
+    atomic_type: . atomic_type type_unboxed_longident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : {%hello|world|} -> {%hello|world|} lident# let false = UIdent
+  ```
 - Derivation (3 occurrences):
   ```
   generalized_constructor_arguments: COLON constructor_arguments MINUSGREATER . atomic_type
@@ -18399,6 +17249,16 @@ The location is guessed by examining the syntactic constructions that appear mos
   Sample sentence (implementation):
   ```ocaml
   exception false : {%hello|world|} -> ( _ : lident ) let false = UIdent
+  ```
+- Derivation (3 occurrences):
+  ```
+  generalized_constructor_arguments: COLON constructor_arguments MINUSGREATER . atomic_type
+    atomic_type: . atomic_type type_unboxed_longident
+      atomic_type: . atomic_type type_longident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : {%hello|world|} -> {%hello|world|} lident lident# let false = UIdent
   ```
 - Derivation (2 occurrences):
   ```
@@ -18414,15 +17274,15 @@ The location is guessed by examining the syntactic constructions that appear mos
 - Derivation (2 occurrences):
   ```
   generalized_constructor_arguments: COLON constructor_arguments MINUSGREATER . atomic_type
-    atomic_type: . type_longident
-      type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
-        mk_longident(mod_ext_longident,type_trailing_no_hash): . mod_ext_longident DOT type_trailing_no_hash
+    atomic_type: . type_unboxed_longident
+      type_unboxed_longident: . mk_longident(mod_ext_longident,type_trailing_hash)
+        mk_longident(mod_ext_longident,type_trailing_hash): . mod_ext_longident DOT type_trailing_hash
           mod_ext_longident: . mk_longident(mod_ext_longident,UIDENT)
             mk_longident(mod_ext_longident,UIDENT): . UIDENT
   ```
   Sample sentence (implementation):
   ```ocaml
-  exception false : {%hello|world|} -> UIdent . lident let false = UIdent
+  exception false : {%hello|world|} -> UIdent . lident# let false = UIdent
   ```
 - Derivation (2 occurrences):
   ```
@@ -18475,19 +17335,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
 
 
-### Item `label_declaration: mutable_or_global_flag LIDENT COLON possibly_poly(core_type_no_attr) . optional_atat_modalities_expr list(attribute)` (in 84 errors)
-
-- Derivation (84 occurrences):
-  ```
-  label_declaration: mutable_or_global_flag LIDENT COLON possibly_poly(core_type_no_attr) . optional_atat_modalities_expr list(attribute)
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  type lident := { lident : {%hello|world|} }
-  ```
-
-
-### Item `generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT constructor_arguments MINUSGREATER . atomic_type` (in 82 errors)
+### Item `generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT constructor_arguments MINUSGREATER . atomic_type` (in 87 errors)
 
 - Derivation (18 occurrences):
   ```
@@ -18498,7 +17346,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  exception false : ' lident . {%hello|world|} -> < _ > let false = UIdent
+  exception false : ' lident . {%hello|world|} -> < .. > let false = UIdent
   ```
 - Derivation (17 occurrences):
   ```
@@ -18532,23 +17380,20 @@ The location is guessed by examining the syntactic constructions that appear mos
 - Derivation (4 occurrences):
   ```
   generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT constructor_arguments MINUSGREATER . atomic_type
-    atomic_type: . type_longident
-      type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
-        mk_longident(mod_ext_longident,type_trailing_no_hash): . type_trailing_no_hash
-          type_trailing_no_hash: . LIDENT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  exception false : ' lident . {%hello|world|} -> lident let false = UIdent
-  ```
-- Derivation (4 occurrences):
-  ```
-  generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT constructor_arguments MINUSGREATER . atomic_type
     atomic_type: . HASH clty_longident
   ```
   Sample sentence (interface):
   ```ocaml
   exception false : ' lident . {%hello|world|} -> # lident
+  ```
+- Derivation (4 occurrences):
+  ```
+  generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT constructor_arguments MINUSGREATER . atomic_type
+    atomic_type: . atomic_type type_unboxed_longident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : ' lident . {%hello|world|} -> {%hello|world|} lident# let false = UIdent
   ```
 - Derivation (3 occurrences):
   ```
@@ -18568,18 +17413,40 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   exception false : ' lident . {%hello|world|} -> ' lident let false = UIdent
   ```
+- Derivation (3 occurrences):
+  ```
+  generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT constructor_arguments MINUSGREATER . atomic_type
+    atomic_type: . atomic_type type_unboxed_longident
+      atomic_type: . atomic_type type_longident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : ' lident . {%hello|world|} -> {%hello|world|} lident lident# let false = UIdent
+  ```
 - Derivation (2 occurrences):
   ```
   generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT constructor_arguments MINUSGREATER . atomic_type
-    atomic_type: . type_longident
-      type_longident: . mk_longident(mod_ext_longident,type_trailing_no_hash)
-        mk_longident(mod_ext_longident,type_trailing_no_hash): . mod_ext_longident DOT type_trailing_no_hash
+    atomic_type: . type_unboxed_longident
+      type_unboxed_longident: . mk_longident(mod_ext_longident,type_trailing_hash)
+        mk_longident(mod_ext_longident,type_trailing_hash): . type_trailing_hash
+          type_trailing_hash: . LIDENT HASH_SUFFIX
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : ' lident . {%hello|world|} -> lident# let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT constructor_arguments MINUSGREATER . atomic_type
+    atomic_type: . type_unboxed_longident
+      type_unboxed_longident: . mk_longident(mod_ext_longident,type_trailing_hash)
+        mk_longident(mod_ext_longident,type_trailing_hash): . mod_ext_longident DOT type_trailing_hash
           mod_ext_longident: . mk_longident(mod_ext_longident,UIDENT)
             mk_longident(mod_ext_longident,UIDENT): . UIDENT
   ```
   Sample sentence (implementation):
   ```ocaml
-  exception false : ' lident . {%hello|world|} -> UIdent . lident let false = UIdent
+  exception false : ' lident . {%hello|world|} -> UIdent . lident# let false = UIdent
   ```
 - Derivation (2 occurrences):
   ```
@@ -18676,6 +17543,18 @@ The location is guessed by examining the syntactic constructions that appear mos
   Sample sentence (implementation):
   ```ocaml
   exception false : ' lident . {%hello|world|} -> _ let false = UIdent
+  ```
+
+
+### Item `label_declaration: mutable_or_global_flag LIDENT COLON possibly_poly(core_type_no_attr) . optional_atat_modalities_expr list(attribute)` (in 84 errors)
+
+- Derivation (84 occurrences):
+  ```
+  label_declaration: mutable_or_global_flag LIDENT COLON possibly_poly(core_type_no_attr) . optional_atat_modalities_expr list(attribute)
+  ```
+  Sample sentence (interface):
+  ```ocaml
+  type lident := { lident : {%hello|world|} }
   ```
 
 
@@ -18914,6 +17793,200 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   [ fun ( type lident ) : {%hello|world|} -> UIdent for false in UIdent ] let false = UIdent
   ```
+
+
+### Item `tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)` (in 58 errors)
+
+- Derivation (3 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: tuple_type MINUSGREATER . tuple_type
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ {%hello|world|} -> {%hello|world|} * {%hello|world|} let false = UIdent
+  ```
+- Derivation (3 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN at_mode_expr MINUSGREATER . tuple_type
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ ( ' lident . {%hello|world|} ) @ lident -> {%hello|world|} * {%hello|world|} let false = UIdent
+  ```
+- Derivation (3 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) tuple_type at_mode_expr MINUSGREATER . tuple_type
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : local_ {%hello|world|} @ lident -> {%hello|world|} * {%hello|world|} let false = UIdent
+  ```
+- Derivation (3 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) tuple_type MINUSGREATER . tuple_type
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : local_ {%hello|world|} -> {%hello|world|} * {%hello|world|} let false = UIdent
+  ```
+- Derivation (3 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN at_mode_expr MINUSGREATER . tuple_type
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : local_ ( ' lident . {%hello|world|} ) @ lident -> {%hello|world|} * {%hello|world|} let false = UIdent
+  ```
+- Derivation (3 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON tuple_type MINUSGREATER . tuple_type
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : {%hello|world|} -> {%hello|world|} * {%hello|world|} let false = UIdent
+  ```
+- Derivation (3 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN at_mode_expr MINUSGREATER . tuple_type
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  kind_abbrev_ lident = kind_of_ lident : ( ' lident . {%hello|world|} ) @ lident -> {%hello|world|} * {%hello|world|} let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: simple_pattern_not_ident COLON . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let false : {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: LPAREN val_ident at_mode_expr RPAREN COLON TYPE newtypes DOT . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let ( lident @ lident ) : type lident . {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: nonempty_list(mode_legacy) val_ident COLON TYPE newtypes DOT . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let local_ lident : type lident . {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: val_ident COLON TYPE newtypes DOT . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let lident : type lident . {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: LPAREN val_ident at_mode_expr RPAREN COLON reversed_nonempty_llist(typevar) DOT . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let ( lident @ lident ) : ' lident . {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: nonempty_list(mode_legacy) val_ident COLON reversed_nonempty_llist(typevar) DOT . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let local_ lident : ' lident . {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: val_ident COLON reversed_nonempty_llist(typevar) DOT . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let lident : ' lident . {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: LPAREN val_ident at_mode_expr RPAREN COLONGREATER . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let ( lident @ lident ) :> {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: LPAREN val_ident at_mode_expr RPAREN COLON . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let ( lident @ lident ) : {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: nonempty_list(mode_legacy) val_ident COLONGREATER . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let local_ lident :> {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: nonempty_list(mode_legacy) val_ident COLON . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let local_ lident : {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: val_ident COLONGREATER . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let lident :> {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_binding_body_no_punning: val_ident COLON . tuple_type at_mode_expr EQUAL seq_expr
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let lident : {%hello|world|} lident * {%hello|world|} @ lident = UIdent end let false = UIdent
+  ```
+- Derivation (1 occurrence):
+  ```
+  strict_function_or_labeled_tuple_type: optlabel nonempty_list(mode_legacy) . tuple_type at_mode_expr MINUSGREATER tuple_type
+    tuple_type: . atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val lident : ?label: local_ {%hello|world|} lident * {%hello|world|} @ lident -> {%hello|world|} let false = UIdent
+  ```
+- ...
 
 
 ### Item `reversed_labeled_tuple_body: . reversed_labeled_tuple_body COMMA TILDE LPAREN LIDENT type_constraint RPAREN` (in 52 errors)
@@ -19419,18 +18492,6 @@ The location is guessed by examining the syntactic constructions that appear mos
 - ...
 
 
-### Item `reversed_separated_nonempty_llist(STAR,constructor_argument): atomic_type . optional_atat_modalities_expr` (in 44 errors)
-
-- Derivation (44 occurrences):
-  ```
-  reversed_separated_nonempty_llist(STAR,constructor_argument): atomic_type . optional_atat_modalities_expr
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  exception false of {%hello|world|} * _
-  ```
-
-
 ### Item `val_ident: . val_extra_ident` (in 44 errors)
 
 - Derivation (37 occurrences):
@@ -19516,7 +18577,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  ( UIdent : {%hello|world|} * lident : lident @ lident ) let false = UIdent
+  ( UIdent : {%hello|world|} * lident : _ @ lident ) let false = UIdent
   ```
 
 
@@ -19918,6 +18979,30 @@ The location is guessed by examining the syntactic constructions that appear mos
   Sample sentence (implementation):
   ```ocaml
   include {%hello|world|} ( UIdent . UIdent ) let false = UIdent
+  ```
+
+
+### Item `constructor_arguments: reversed_separated_nonempty_llist(STAR,constructor_argument) . STAR atomic_type optional_atat_modalities_expr` (in 36 errors)
+
+- Derivation (36 occurrences):
+  ```
+  constructor_arguments: reversed_separated_nonempty_llist(STAR,constructor_argument) . STAR atomic_type optional_atat_modalities_expr
+  ```
+  Sample sentence (interface):
+  ```ocaml
+  exception false of {%hello|world|} * _
+  ```
+
+
+### Item `constructor_arguments: reversed_separated_nonempty_llist(STAR,constructor_argument) . STAR GLOBAL atomic_type optional_atat_modalities_expr` (in 36 errors)
+
+- Derivation (36 occurrences):
+  ```
+  constructor_arguments: reversed_separated_nonempty_llist(STAR,constructor_argument) . STAR GLOBAL atomic_type optional_atat_modalities_expr
+  ```
+  Sample sentence (interface):
+  ```ocaml
+  exception false of {%hello|world|} * global_ _
   ```
 
 
@@ -20669,30 +19754,6 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
 
 
-### Item `constructor_arguments: reversed_separated_nonempty_llist(STAR,constructor_argument) . STAR atomic_type optional_atat_modalities_expr` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  constructor_arguments: reversed_separated_nonempty_llist(STAR,constructor_argument) . STAR atomic_type optional_atat_modalities_expr
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct exception false of {%hello|world|} * lident [@ and ] let false = UIdent end let false = UIdent
-  ```
-
-
-### Item `constructor_arguments: reversed_separated_nonempty_llist(STAR,constructor_argument) . STAR GLOBAL atomic_type optional_atat_modalities_expr` (in 20 errors)
-
-- Derivation (20 occurrences):
-  ```
-  constructor_arguments: reversed_separated_nonempty_llist(STAR,constructor_argument) . STAR GLOBAL atomic_type optional_atat_modalities_expr
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  include struct exception false of {%hello|world|} * global_ lident [@ and ] let false = UIdent end let false = UIdent
-  ```
-
-
 ### Item `strict_function_or_labeled_tuple_type: . LIDENT COLON LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN at_mode_expr MINUSGREATER tuple_type` (in 20 errors)
 
 - Derivation (2 occurrences):
@@ -21413,7 +20474,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  object ( # lident : {%hello|world|} ) end let false = UIdent
+  object (# lident : {%hello|world|} ) end let false = UIdent
   ```
 - Derivation (7 occurrences):
   ```
@@ -22612,9 +21673,9 @@ The location is guessed by examining the syntactic constructions that appear mos
   val lident : ( ' lident . {%hello|world|} ) @ lident -> {%hello|world|} let false = UIdent
   ```
 
-## BUG: formatting did not stabilize after 10 iterations. (15245 errors)
+## BUG: formatting did not stabilize after 10 iterations. (15260 errors)
 
-### Item `pattern_gen: . simple_pattern` (in 9620 errors)
+### Item `pattern_gen: . simple_pattern` (in 9635 errors)
 
 - Derivation (2114 occurrences):
   ```
@@ -25081,7 +24142,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   module UIdent ( ) : UIdent -> UIdent
   ```
 
-## BUG: ast changed. (5582 errors)
+## BUG: ast changed. (5597 errors)
 
 ### Item `seq_expr: . fun_seq_expr` (in 4466 errors)
 
@@ -25440,9 +24501,9 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
 
 
-### Item `generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT . atomic_type` (in 96 errors)
+### Item `generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT . atomic_type` (in 111 errors)
 
-- Derivation (24 occurrences):
+- Derivation (27 occurrences):
   ```
   generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT . atomic_type
   ```
@@ -25529,6 +24590,19 @@ The location is guessed by examining the syntactic constructions that appear mos
 - Derivation (3 occurrences):
   ```
   generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT . atomic_type
+    atomic_type: . atomic_type type_unboxed_longident
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct exception false : ' lident . {%hello|world|} lident# let false = UIdent end let false = UIdent
+  ```
+- Derivation (3 occurrences):
+  ```
+  generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT . atomic_type
     atomic_type: . LPAREN UNDERSCORE COLON jkind_annotation RPAREN
   ```
   Sample sentence (implementation):
@@ -25544,6 +24618,27 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```ocaml
   exception false : ' lident . ( ' lident : lident ) let false = UIdent
   ```
+- Derivation (3 occurrences):
+  ```
+  generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT . atomic_type
+    atomic_type: . atomic_type type_unboxed_longident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : ' lident . {%hello|world|} lident lident# let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT . atomic_type
+    atomic_type: . type_unboxed_longident
+      type_unboxed_longident: . mk_longident(mod_ext_longident,type_trailing_hash)
+        mk_longident(mod_ext_longident,type_trailing_hash): . type_trailing_hash
+          type_trailing_hash: . LIDENT HASH_SUFFIX
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct exception false : ' lident . lident# let false = UIdent end let false = UIdent
+  ```
 - Derivation (2 occurrences):
   ```
   generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT . atomic_type
@@ -25554,6 +24649,17 @@ The location is guessed by examining the syntactic constructions that appear mos
   Sample sentence (implementation):
   ```ocaml
   exception false : ' lident . < > let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT . atomic_type
+    atomic_type: . type_unboxed_longident
+      type_unboxed_longident: . mk_longident(mod_ext_longident,type_trailing_hash)
+        mk_longident(mod_ext_longident,type_trailing_hash): . type_trailing_hash
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : ' lident . lident# let false = UIdent
   ```
 - Derivation (2 occurrences):
   ```
@@ -25607,6 +24713,16 @@ The location is guessed by examining the syntactic constructions that appear mos
   Sample sentence (implementation):
   ```ocaml
   exception false : ' lident . _ let false = UIdent
+  ```
+- Derivation (2 occurrences):
+  ```
+  generalized_constructor_arguments: COLON reversed_nonempty_llist(typevar) DOT . atomic_type
+    atomic_type: . atomic_type type_unboxed_longident
+      atomic_type: . type_longident
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : ' lident . lident lident# let false = UIdent
   ```
 
 
@@ -25846,7 +24962,19 @@ The location is guessed by examining the syntactic constructions that appear mos
   module UIdent : UIdent @ lident -> functor ( ) -> UIdent = {%hello|world|} let false = UIdent
   ```
 
-## BUG: generating invalid ocaml syntax. (73 errors)
+## BUG: generating invalid ocaml syntax. (200 errors)
+
+### Item `mk_longident(mod_ext_longident,type_trailing_hash): mod_ext_longident DOT . type_trailing_hash` (in 127 errors)
+
+- Derivation (127 occurrences):
+  ```
+  mk_longident(mod_ext_longident,type_trailing_hash): mod_ext_longident DOT . type_trailing_hash
+  ```
+  Sample sentence (interface):
+  ```ocaml
+  exception false of UIdent . lident#
+  ```
+
 
 ### Item `module_expr: . FUNCTOR list(attribute) reversed_nonempty_llist(functor_arg) MINUSGREATER module_expr` (in 25 errors)
 
@@ -25918,7 +25046,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  include struct let local_ lident @ lident = fun false -> UIdent ; ; end let false = UIdent
+  let local_ lident @ lident = fun false -> UIdent ; ; [@@ and ] let false = UIdent
   ```
 - Derivation (2 occurrences):
   ```
@@ -25930,7 +25058,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  include struct let local_ lident @ lident = fun false -> function false -> . % UIdent end let false = UIdent
+  let local_ lident @ lident = fun false -> function false -> . % UIdent [@@ and ] let false = UIdent
   ```
 - Derivation (2 occurrences):
   ```
@@ -25942,7 +25070,7 @@ The location is guessed by examining the syntactic constructions that appear mos
   ```
   Sample sentence (implementation):
   ```ocaml
-  include struct let local_ lident @ lident = fun false -> function false -> . - UIdent end let false = UIdent
+  let local_ lident @ lident = fun false -> function false -> . - UIdent [@@ and ] let false = UIdent
   ```
 - Derivation (1 occurrence):
   ```
@@ -26042,37 +25170,6 @@ This can happen, for example, if the formatter succeeds on the first pass but fa
 Note that, as with internal errors, the exact location of the problem cannot be determined.
 The location is guessed by inspecting the syntactic constructions that appear most frequently in the failing code.
 
-## Error: Syntax error (100 errors)
-
-### Item `type_trailing_hash: LIDENT . HASH_SUFFIX` (in 86 errors)
-
-- Derivation (86 occurrences):
-  ```
-  type_trailing_hash: LIDENT . HASH_SUFFIX
-  ```
-  Sample sentence (interface):
-  ```ocaml
-  exception false of lident #
-  ```
-
-
-### Item `constr_longident: . mod_longident` (in 14 errors)
-
-- Derivation (14 occurrences):
-  ```
-  simple_expr: LESSLBRACKET . separated_or_terminated_nonempty_list(SEMI,expr) RBRACKETGREATER
-    separated_or_terminated_nonempty_list(SEMI,expr): . fun_expr
-      fun_expr: . simple_expr
-        simple_expr: . constr_longident
-          constr_longident: . mod_longident
-            mod_longident: . mk_longident(mod_longident,UIDENT)
-              mk_longident(mod_longident,UIDENT): . UIDENT
-  ```
-  Sample sentence (implementation):
-  ```ocaml
-  unique_ <[ UIdent ]> let false = UIdent
-  ```
-
 ## Error: comment dropped. (21 errors)
 
 ### Item `atat_modalities_expr: . ATAT nonempty_list(modality)` (in 21 errors)
@@ -26096,6 +25193,38 @@ The location is guessed by inspecting the syntactic constructions that appear mo
   Sample sentence (interface):
   ```ocaml
   include functor functor ( ) -> UIdent @@ lident
+  ```
+
+## Error: Syntax error (15 errors)
+
+### Item `constr_longident: . mod_longident` (in 15 errors)
+
+- Derivation (14 occurrences):
+  ```
+  simple_expr: LESSLBRACKET . separated_or_terminated_nonempty_list(SEMI,expr) RBRACKETGREATER
+    separated_or_terminated_nonempty_list(SEMI,expr): . fun_expr
+      fun_expr: . simple_expr
+        simple_expr: . constr_longident
+          constr_longident: . mod_longident
+            mod_longident: . mk_longident(mod_longident,UIDENT)
+              mk_longident(mod_longident,UIDENT): . UIDENT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ <[ UIdent ]> let false = UIdent
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE pattern IN . fun_expr
+    fun_expr: . simple_expr
+      simple_expr: . constr_longident
+        constr_longident: . mod_longident
+          mod_longident: . mk_longident(mod_longident,UIDENT)
+            mk_longident(mod_longident,UIDENT): . UIDENT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: UIdent for unique_ exception# lident in UIdent :] let false = UIdent
   ```
 
 
