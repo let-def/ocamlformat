@@ -839,7 +839,7 @@ and type_constr_and_body c xbody =
   let body = xbody.ast in
   match xbody.ast.pexp_desc with
   | Pexp_constraint (exp, typ, ([] as modes))
-   |Pexp_constraint (exp, (None as typ), modes)
+  | Pexp_constraint (exp, (None as typ), modes)
   (* [fun x : ret_t @ ret_mode ->] is banned in the parser, so don't move the
      constraint if there are both a type and modes. *) ->
       Cmts.relocate c.cmts ~src:body.pexp_loc ~before:exp.pexp_loc
@@ -3710,14 +3710,16 @@ and fmt_class_field_kind c ctx = function
               (sub_exp ~ctx e)
         | Some _ -> ([], sub_exp ~ctx e)
       in
-      let ty, e =
+      let ty, modes, e =
         match (xbody.ast, poly) with
-        | {pexp_desc= Pexp_constraint (e, Some t, []); pexp_loc; _}, None ->
+        | {pexp_desc= Pexp_constraint (e, Some t, modes); pexp_loc; _}, None ->
             Cmts.relocate c.cmts ~src:pexp_loc ~before:t.ptyp_loc
-              ~after:e.pexp_loc ;
-            (Some t, sub_exp ~ctx e)
-        | {pexp_desc= Pexp_constraint _; _}, Some _ -> (poly, xbody)
-        | _, poly -> (poly, xbody)
+              ~after:e.pexp_loc;
+            (Some t, modes, sub_exp ~ctx e)
+        | {pexp_desc= Pexp_constraint (e, None, (_ ::_ as modes)); pexp_loc=_; _}, None ->
+            (None, modes, sub_exp ~ctx e)
+        | {pexp_desc= Pexp_constraint _; _}, Some _ -> (poly, [], xbody)
+        | _, poly -> (poly, [], xbody)
       in
       Cmts.relocate c.cmts ~src:pexp_loc ~before:e.ast.pexp_loc
         ~after:e.ast.pexp_loc ;
@@ -3725,7 +3727,7 @@ and fmt_class_field_kind c ctx = function
       , fmt_if (not (List.is_empty xargs)) "@ "
         $ wrap_fun_decl_args c (fmt_fun_args c xargs)
         $ opt ty (fun t -> fmt "@ : " $ fmt_core_type c (sub_typ ~ctx t))
-      , fmt "@;<1 2>="
+      , fmt_modals c (Modes modes) $ fmt "@;<1 2>="
       , fmt "@ " $ fmt_expression c e )
   | Cfk_concrete (_, e) ->
       let ty, e =
