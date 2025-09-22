@@ -1170,7 +1170,7 @@ and skip_hash_bang = parse
         | WHILE                  -> "WHILE"
         | WITH                   -> "WITH"
       in
-      prerr_endline text
+      prerr_endline ("extended: " ^ text);
     );
     result
 
