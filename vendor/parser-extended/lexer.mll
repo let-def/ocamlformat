@@ -742,8 +742,11 @@ rule token = parse
       }
 
   (* Jane Street modification *)
-  | "#"
-      { if not (at_beginning_of_line lexbuf.lex_start_p)
+  | "#" | "#(*"
+      { (* Do not consume "(*" if it is present. This will be parsed as a comment later.
+           This case is handled here to prevent the rule "#(" from matching. *)
+        set_lexeme_length lexbuf 1;
+        if not (at_beginning_of_line lexbuf.lex_start_p)
         then HASH
         else try directive Hash lexbuf with Failure _ -> HASH
       }
