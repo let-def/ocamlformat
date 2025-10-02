@@ -380,7 +380,7 @@ let make_mapper conf ~ignore_doc_comments ~erase_jane_syntax =
     |> Ast_mapper.default_mapper.structure m
   in
   let signature m {psg_modalities; psg_items; psg_loc} =
-    let psg_modalities = if erase_jane_syntax then no_modalities else psg_modalities in
+    let psg_modalities = if erase_jane_syntax then [] else psg_modalities in
     let psg_items =
       List.filter psg_items ~f:(function
         | {psig_desc= Psig_kind_abbrev _; _} when erase_jane_syntax -> false
@@ -455,17 +455,16 @@ let make_mapper conf ~ignore_doc_comments ~erase_jane_syntax =
               String.compare m1 m2 )
             ms )
   in
-  let modalities (m : Ast_mapper.mapper) (loc,ms) =
+  let modalities (m : Ast_mapper.mapper) ms =
     Ast_mapper.default_mapper.modalities m
-      ( if erase_jane_syntax then no_modalities
+      ( if erase_jane_syntax then []
         else
-          (loc,
-           List.sort
-             ~compare:(fun
-                        {Location.txt= Modality m1; _}
-                        {Location.txt= Modality m2; _}
-                        -> String.compare m1 m2 )
-             ms ))
+          List.sort
+            ~compare:(fun
+                {Location.txt= Modality m1; _}
+                {Location.txt= Modality m2; _}
+              -> String.compare m1 m2 )
+            ms )
   in
   let value_binding (m : Ast_mapper.mapper) vb =
     let vb =
@@ -513,7 +512,7 @@ let make_mapper conf ~ignore_doc_comments ~erase_jane_syntax =
     (* CR modes: Develop a more general mechanism for "erasing" modalities
        into attributes *)
     let global__ =
-      List.exists (snd ld.pld_modalities) ~f:(function
+      List.exists ld.pld_modalities ~f:(function
         | {Location.txt= Modality "global"; _} -> true
         | {txt= Modality _; _} -> false )
     in
@@ -528,7 +527,7 @@ let make_mapper conf ~ignore_doc_comments ~erase_jane_syntax =
     (* CR modes: Develop a more general mechanism for "erasing" modalities
        into attributes *)
     let global__ =
-      List.exists (snd ca.pca_modalities) ~f:(function
+      List.exists ca.pca_modalities ~f:(function
         | {Location.txt= Modality "global"; _} -> true
         | {txt= Modality _; _} -> false )
     in

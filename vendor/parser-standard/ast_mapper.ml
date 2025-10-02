@@ -978,8 +978,8 @@ let default_mapper =
     modes = (fun this m ->
       List.map (map_loc this) m);
 
-    modalities = (fun this (loc, m) ->
-        (this.location this loc, List.map (map_loc this) m));
+    modalities = (fun this m ->
+      List.map (map_loc this) m);
 
     directive_argument =
       (fun this a ->
@@ -1255,7 +1255,7 @@ let apply_lazy ~source ~target mapper =
       with exn ->
         { psg_items = [{psig_desc = Psig_extension (extension_of_exn exn, []);
           psig_loc = Location.none}];
-          psg_modalities = Ast_helper.no_modalities; psg_loc = Location.none }
+          psg_modalities = []; psg_loc = Location.none }
     in
     let fields = PpxContext.update_cookies fields in
     let psg_items = Sig.attribute (PpxContext.mk fields) :: psg_items in

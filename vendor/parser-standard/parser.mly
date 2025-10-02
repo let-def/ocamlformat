@@ -635,7 +635,7 @@ let wrap_sig_ext ~loc body ext =
   | None -> body
   | Some id ->
       ghsig ~loc (Psig_extension ((id, PSig {psg_items=[body];
-        psg_modalities=no_modalities; psg_loc=make_loc loc}), []))
+        psg_modalities=[]; psg_loc=make_loc loc}), []))
 
 let wrap_mksig_ext ~loc (item, ext) =
   wrap_sig_ext ~loc (mksig ~loc item) ext
@@ -679,8 +679,8 @@ let extra_rhs_core_type ct ~pos =
 (* Allow doc comments before default modalities *)
 let extra_modalities startpos modalities =
   match modalities with
-  | _, [] -> modalities, []
-  | _, _ :: _ ->
+  | [] -> modalities, []
+  | _ :: _ ->
      let extras = rhs_pre_extra_text startpos in
      modalities, Sig.text extras
 
@@ -1260,8 +1260,6 @@ The precedences must be listed from low to high.
 %type <Longident.t> parse_any_longident
 /* END AVOID */
 
-%type <modalities> optional_atat_modalities_expr
-
 %%
 
 /* macros */
@@ -1698,13 +1696,9 @@ module_name:
       { None }
 ;
 
-module_name_modal_at_mode_expr:
+module_name_modal(at_modal_expr):
   | mkrhs(module_name) { $1, [] }
-  | LPAREN mkrhs(module_name) at_mode_expr RPAREN { $2, $3 }
-
-module_name_modal_atat_modalities_expr:
-  | mkrhs(module_name) { $1, no_modalities }
-  | LPAREN mkrhs(module_name) atat_modalities_expr RPAREN { $2, $3 }
+  | LPAREN mkrhs(module_name) at_modal_expr RPAREN { $2, $3 }
 
 (* -------------------------------------------------------------------------- *)
 
@@ -1881,7 +1875,7 @@ structure_item:
 %inline module_binding:
   MODULE
   ext = ext attrs1 = attributes
-  name_ = module_name_modal_at_mode_expr
+  name_ = module_name_modal(at_mode_expr)
   body = module_binding_body
   attrs2 = post_item_attributes
     { let docs = symbol_docs $sloc in
@@ -1930,7 +1924,7 @@ module_binding_body:
   ext = ext
   attrs1 = attributes
   REC
-  name_ = module_name_modal_at_mode_expr
+  name_ = module_name_modal(at_mode_expr)
   body = module_binding_body
   attrs2 = post_item_attributes
   {
@@ -1948,7 +1942,7 @@ module_binding_body:
 %inline and_module_binding:
   AND
   attrs1 = attributes
-  name_ = module_name_modal_at_mode_expr
+  name_ = module_name_modal(at_mode_expr)
   body = module_binding_body
   attrs2 = post_item_attributes
   {
@@ -2177,68 +2171,45 @@ signature_item:
       }
 
 (* A module declaration. *)
-foo:
-    module_type optional_atat_modalities_expr
-    { ($1, $2 : _ * modalities) }
-;
-
 %inline module_declaration:
   MODULE
   ext = ext attrs1 = attributes
-  name_ = module_name_modal_atat_modalities_expr
-  body = module_declaration_body
+  name_ = module_name_modal(atat_modalities_expr)
+  body = module_declaration_body(
+    module_type optional_atat_modalities_expr { ($1, $2) }
+  )
   attrs2 = post_item_attributes
   {
     let attrs = attrs1 @ attrs2 in
     let loc = make_loc $sloc in
     let docs = symbol_docs $sloc in
-    let name, (_, modalities') = name_ in
+    let name, modalities' = name_ in
     let mty, modalities = body in
-    let mloc, ms = modalities in
-    let modalities = (mloc, modalities' @ ms) in
+    let modalities = modalities' @ modalities in
     Md.mk name mty ~attrs ~loc ~docs ~modalities, ext
   }
 ;
 
-module_type_with_optional_modes_:
-  module_type_with_optional_modes
-  { (fst $1, (Location.none, snd $1)) }
-;
-
 (* The body (right-hand side) of a module declaration. *)
-module_declaration_body:
-  | COLON mty_mm = foo
+module_declaration_body(module_type_with_optional_modal_expr):
+    COLON mty_mm = module_type_with_optional_modal_expr
       { mty_mm }
   | EQUAL error
       { expecting $loc($1) ":" }
   | mkmty(
-      arg_and_pos = functor_arg body = module_declaration_body_
+      arg_and_pos = functor_arg body = module_declaration_body(module_type_with_optional_modes)
         { let (_, arg) = arg_and_pos in
-          let (ret, (_, mret)) = body in
+          let (ret, mret) = body in
           Pmty_functor(arg, ret, mret) }
     )
-    { $1, no_modalities }
-;
-
-module_declaration_body_:
-  | COLON mty_mm = module_type_with_optional_modes_
-      { mty_mm }
-  | EQUAL error
-      { expecting $loc($1) ":" }
-  | mkmty(
-      arg_and_pos = functor_arg body = module_declaration_body_
-        { let (_, arg) = arg_and_pos in
-          let (ret, (_, mret)) = body in
-          Pmty_functor(arg, ret, mret) }
-    )
-    { $1, no_modalities }
+    { $1, [] }
 ;
 
 (* A module alias declaration (in a signature). *)
 %inline module_alias:
   MODULE
   ext = ext attrs1 = attributes
-  name_ = module_name_modal_atat_modalities_expr
+  name_ = module_name_modal(atat_modalities_expr)
   EQUAL
   body = module_expr_alias
   modalities = optional_atat_modalities_expr
@@ -2247,9 +2218,8 @@ module_declaration_body_:
     let attrs = attrs1 @ attrs2 in
     let loc = make_loc $sloc in
     let docs = symbol_docs $sloc in
-    let name, (_, modalities') = name_ in
-    let mloc, ms = modalities in
-    let modalities = (mloc, modalities' @ ms) in
+    let name, modalities' = name_ in
+    let modalities = modalities' @ modalities in
     Md.mk name body ~attrs ~modalities ~loc ~docs, ext
   }
 ;
@@ -2926,7 +2896,7 @@ fun_expr:
   | or_function(fun_expr) { $1 }
 ;
 %inline fun_expr_attrs:
-  | LET MODULE ext_attributes module_name_modal_at_mode_expr module_binding_body IN seq_expr
+  | LET MODULE ext_attributes module_name_modal(at_mode_expr) module_binding_body IN seq_expr
       {
         let name, modes = $4 in
         let body = maybe_pmod_constraint modes $5 in
@@ -4307,8 +4277,7 @@ generalized_constructor_arguments:
 
 %inline constructor_argument:
   gbl=global_flag cty=atomic_type m1=optional_atat_modalities_expr {
-    let mloc, ms = m1 in
-    let modalities = (mloc, gbl @ ms) in
+    let modalities = gbl @ m1 in
     Type.constructor_arg cty ~modalities ~loc:(make_loc $sloc)
   }
 ;
@@ -4328,8 +4297,7 @@ label_declaration:
     mutable_or_global_flag mkrhs(label) COLON poly_type_no_attr m1=optional_atat_modalities_expr attrs=attributes
       { let info = symbol_info $endpos in
         let mut, m0 = $1 in
-        let mloc, ms = m1 in
-        let modalities = (mloc, m0 @ ms) in
+        let modalities = m0 @ m1 in
         Type.field $2 $4 ~mut ~modalities ~attrs ~loc:(make_loc $sloc) ~info}
 ;
 label_declaration_semi:
@@ -4341,8 +4309,7 @@ label_declaration_semi:
           | None -> symbol_info $endpos
        in
        let mut, m0 = $1 in
-       let mloc, ms = m1 in
-       let modalities = (mloc, m0 @ ms) in
+       let modalities = m0 @ m1 in
        Type.field $2 $4 ~mut ~modalities ~attrs:(attrs0 @ attrs1) ~loc:(make_loc $sloc) ~info}
 ;
 
@@ -4705,13 +4672,13 @@ at_mode_expr:
   | modality+ { $1 }
 
 atat_modalities_expr:
-  | ATAT modalities {make_loc $loc($1), $2}
+  | ATAT modalities {$2}
   | ATAT error { expecting $loc($2) "modality expression" }
 ;
 
 optional_atat_modalities_expr:
   | %prec below_HASH
-    { no_modalities }
+    { [] }
   | atat_modalities_expr
     { $1 }
 ;

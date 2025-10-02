@@ -509,8 +509,6 @@ let find_cmts ?(filter = Fn.const true) t pos loc =
   Option.map (find_at_position t loc pos) ~f:(fun cmts ->
       let picked, not_picked = List.partition_tf cmts ~f:filter in
       update_cmts t pos ~f:(Map.set ~key:loc ~data:not_picked) ;
-      Stdlib.Printf.eprintf "%d comments picked\n" (List.length picked);
-      Stdlib.Printexc.print_raw_backtrace stderr (Stdlib.Printexc.get_callstack 10);
       picked )
 
 let break_comment_group source a b =
@@ -781,14 +779,10 @@ let drop_before t loc =
   update_cmts t `Before ~f:(fun m -> Map.remove m loc) ;
   t
 
-let has_before t loc =
-  Stdlib.Printf.eprintf "has_before %s\n" (Sexp.to_string_hum (Location.sexp_of_t loc));
-  pop_if_debug t loc ; Map.mem t.cmts_before loc
+let has_before t loc = pop_if_debug t loc ; Map.mem t.cmts_before loc
 
 let has_within t loc = pop_if_debug t loc ; Map.mem t.cmts_within loc
 
-let has_after t loc
-  =
-  Stdlib.Printf.eprintf "has_after %s" (Sexp.to_string_hum (Location.sexp_of_t loc));
+let has_after t loc =
   pop_if_debug t loc ;
   Map.mem t.cmts_within loc || Map.mem t.cmts_after loc
