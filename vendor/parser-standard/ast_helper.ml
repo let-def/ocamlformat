@@ -32,6 +32,8 @@ let default_loc = ref Location.none
 let with_default_loc l f =
   Misc.protect_refs [Misc.R (default_loc, l)] f
 
+let no_modalities = (Location.none, [])
+                  
 module Const = struct
   let integer ?suffix i = Pconst_integer (i, suffix)
   let int ?suffix i = integer ?suffix (Int.to_string i)
@@ -321,7 +323,7 @@ module Sig = struct
   let modtype ?loc a = mk ?loc (Psig_modtype a)
   let modtype_subst ?loc a = mk ?loc (Psig_modtypesubst a)
   let open_ ?loc a = mk ?loc (Psig_open a)
-  let include_ ?loc ?(modalities = []) a = mk ?loc (Psig_include (a, modalities))
+  let include_ ?loc ?(modalities = no_modalities) a = mk ?loc (Psig_include (a, modalities))
   let class_ ?loc a = mk ?loc (Psig_class a)
   let class_type ?loc a = mk ?loc (Psig_class_type a)
   let extension ?loc ?(attrs = []) a = mk ?loc (Psig_extension (a, attrs))
@@ -335,7 +337,7 @@ module Sig = struct
 end
 
 module Sg = struct
-  let mk ?(loc = !default_loc) ?(modalities = []) a =
+  let mk ?(loc = !default_loc) ?(modalities = no_modalities) a =
     {psg_items = a; psg_modalities = modalities; psg_loc = loc}
 end
 
@@ -456,7 +458,7 @@ end
 
 module Val = struct
   let mk ?(loc = !default_loc) ?(attrs = []) ?(docs = empty_docs)
-        ?(prim = []) ?(modalities=[]) name typ =
+        ?(prim = []) ?(modalities=no_modalities) name typ =
     {
      pval_name = name;
      pval_type = typ;
@@ -469,7 +471,7 @@ end
 
 module Md = struct
   let mk ?(loc = !default_loc) ?(attrs = [])
-        ?(docs = empty_docs) ?(text = []) ?(modalities=[]) name typ =
+        ?(docs = empty_docs) ?(text = []) ?(modalities=no_modalities) name typ =
     {
      pmd_name = name;
      pmd_type = typ;
@@ -601,7 +603,7 @@ module Type = struct
      pcd_attributes = add_info_attrs info attrs;
     }
 
-  let constructor_arg ?(loc = !default_loc) ?(modalities = []) typ =
+  let constructor_arg ?(loc = !default_loc) ?(modalities = no_modalities) typ =
     {
       pca_modalities = modalities;
       pca_type = typ;
@@ -609,7 +611,7 @@ module Type = struct
     }
 
   let field ?(loc = !default_loc) ?(attrs = []) ?(info = empty_info)
-        ?(mut = Immutable) ?(modalities = []) name typ =
+        ?(mut = Immutable) ?(modalities = no_modalities) name typ =
     {
      pld_name = name;
      pld_mutable = mut;

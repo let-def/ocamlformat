@@ -145,7 +145,7 @@ let modality i ppf modality =
   line i ppf "modality %a\n" fmt_string_loc
     (Location.map (fun (Modality x) -> x) modality)
 
-let modalities i ppf modalities =
+let modalities i ppf (_loc, modalities) =
   List.iter (fun m -> modality i ppf m) modalities
 
 let mode i ppf mode =
