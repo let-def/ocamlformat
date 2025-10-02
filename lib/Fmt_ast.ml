@@ -863,17 +863,7 @@ and type_constr_and_body c xbody =
   | _ -> (None, xbody)
 
 and fmt_modals ?(pro = fmt "@ ") c modals =
-  let fmt_modal {txt; loc} =
-    let result = Cmts.fmt c loc (str txt) ~eol:(fmt "@ ") in
-    Stdlib.Printf.eprintf "Location: %s\n" (Sexp.to_string_hum (Location.sexp_of_t loc));
-    List.iter ~f:(fun cmt ->
-        Stdlib.Printf.eprintf "remaining before: %s\n" (Cmt.txt cmt);
-      ) (Cmts.remaining_before c.cmts loc);
-    List.iter ~f:(fun cmt ->
-        Stdlib.Printf.eprintf "remaining: %s @ %s\n" (Cmt.txt cmt) (Sexp.to_string_hum (Location.sexp_of_t (Cmt.loc cmt)));
-      ) (Cmts.remaining_comments c.cmts);
-    result
-  in
+  let fmt_modal {txt; loc} = Cmts.fmt c loc (str txt) ~eol:(fmt "@ ") in
   let fmt_mode {txt= Mode mode; loc} = fmt_modal {txt= mode; loc} in
   let fmt_modality {txt= Modality modality; loc} =
     fmt_modal {txt= modality; loc}
@@ -2383,7 +2373,6 @@ and fmt_expression c ?(box = true) ?(pro = noop) ?eol ?parens
           $ fmt_atrs )
   | Pexp_infix (({txt= id; _} as op), l, ({pexp_desc= Pexp_ident _; _} as r))
     when Std_longident.String_id.is_hash_getter id ->
-      Stdlib.Printf.eprintf "infix whatever 0\n";
       pro
       $ Params.parens_if parens c.conf
           ( fmt_expression c (sub_exp ~ctx l)
@@ -2393,7 +2382,6 @@ and fmt_expression c ?(box = true) ?(pro = noop) ?eol ?parens
       (op, l, ({pexp_desc= Pexp_fun _; pexp_loc; pexp_attributes; _} as r))
     when not c.conf.fmt_opts.break_infix_before_func.v ->
       (* side effects of Cmts.fmt c.cmts before Sugar.fun_ is important *)
-      Stdlib.Printf.eprintf "infix whatever 1\n";
       let cmts_before = Cmts.fmt_before c pexp_loc in
       let cmts_after = Cmts.fmt_after c pexp_loc in
       let xr = sub_exp ~ctx r in
@@ -2435,7 +2423,6 @@ and fmt_expression c ?(box = true) ?(pro = noop) ?eol ?parens
       , l
       , ({pexp_desc= Pexp_function cs; pexp_loc; pexp_attributes; _} as r) )
     when not c.conf.fmt_opts.break_infix_before_func.v ->
-      Stdlib.Printf.eprintf "infix whatever 2\n";
       let cmts_before = Cmts.fmt_before c pexp_loc in
       let cmts_after = Cmts.fmt_after c pexp_loc in
       let xr = sub_exp ~ctx r in
@@ -2456,7 +2443,6 @@ and fmt_expression c ?(box = true) ?(pro = noop) ?eol ?parens
              $ fmt "@ " $ fmt_cases c (Exp r) cs $ fmt_if parens_r " )"
              $ cmts_after ) )
   | Pexp_infix _ ->
-      Stdlib.Printf.eprintf "infix whatever x\n";
       let op_args = Sugar.Exp.infix c.cmts (prec_ast (Exp exp)) xexp in
       let inner_wrap = parens || has_attr in
       let outer_wrap =
@@ -2476,7 +2462,6 @@ and fmt_expression c ?(box = true) ?(pro = noop) ?eol ?parens
         List.map op_args ~f:(fun (op, arg) ->
             match op with
             | Some op ->
-                Stdlib.Printf.eprintf "infix_op_arg\n";
                 (* side effects of Cmts.fmt_before before fmt_expression is
                    important *)
                 let adj = break 1000 0 in
