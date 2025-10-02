@@ -26,7 +26,10 @@
    Ocamlformat_stdlib))
  (instrumentation
   (backend bisect_ppx))
+ (preprocess
+  (pps camtrail.ppx))
  (libraries
+  camtrail
   format_
   ocaml_common
   parser_standard

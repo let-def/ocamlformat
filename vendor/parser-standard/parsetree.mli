@@ -58,7 +58,7 @@ type constant =
 type location_stack = Location.t list
 
 type modality = | Modality of string [@@unboxed]
-type modalities = modality loc list
+type modalities = Location.t * modality loc list
 
 type mode = | Mode of string [@@unboxed]
 type modes = mode loc list
