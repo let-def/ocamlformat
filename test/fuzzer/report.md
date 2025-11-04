@@ -4,6 +4,2485 @@ A parser error is reported when OCamlformat rejects an input on a specific token
 The error location is the token that caused the failure; 
 it is usually the exact point where the parser could not continue.
 
+## Error: Syntax error
+
+### Item `seq_expr: . fun_seq_expr` (in 2932 errors)
+
+- Derivation (182 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . fun_
+          fun_: . FUN ext list(attribute) fun_params optional_atomic_constraint_ MINUSGREATER fun_body
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ fun false -> X with X
+             ^^^
+  ```
+- Derivation (179 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . EXCLAVE seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ exclave_ stack_ X with X
+             ^^^^^^^^
+  ```
+- Derivation (179 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . LOCAL seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ local_ stack_ X with X
+             ^^^^^^
+  ```
+- Derivation (179 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . LETOP letop_bindings IN seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ let* x in stack_ X with X
+             ^^^^
+  ```
+- Derivation (178 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . fun_
+          fun_: . STACK FUN ext list(attribute) fun_params optional_atomic_constraint_ MINUSGREATER fun_body
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ stack_ fun false -> stack_ X with X
+             ^^^^^^
+  ```
+- Derivation (175 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . IF ext list(attribute) seq_expr THEN fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ if X then stack_ X with X
+             ^^
+  ```
+- Derivation (175 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . IF ext list(attribute) seq_expr THEN STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case) ELSE fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ if X then stack_ function false -> X else stack_ X with X
+             ^^
+  ```
+- Derivation (175 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . IF ext list(attribute) seq_expr THEN FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case) ELSE fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ if X then function false -> X else stack_ X with X
+             ^^
+  ```
+- Derivation (175 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . IF ext list(attribute) seq_expr THEN fun_expr ELSE fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ if X then X else stack_ X with X
+             ^^
+  ```
+- Derivation (156 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . reversed_labeled_tuple_body
+          reversed_labeled_tuple_body: . STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case) COMMA fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ stack_ function false -> . , stack_ X with X
+             ^^^^^^
+  ```
+- Derivation (156 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . reversed_labeled_tuple_body
+          reversed_labeled_tuple_body: . FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case) COMMA fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ function false -> . , stack_ X with X
+             ^^^^^^^^
+  ```
+- Derivation (5 occurrences):
+  ```
+  fun_expr: ONCE . seq_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . reversed_labeled_tuple_body
+          reversed_labeled_tuple_body: . STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case) COMMA fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ stack_ function false -> . , X
+        ^^^^^^
+  ```
+- Derivation (5 occurrences):
+  ```
+  fun_expr: UNIQUE . seq_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . reversed_labeled_tuple_body
+          reversed_labeled_tuple_body: . STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case) COMMA fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ stack_ function false -> . , X
+          ^^^^^^
+  ```
+- Derivation (5 occurrences):
+  ```
+  fun_expr: ONCE . seq_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . reversed_labeled_tuple_body
+          reversed_labeled_tuple_body: . FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case) COMMA fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ function false -> . , X
+        ^^^^^^^^
+  ```
+- Derivation (5 occurrences):
+  ```
+  fun_expr: UNIQUE . seq_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . reversed_labeled_tuple_body
+          reversed_labeled_tuple_body: . FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case) COMMA fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ function false -> . , X
+          ^^^^^^^^
+  ```
+- Derivation (5 occurrences):
+  ```
+  fun_expr: ONCE . seq_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . EXCLAVE seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ exclave_ X
+        ^^^^^^^^
+  ```
+- Derivation (5 occurrences):
+  ```
+  fun_expr: UNIQUE . seq_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . EXCLAVE seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ exclave_ X
+          ^^^^^^^^
+  ```
+- Derivation (5 occurrences):
+  ```
+  fun_expr: ONCE . seq_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . LOCAL seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ local_ X
+        ^^^^^^
+  ```
+- Derivation (5 occurrences):
+  ```
+  fun_expr: UNIQUE . seq_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . LOCAL seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ local_ X
+          ^^^^^^
+  ```
+- Derivation (5 occurrences):
+  ```
+  fun_expr: ONCE . seq_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . LETOP letop_bindings IN seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ let* x in X
+        ^^^^
+  ```
+- Derivation (5 occurrences):
+  ```
+  fun_expr: UNIQUE . seq_expr
+    seq_expr: . fun_seq_expr
+      fun_seq_expr: . fun_expr
+        fun_expr: . LETOP letop_bindings IN seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ let* x in X
+          ^^^^
+  ```
+- ...
+
+
+### Item `fun_expr: OVERWRITE ext list(attribute) seq_expr . WITH fun_expr` (in 8845 errors)
+
+- Derivation (8845 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) seq_expr . WITH fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ X with _
+               ^^^^
+  ```
+
+
+### Item `fun_expr: let_bindings(ext) . IN seq_expr` (in 5413 errors)
+
+- Derivation (5413 occurrences):
+  ```
+  fun_expr: let_bindings(ext) . IN seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  let x in _
+        ^^
+  ```
+
+
+### Item `pattern: . pattern_gen` (in 4590 errors)
+
+- Derivation (1899 occurrences):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . constr_longident
+            constr_longident: . constr_extra_nonprefix_ident
+              constr_extra_nonprefix_ident: . FALSE
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ false in X :]
+                 ^^^^^
+  ```
+- Derivation (1899 occurrences):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . constr_longident
+            constr_longident: . constr_extra_nonprefix_ident
+              constr_extra_nonprefix_ident: . FALSE
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ false in X :]
+                   ^^^^^
+  ```
+- Derivation (151 occurrences):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . constr_longident
+            constr_longident: . constr_extra_nonprefix_ident
+              constr_extra_nonprefix_ident: . FALSE
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ false in stack_ function false -> X :]
+                 ^^^^^
+  ```
+- Derivation (151 occurrences):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . constr_longident
+            constr_longident: . constr_extra_nonprefix_ident
+              constr_extra_nonprefix_ident: . FALSE
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ false in function false -> X :]
+                 ^^^^^
+  ```
+- Derivation (151 occurrences):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . constr_longident
+            constr_longident: . constr_extra_nonprefix_ident
+              constr_extra_nonprefix_ident: . FALSE
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ false in stack_ function false -> X :]
+                   ^^^^^
+  ```
+- Derivation (151 occurrences):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . constr_longident
+            constr_longident: . constr_extra_nonprefix_ident
+              constr_extra_nonprefix_ident: . FALSE
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ false in function false -> X :]
+                   ^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  let_pattern: nonempty_list(mode_legacy) . pattern optional_poly_type_and_modes
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . constr_longident
+            constr_longident: . constr_extra_nonprefix_ident
+              constr_extra_nonprefix_ident: . FALSE
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  fun ?label: ( once_ false ) -> X
+                      ^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . signed_constant
+            signed_constant: . signed_value_constant
+              signed_value_constant: . value_constant
+                value_constant: . STRING
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ "s" in X :]
+                 ^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . signed_constant
+            signed_constant: . signed_value_constant
+              signed_value_constant: . value_constant
+                value_constant: . STRING
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ "s" in X :]
+                   ^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . signed_value_constant DOTDOT signed_value_constant
+            signed_value_constant: . value_constant
+              value_constant: . CHAR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ 'a' .. 'a' in X :]
+                 ^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . signed_value_constant DOTDOT signed_value_constant
+            signed_value_constant: . value_constant
+              value_constant: . CHAR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ 'a' .. 'a' in X :]
+                   ^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . signed_constant
+            signed_constant: . signed_value_constant
+              signed_value_constant: . value_constant
+                value_constant: . CHAR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ 'a' in X :]
+                 ^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . signed_constant
+            signed_constant: . signed_value_constant
+              signed_value_constant: . value_constant
+                value_constant: . CHAR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ 'a' in X :]
+                   ^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . signed_constant
+            signed_constant: . signed_value_constant
+              signed_value_constant: . value_constant
+                value_constant: . INT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ 4 in X :]
+                 ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . signed_constant
+            signed_constant: . signed_value_constant
+              signed_value_constant: . value_constant
+                value_constant: . INT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ 4 in X :]
+                   ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . val_ident
+          val_ident: . LIDENT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ x in X :]
+                 ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . val_ident
+          val_ident: . LIDENT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ x in X :]
+                   ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . val_ident
+          val_ident: . val_extra_ident
+            val_extra_ident: . LPAREN operator RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ ( - ) in X :]
+                 ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . val_ident
+          val_ident: . val_extra_ident
+            val_extra_ident: . LPAREN operator RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ ( - ) in X :]
+                   ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . signed_constant
+            signed_constant: . unboxed_constant
+              unboxed_constant: . HASH_FLOAT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ #1.0 in X :]
+                 ^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . pattern_gen
+      pattern_gen: . simple_pattern
+        simple_pattern: . simple_pattern_not_ident
+          simple_pattern_not_ident: . signed_constant
+            signed_constant: . unboxed_constant
+              unboxed_constant: . HASH_FLOAT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ #1.0 in X :]
+                   ^^^^
+  ```
+- ...
+
+
+### Item `fun_expr: OVERWRITE ext list(attribute) seq_expr . WITH FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 1969 errors)
+
+- Derivation (1969 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) seq_expr . WITH FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ X with function false -> X
+               ^^^^
+  ```
+
+
+### Item `fun_expr: OVERWRITE ext list(attribute) seq_expr . WITH STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 1969 errors)
+
+- Derivation (1969 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) seq_expr . WITH STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ X with stack_ function false -> X
+               ^^^^
+  ```
+
+
+### Item `seq_expr: . FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 913 errors)
+
+- Derivation (363 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ function false -> X with X
+             ^^^^^^^^
+  ```
+- Derivation (275 occurrences):
+  ```
+  fun_expr: ONCE . seq_expr
+    seq_expr: . FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ function false -> X
+        ^^^^^^^^
+  ```
+- Derivation (275 occurrences):
+  ```
+  fun_expr: UNIQUE . seq_expr
+    seq_expr: . FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ function false -> X
+          ^^^^^^^^
+  ```
+
+
+### Item `atomic_type: mod_ext_longident DOT . delimited_type_supporting_local_open` (in 505 errors)
+
+- Derivation (286 occurrences):
+  ```
+  atomic_type: mod_ext_longident DOT . delimited_type_supporting_local_open
+    delimited_type_supporting_local_open: . LPAREN core_type RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : X . ( {%ext|s|} )
+                        ^
+  ```
+- Derivation (201 occurrences):
+  ```
+  atomic_type: mod_ext_longident DOT . delimited_type_supporting_local_open
+    delimited_type_supporting_local_open: . LBRACKETGREATER RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : X . [> ]
+                        ^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  atomic_type: mod_ext_longident DOT . delimited_type_supporting_local_open
+    delimited_type_supporting_local_open: . HASHLPAREN LIDENT COLON atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : X . #( x : {%ext|s|} * {%ext|s|} )
+                        ^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  atomic_type: mod_ext_longident DOT . delimited_type_supporting_local_open
+    delimited_type_supporting_local_open: . HASHLPAREN atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : X . #( {%ext|s|} * {%ext|s|} )
+                        ^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  atomic_type: mod_ext_longident DOT . delimited_type_supporting_local_open
+    delimited_type_supporting_local_open: . LBRACKETLESS option(BAR) reversed_separated_nonempty_llist(BAR,row_field) GREATER reversed_nonempty_llist(name_tag) RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : X . [< {%ext|s|} > ` x ]
+                        ^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  atomic_type: mod_ext_longident DOT . delimited_type_supporting_local_open
+    delimited_type_supporting_local_open: . LBRACKETLESS option(BAR) reversed_separated_nonempty_llist(BAR,row_field) RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : X . [< {%ext|s|} ]
+                        ^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  atomic_type: mod_ext_longident DOT . delimited_type_supporting_local_open
+    delimited_type_supporting_local_open: . LBRACKETGREATER option(BAR) reversed_separated_nonempty_llist(BAR,row_field) RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : X . [> {%ext|s|} ]
+                        ^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  atomic_type: mod_ext_longident DOT . delimited_type_supporting_local_open
+    delimited_type_supporting_local_open: . LBRACKET row_field BAR reversed_separated_nonempty_llist(BAR,row_field) RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : X . [ {%ext|s|} | {%ext|s|} ]
+                        ^
+  ```
+- Derivation (2 occurrences):
+  ```
+  atomic_type: mod_ext_longident DOT . delimited_type_supporting_local_open
+    delimited_type_supporting_local_open: . LBRACKET BAR reversed_separated_nonempty_llist(BAR,row_field) RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : X . [ | {%ext|s|} ]
+                        ^
+  ```
+- Derivation (2 occurrences):
+  ```
+  atomic_type: mod_ext_longident DOT . delimited_type_supporting_local_open
+    delimited_type_supporting_local_open: . LBRACKET tag_field RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : X . [ ` x ]
+                        ^
+  ```
+- Derivation (2 occurrences):
+  ```
+  atomic_type: mod_ext_longident DOT . delimited_type_supporting_local_open
+    delimited_type_supporting_local_open: . LPAREN MODULE ext list(attribute) module_type RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  exception false : X . ( module {%ext|s|} )
+                        ^
+  ```
+
+
+### Item `simple_expr: HASHLPAREN reversed_labeled_tuple_body . RPAREN` (in 444 errors)
+
+- Derivation (444 occurrences):
+  ```
+  simple_expr: HASHLPAREN reversed_labeled_tuple_body . RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  #( exclave_ function false -> . % X , X )
+                                          ^
+  ```
+
+
+### Item `nonempty_list(mode_legacy): . LOCAL` (in 419 errors)
+
+- Derivation (147 occurrences):
+  ```
+  nonempty_list(mode_legacy): LOCAL . nonempty_list(mode_legacy)
+    nonempty_list(mode_legacy): . LOCAL
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  let local_ local_ x = X
+             ^^^^^^
+  ```
+- Derivation (136 occurrences):
+  ```
+  nonempty_list(mode_legacy): ONCE . nonempty_list(mode_legacy)
+    nonempty_list(mode_legacy): . LOCAL
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  let once_ local_ x = X
+            ^^^^^^
+  ```
+- Derivation (136 occurrences):
+  ```
+  nonempty_list(mode_legacy): UNIQUE . nonempty_list(mode_legacy)
+    nonempty_list(mode_legacy): . LOCAL
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  let unique_ local_ x = X
+              ^^^^^^
+  ```
+
+
+### Item `and_let_binding: . AND list(attribute) let_binding_body list(post_item_attribute)` (in 390 errors)
+
+- Derivation (382 occurrences):
+  ```
+  let_bindings(ext): let_bindings(ext) . and_let_binding
+    and_let_binding: . AND list(attribute) let_binding_body list(post_item_attribute)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  {%%ext|s|} let x and x
+                   ^^^
+  ```
+- Derivation (8 occurrences):
+  ```
+  let_bindings(no_ext): let_bindings(no_ext) . and_let_binding
+    and_let_binding: . AND list(attribute) let_binding_body list(post_item_attribute)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  class x = let x and x in x
+                  ^^^
+  ```
+
+
+### Item `fun_seq_expr: fun_expr . SEMI` (in 388 errors)
+
+- Derivation (388 occurrences):
+  ```
+  fun_seq_expr: fun_expr . SEMI
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ X ; ;
+              ^
+  ```
+
+
+### Item `fun_expr: IF ext list(attribute) seq_expr THEN fun_expr . ELSE fun_expr` (in 318 errors)
+
+- Derivation (318 occurrences):
+  ```
+  fun_expr: IF ext list(attribute) seq_expr THEN fun_expr . ELSE fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  if X then once_ X ; X else X
+                        ^^^^
+  ```
+
+
+### Item `atomic_type: . delimited_type` (in 254 errors)
+
+- Derivation (194 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: nonempty_list(mode_legacy) . tuple_type MINUSGREATER tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : once_ {%ext|s|} -> {%ext|s|}
+                ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) at_mode_expr MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : x : local_ {%ext|s|} * {%ext|s|} @ x -> once_ {%ext|s|}
+                                                        ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : x : local_ {%ext|s|} * {%ext|s|} -> once_ {%ext|s|}
+                                                    ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) at_mode_expr MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : x : {%ext|s|} * {%ext|s|} @ x -> once_ {%ext|s|}
+                                                 ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON atomic_type STAR reversed_separated_nonempty_llist(STAR,labeled_tuple_typ_element) MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : x : {%ext|s|} * {%ext|s|} -> once_ {%ext|s|}
+                                             ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: nonempty_list(mode_legacy) tuple_type at_mode_expr MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : local_ {%ext|s|} @ x -> once_ {%ext|s|}
+                                        ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: nonempty_list(mode_legacy) tuple_type MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : local_ {%ext|s|} -> once_ {%ext|s|}
+                                    ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: nonempty_list(mode_legacy) LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN at_mode_expr MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : local_ ( ' x . {%ext|s|} ) @ x -> once_ {%ext|s|}
+                                                  ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: nonempty_list(mode_legacy) LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : local_ ( ' x . {%ext|s|} ) -> once_ {%ext|s|}
+                                              ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: tuple_type at_mode_expr MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : {%ext|s|} @ x -> once_ {%ext|s|}
+                                 ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: tuple_type MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : {%ext|s|} -> once_ {%ext|s|}
+                             ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN at_mode_expr MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : ( ' x . {%ext|s|} ) @ x -> once_ {%ext|s|}
+                                           ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : ( ' x . {%ext|s|} ) -> once_ {%ext|s|}
+                                       ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) tuple_type at_mode_expr MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : x : local_ {%ext|s|} @ x -> once_ {%ext|s|}
+                                            ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) tuple_type MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : x : local_ {%ext|s|} -> once_ {%ext|s|}
+                                        ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) . tuple_type MINUSGREATER tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : x : once_ {%ext|s|} -> {%ext|s|}
+                    ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN at_mode_expr MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : x : local_ ( ' x . {%ext|s|} ) @ x -> once_ {%ext|s|}
+                                                      ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON nonempty_list(mode_legacy) LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : x : local_ ( ' x . {%ext|s|} ) -> once_ {%ext|s|}
+                                                  ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON tuple_type at_mode_expr MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : x : {%ext|s|} @ x -> once_ {%ext|s|}
+                                     ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON tuple_type MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : x : {%ext|s|} -> once_ {%ext|s|}
+                                 ^^^^^^^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  strict_function_or_labeled_tuple_type: LIDENT COLON LPAREN reversed_nonempty_llist(typevar) DOT core_type RPAREN at_mode_expr MINUSGREATER nonempty_list(mode_legacy) . tuple_type
+    tuple_type: . atomic_type
+      atomic_type: . delimited_type
+        delimited_type: . extension_type
+          extension_type: . extension
+            extension: . QUOTED_STRING_EXPR
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  val x : x : ( ' x . {%ext|s|} ) @ x -> once_ {%ext|s|}
+                                               ^^^^^^^^^
+  ```
+- ...
+
+
+### Item `fun_expr: fun_expr . AT fun_expr` (in 242 errors)
+
+- Derivation (242 occurrences):
+  ```
+  fun_expr: fun_expr . AT fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ X ; @ X
+              ^
+  ```
+
+
+### Item `fun_expr: fun_expr . INFIXOP3 fun_expr` (in 242 errors)
+
+- Derivation (242 occurrences):
+  ```
+  fun_expr: fun_expr . INFIXOP3 fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ X ; land X
+              ^^^^
+  ```
+
+
+### Item `fun_expr: fun_expr . INFIXOP4 fun_expr` (in 242 errors)
+
+- Derivation (242 occurrences):
+  ```
+  fun_expr: fun_expr . INFIXOP4 fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ X ; ** X
+              ^^
+  ```
+
+
+### Item `fun_expr: fun_expr . EQUAL fun_expr` (in 242 errors)
+
+- Derivation (242 occurrences):
+  ```
+  fun_expr: fun_expr . EQUAL fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ X ; = X
+              ^
+  ```
+
+
+### Item `fun_expr: fun_expr . BARBAR fun_expr` (in 242 errors)
+
+- Derivation (242 occurrences):
+  ```
+  fun_expr: fun_expr . BARBAR fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ X ; || X
+              ^^
+  ```
+
+
+### Item `fun_expr: fun_expr . AMPERAMPER fun_expr` (in 242 errors)
+
+- Derivation (242 occurrences):
+  ```
+  fun_expr: fun_expr . AMPERAMPER fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ X ; && X
+              ^^
+  ```
+
+
+### Item `fun_expr: fun_expr . COLONEQUAL fun_expr` (in 242 errors)
+
+- Derivation (242 occurrences):
+  ```
+  fun_expr: fun_expr . COLONEQUAL fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ X ; := X
+              ^^
+  ```
+
+
+### Item `fun_expr: fun_expr . COLONCOLON fun_expr` (in 242 errors)
+
+- Derivation (242 occurrences):
+  ```
+  fun_expr: fun_expr . COLONCOLON fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ X ; :: X
+              ^^
+  ```
+
+
+### Item `fun_expr: LET . MODULE ext list(attribute) module_name_modal(at_mode_expr) module_binding_body IN seq_expr` (in 225 errors)
+
+- Derivation (225 occurrences):
+  ```
+  fun_expr: LET . MODULE ext list(attribute) module_name_modal(at_mode_expr) module_binding_body IN seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ let module X = {%ext|s|} in X
+            ^^^^^^
+  ```
+
+
+### Item `fun_expr: LET . EXCEPTION ext list(attribute) constr_ident generalized_constructor_arguments list(attribute) IN seq_expr` (in 225 errors)
+
+- Derivation (225 occurrences):
+  ```
+  fun_expr: LET . EXCEPTION ext list(attribute) constr_ident generalized_constructor_arguments list(attribute) IN seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ let exception false in X
+            ^^^^^^^^^
+  ```
+
+
+### Item `fun_expr: LET . OPEN ext list(attribute) module_expr IN seq_expr` (in 225 errors)
+
+- Derivation (225 occurrences):
+  ```
+  fun_expr: LET . OPEN ext list(attribute) module_expr IN seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ let open {%ext|s|} in X
+            ^^^^
+  ```
+
+
+### Item `fun_expr: LET . OPEN BANG ext list(attribute) module_expr IN seq_expr` (in 225 errors)
+
+- Derivation (225 occurrences):
+  ```
+  fun_expr: LET . OPEN BANG ext list(attribute) module_expr IN seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ let open ! {%ext|s|} in X
+            ^^^^
+  ```
+
+
+### Item `reversed_labeled_tuple_body: fun_expr . COMMA fun_expr` (in 220 errors)
+
+- Derivation (220 occurrences):
+  ```
+  reversed_labeled_tuple_body: fun_expr . COMMA fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ X ; , X
+              ^
+  ```
+
+
+### Item `fun_expr: LIDENT . LESSMINUS fun_expr` (in 188 errors)
+
+- Derivation (188 occurrences):
+  ```
+  fun_expr: LIDENT . LESSMINUS fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ x <- X
+          ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT label_longident . LESSMINUS fun_expr` (in 188 errors)
+
+- Derivation (188 occurrences):
+  ```
+  fun_expr: simple_expr DOT label_longident . LESSMINUS fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . x <- X
+                  ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT LPAREN seq_expr RPAREN . LESSMINUS fun_expr` (in 188 errors)
+
+- Derivation (188 occurrences):
+  ```
+  fun_expr: simple_expr DOT LPAREN seq_expr RPAREN . LESSMINUS fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . ( X ) <- X
+                      ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT LBRACE seq_expr RBRACE . LESSMINUS fun_expr` (in 188 errors)
+
+- Derivation (188 occurrences):
+  ```
+  fun_expr: simple_expr DOT LBRACE seq_expr RBRACE . LESSMINUS fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . { X } <- X
+                      ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT LBRACKET seq_expr RBRACKET . LESSMINUS fun_expr` (in 188 errors)
+
+- Derivation (188 occurrences):
+  ```
+  fun_expr: simple_expr DOT LBRACKET seq_expr RBRACKET . LESSMINUS fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . [ X ] <- X
+                      ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOTOP LPAREN separated_or_terminated_nonempty_list(SEMI,expr) RPAREN . LESSMINUS fun_expr` (in 188 errors)
+
+- Derivation (188 occurrences):
+  ```
+  fun_expr: simple_expr DOTOP LPAREN separated_or_terminated_nonempty_list(SEMI,expr) RPAREN . LESSMINUS fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ X .+ ( X ) <- X
+                   ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT mod_longident DOTOP LPAREN separated_or_terminated_nonempty_list(SEMI,expr) RPAREN . LESSMINUS fun_expr` (in 188 errors)
+
+- Derivation (188 occurrences):
+  ```
+  fun_expr: simple_expr DOT mod_longident DOTOP LPAREN separated_or_terminated_nonempty_list(SEMI,expr) RPAREN . LESSMINUS fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . X .+ ( X ) <- X
+                           ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOTOP LBRACE separated_or_terminated_nonempty_list(SEMI,expr) RBRACE . LESSMINUS fun_expr` (in 188 errors)
+
+- Derivation (188 occurrences):
+  ```
+  fun_expr: simple_expr DOTOP LBRACE separated_or_terminated_nonempty_list(SEMI,expr) RBRACE . LESSMINUS fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ X .+ { X } <- X
+                   ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT mod_longident DOTOP LBRACE separated_or_terminated_nonempty_list(SEMI,expr) RBRACE . LESSMINUS fun_expr` (in 188 errors)
+
+- Derivation (188 occurrences):
+  ```
+  fun_expr: simple_expr DOT mod_longident DOTOP LBRACE separated_or_terminated_nonempty_list(SEMI,expr) RBRACE . LESSMINUS fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . X .+ { X } <- X
+                           ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOTOP LBRACKET separated_or_terminated_nonempty_list(SEMI,expr) RBRACKET . LESSMINUS fun_expr` (in 188 errors)
+
+- Derivation (188 occurrences):
+  ```
+  fun_expr: simple_expr DOTOP LBRACKET separated_or_terminated_nonempty_list(SEMI,expr) RBRACKET . LESSMINUS fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ X .+ [ X ] <- X
+                   ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT mod_longident DOTOP LBRACKET separated_or_terminated_nonempty_list(SEMI,expr) RBRACKET . LESSMINUS fun_expr` (in 188 errors)
+
+- Derivation (188 occurrences):
+  ```
+  fun_expr: simple_expr DOT mod_longident DOTOP LBRACKET separated_or_terminated_nonempty_list(SEMI,expr) RBRACKET . LESSMINUS fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . X .+ [ X ] <- X
+                           ^^
+  ```
+
+
+### Item `attribute: LBRACKETAT attr_id attr_payload . RBRACKET` (in 170 errors)
+
+- Derivation (170 occurrences):
+  ```
+  attribute: LBRACKETAT attr_id attr_payload . RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  X [@ and let x ]
+                 ^
+  ```
+
+
+### Item `extension: LBRACKETPERCENT attr_id payload . RBRACKET` (in 170 errors)
+
+- Derivation (170 occurrences):
+  ```
+  extension: LBRACKETPERCENT attr_id payload . RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [% and let x ]
+               ^
+  ```
+
+
+### Item `floating_attribute: LBRACKETATATAT attr_id attr_payload . RBRACKET` (in 170 errors)
+
+- Derivation (170 occurrences):
+  ```
+  floating_attribute: LBRACKETATATAT attr_id attr_payload . RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [@@@ and let x ]
+                 ^
+  ```
+
+
+### Item `item_extension: LBRACKETPERCENTPERCENT attr_id payload . RBRACKET` (in 170 errors)
+
+- Derivation (170 occurrences):
+  ```
+  item_extension: LBRACKETPERCENTPERCENT attr_id payload . RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [%% and let x ]
+                ^
+  ```
+
+
+### Item `module_expr: STRUCT list(attribute) structure . END` (in 170 errors)
+
+- Derivation (170 occurrences):
+  ```
+  module_expr: STRUCT list(attribute) structure . END
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  include struct let x end
+                       ^^^
+  ```
+
+
+### Item `post_item_attribute: LBRACKETATAT attr_id attr_payload . RBRACKET` (in 170 errors)
+
+- Derivation (170 occurrences):
+  ```
+  post_item_attribute: LBRACKETATAT attr_id attr_payload . RBRACKET
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  X [@@ and let x ]
+                  ^
+  ```
+
+
+### Item `pattern: . reversed_labeled_tuple_pattern(pattern)` (in 56 errors)
+
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA DOTDOT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ ~ ( x : {%ext|s|} ) , .. in X :]
+                 ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA DOTDOT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ ~ ( x : {%ext|s|} ) , .. in X :]
+                   ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . TILDE LIDENT COMMA DOTDOT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ ~ x , .. in X :]
+                 ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . TILDE LIDENT COMMA DOTDOT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ ~ x , .. in X :]
+                   ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . LABEL simple_pattern COMMA DOTDOT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ ~label: false , .. in X :]
+                 ^^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . LABEL simple_pattern COMMA DOTDOT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ ~label: false , .. in X :]
+                   ^^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . pattern COMMA DOTDOT
+        pattern: . EXCEPTION ext list(attribute) pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ exception false , .. in X :]
+                 ^^^^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . pattern COMMA DOTDOT
+        pattern: . EXCEPTION ext list(attribute) pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ exception false , .. in X :]
+                   ^^^^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+        labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA TILDE LPAREN LIDENT COLON core_type RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ ~ ( x : {%ext|s|} ) , ~ ( x : {%ext|s|} ) in X :]
+                 ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+        labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA TILDE LPAREN LIDENT COLON core_type RPAREN
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ ~ ( x : {%ext|s|} ) , ~ ( x : {%ext|s|} ) in X :]
+                   ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+        labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA TILDE LIDENT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ ~ ( x : {%ext|s|} ) , ~ x in X :]
+                 ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+        labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA TILDE LIDENT
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ ~ ( x : {%ext|s|} ) , ~ x in X :]
+                   ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern) COMMA DOTDOT
+        labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA LABEL simple_pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ ~ ( x : {%ext|s|} ) , ~label: false , .. in X :]
+                 ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern) COMMA DOTDOT
+        labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA LABEL simple_pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ ~ ( x : {%ext|s|} ) , ~label: false , .. in X :]
+                   ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern COLONCOLON pattern
+      pattern: . reversed_labeled_tuple_pattern(pattern)
+        reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+          labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA LABEL simple_pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ ~ ( x : {%ext|s|} ) , ~label: false :: false in X :]
+                 ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . pattern COLONCOLON pattern
+      pattern: . reversed_labeled_tuple_pattern(pattern)
+        reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+          labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA LABEL simple_pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ ~ ( x : {%ext|s|} ) , ~label: false :: false in X :]
+                   ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+        labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA LABEL simple_pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ ~ ( x : {%ext|s|} ) , ~label: false in X :]
+                 ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+        labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA LABEL simple_pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ ~ ( x : {%ext|s|} ) , ~label: false in X :]
+                   ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern) COMMA DOTDOT
+        labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ ~ ( x : {%ext|s|} ) , false , .. in X :]
+                 ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . reversed_labeled_tuple_pattern(pattern)
+      reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern) COMMA DOTDOT
+        labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ ~ ( x : {%ext|s|} ) , false , .. in X :]
+                   ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern AS val_ident
+      pattern: . reversed_labeled_tuple_pattern(pattern)
+        reversed_labeled_tuple_pattern(pattern): . labeled_tuple_pat_element_list(pattern)
+          labeled_tuple_pat_element_list(pattern): . TILDE LPAREN LIDENT COLON core_type RPAREN COMMA pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ ~ ( x : {%ext|s|} ) , false as x in X :]
+                 ^
+  ```
+- ...
+
+
+### Item `class_expr: let_bindings(no_ext) . IN class_expr` (in 55 errors)
+
+- Derivation (55 occurrences):
+  ```
+  class_expr: let_bindings(no_ext) . IN class_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  class x = let x in x
+                  ^^
+  ```
+
+
+### Item `fun_expr: LIDENT . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: LIDENT . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ x <- function false -> X
+          ^^
+  ```
+
+
+### Item `fun_expr: LIDENT . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: LIDENT . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ x <- stack_ function false -> X
+          ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT label_longident . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT label_longident . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . x <- function false -> X
+                  ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT label_longident . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT label_longident . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . x <- stack_ function false -> X
+                  ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT LPAREN seq_expr RPAREN . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT LPAREN seq_expr RPAREN . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . ( X ) <- function false -> X
+                      ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT LPAREN seq_expr RPAREN . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT LPAREN seq_expr RPAREN . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . ( X ) <- stack_ function false -> X
+                      ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT LBRACE seq_expr RBRACE . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT LBRACE seq_expr RBRACE . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . { X } <- function false -> X
+                      ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT LBRACE seq_expr RBRACE . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT LBRACE seq_expr RBRACE . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . { X } <- stack_ function false -> X
+                      ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT LBRACKET seq_expr RBRACKET . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT LBRACKET seq_expr RBRACKET . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . [ X ] <- function false -> X
+                      ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT LBRACKET seq_expr RBRACKET . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT LBRACKET seq_expr RBRACKET . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . [ X ] <- stack_ function false -> X
+                      ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOTOP LPAREN separated_or_terminated_nonempty_list(SEMI,expr) RPAREN . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOTOP LPAREN separated_or_terminated_nonempty_list(SEMI,expr) RPAREN . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ X .+ ( X ) <- function false -> X
+                   ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOTOP LPAREN separated_or_terminated_nonempty_list(SEMI,expr) RPAREN . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOTOP LPAREN separated_or_terminated_nonempty_list(SEMI,expr) RPAREN . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ X .+ ( X ) <- stack_ function false -> X
+                   ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT mod_longident DOTOP LPAREN separated_or_terminated_nonempty_list(SEMI,expr) RPAREN . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT mod_longident DOTOP LPAREN separated_or_terminated_nonempty_list(SEMI,expr) RPAREN . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . X .+ ( X ) <- function false -> X
+                           ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT mod_longident DOTOP LPAREN separated_or_terminated_nonempty_list(SEMI,expr) RPAREN . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT mod_longident DOTOP LPAREN separated_or_terminated_nonempty_list(SEMI,expr) RPAREN . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . X .+ ( X ) <- stack_ function false -> X
+                           ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOTOP LBRACE separated_or_terminated_nonempty_list(SEMI,expr) RBRACE . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOTOP LBRACE separated_or_terminated_nonempty_list(SEMI,expr) RBRACE . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ X .+ { X } <- function false -> X
+                   ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOTOP LBRACE separated_or_terminated_nonempty_list(SEMI,expr) RBRACE . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOTOP LBRACE separated_or_terminated_nonempty_list(SEMI,expr) RBRACE . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ X .+ { X } <- stack_ function false -> X
+                   ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT mod_longident DOTOP LBRACE separated_or_terminated_nonempty_list(SEMI,expr) RBRACE . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT mod_longident DOTOP LBRACE separated_or_terminated_nonempty_list(SEMI,expr) RBRACE . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . X .+ { X } <- function false -> X
+                           ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT mod_longident DOTOP LBRACE separated_or_terminated_nonempty_list(SEMI,expr) RBRACE . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT mod_longident DOTOP LBRACE separated_or_terminated_nonempty_list(SEMI,expr) RBRACE . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . X .+ { X } <- stack_ function false -> X
+                           ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOTOP LBRACKET separated_or_terminated_nonempty_list(SEMI,expr) RBRACKET . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOTOP LBRACKET separated_or_terminated_nonempty_list(SEMI,expr) RBRACKET . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ X .+ [ X ] <- function false -> X
+                   ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOTOP LBRACKET separated_or_terminated_nonempty_list(SEMI,expr) RBRACKET . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOTOP LBRACKET separated_or_terminated_nonempty_list(SEMI,expr) RBRACKET . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ X .+ [ X ] <- stack_ function false -> X
+                   ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT mod_longident DOTOP LBRACKET separated_or_terminated_nonempty_list(SEMI,expr) RBRACKET . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT mod_longident DOTOP LBRACKET separated_or_terminated_nonempty_list(SEMI,expr) RBRACKET . LESSMINUS FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . X .+ [ X ] <- function false -> X
+                           ^^
+  ```
+
+
+### Item `fun_expr: simple_expr DOT mod_longident DOTOP LBRACKET separated_or_terminated_nonempty_list(SEMI,expr) RBRACKET . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 45 errors)
+
+- Derivation (45 occurrences):
+  ```
+  fun_expr: simple_expr DOT mod_longident DOTOP LBRACKET separated_or_terminated_nonempty_list(SEMI,expr) RBRACKET . LESSMINUS STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ false . X .+ [ X ] <- stack_ function false -> X
+                           ^^
+  ```
+
+
+### Item `seq_expr: . STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 34 errors)
+
+- Derivation (15 occurrences):
+  ```
+  fun_expr: ONCE . seq_expr
+    seq_expr: . STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  once_ stack_ function false -> X
+        ^^^^^^
+  ```
+- Derivation (15 occurrences):
+  ```
+  fun_expr: UNIQUE . seq_expr
+    seq_expr: . STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ stack_ function false -> X
+          ^^^^^^
+  ```
+- Derivation (4 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) . seq_expr WITH fun_expr
+    seq_expr: . STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ stack_ function false -> X with X
+             ^^^^^^
+  ```
+
+
+### Item `reversed_nonempty_llist(functor_arg): reversed_nonempty_llist(functor_arg) . functor_arg` (in 32 errors)
+
+- Derivation (30 occurrences):
+  ```
+  reversed_nonempty_llist(functor_arg): reversed_nonempty_llist(functor_arg) . functor_arg
+    functor_arg: . LPAREN RPAREN
+  ```
+  Sample sentence (interface):
+  ```ocaml
+  include ( ) ( ) -> {%ext|s|}
+              ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  reversed_nonempty_llist(functor_arg): reversed_nonempty_llist(functor_arg) . functor_arg
+    functor_arg: . LPAREN module_name COLON module_type_atomic at_mode_expr RPAREN
+  ```
+  Sample sentence (interface):
+  ```ocaml
+  include ( ) ( X : X @ x ) -> {%ext|s|}
+              ^
+  ```
+- Derivation (1 occurrence):
+  ```
+  reversed_nonempty_llist(functor_arg): reversed_nonempty_llist(functor_arg) . functor_arg
+    functor_arg: . LPAREN module_name COLON module_type RPAREN
+  ```
+  Sample sentence (interface):
+  ```ocaml
+  include ( ) ( X : X ) -> {%ext|s|}
+              ^
+  ```
+
+
+### Item `fun_expr: OVERWRITE ext list(attribute) seq_expr WITH . FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 24 errors)
+
+- Derivation (24 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) seq_expr WITH . FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  try overwrite_ X with function false -> X with false -> X
+                        ^^^^^^^^
+  ```
+
+
+### Item `fun_expr: OVERWRITE ext list(attribute) seq_expr WITH . STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 24 errors)
+
+- Derivation (24 occurrences):
+  ```
+  fun_expr: OVERWRITE ext list(attribute) seq_expr WITH . STACK FUNCTION ext list(attribute) reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  try overwrite_ X with stack_ function false -> X with false -> X
+                        ^^^^^^
+  ```
+
+
+### Item `let_bindings(ext): . LET ext list(attribute) mutable_flag rec_flag let_binding_body list(post_item_attribute)` (in 14 errors)
+
+- Derivation (12 occurrences):
+  ```
+  list(structure_element): structure_item . list(structure_element)
+    list(structure_element): . structure_item list(structure_element)
+      structure_item: . let_bindings(ext)
+        let_bindings(ext): . LET ext list(attribute) mutable_flag rec_flag let_binding_body list(post_item_attribute)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  let x let x
+        ^^^
+  ```
+- Derivation (2 occurrences):
+  ```
+  implementation: . structure EOF
+    structure: . list(structure_element)
+      list(structure_element): . structure_item list(structure_element)
+        structure_item: . let_bindings(ext)
+          let_bindings(ext): . let_bindings(ext) and_let_binding
+            let_bindings(ext): . LET ext list(attribute) mutable_flag rec_flag let_binding_body list(post_item_attribute)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  let x and# x = X
+  ^^^
+  ```
+
+
+### Item `reversed_labeled_tuple_body: reversed_labeled_tuple_body . COMMA fun_expr` (in 14 errors)
+
+- Derivation (14 occurrences):
+  ```
+  reversed_labeled_tuple_body: reversed_labeled_tuple_body . COMMA fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  X , once_ X ; , X
+                ^
+  ```
+
+
+### Item `fun_expr: fun_expr . MINUS fun_expr` (in 9 errors)
+
+- Derivation (9 occurrences):
+  ```
+  fun_expr: fun_expr . MINUS fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ X ; function false -> . - X
+                                  ^
+  ```
+
+
+### Item `fun_expr: fun_expr . PERCENT fun_expr` (in 9 errors)
+
+- Derivation (9 occurrences):
+  ```
+  fun_expr: fun_expr . PERCENT fun_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  unique_ X ; function false -> . % X
+                                  ^
+  ```
+
+
+### Item `pattern: . EXCEPTION ext list(attribute) pattern` (in 8 errors)
+
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern AS val_ident
+      pattern: . EXCEPTION ext list(attribute) pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ exception false as x in X :]
+                 ^^^^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . pattern AS val_ident
+      pattern: . EXCEPTION ext list(attribute) pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ exception false as x in X :]
+                   ^^^^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern attribute
+      pattern: . EXCEPTION ext list(attribute) pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ exception false [@ and ] in X :]
+                 ^^^^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . pattern attribute
+      pattern: . EXCEPTION ext list(attribute) pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ exception false [@ and ] in X :]
+                   ^^^^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . pattern COLONCOLON pattern
+      pattern: . EXCEPTION ext list(attribute) pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ exception false :: false in X :]
+                 ^^^^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . pattern COLONCOLON pattern
+      pattern: . EXCEPTION ext list(attribute) pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ exception false :: false in X :]
+                   ^^^^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) ONCE . pattern IN fun_expr
+    pattern: . EXCEPTION ext list(attribute) pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for once_ exception false in X :]
+                 ^^^^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  comprehension_clause_binding: list(attribute) UNIQUE . pattern IN fun_expr
+    pattern: . EXCEPTION ext list(attribute) pattern
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [: X for unique_ exception false in X :]
+                   ^^^^^^^^^
+  ```
+
+
+### Item `label_let_pattern: nonempty_list(mode_legacy) . LIDENT optional_poly_type_and_modes` (in 4 errors)
+
+- Derivation (4 occurrences):
+  ```
+  label_let_pattern: nonempty_list(mode_legacy) . LIDENT optional_poly_type_and_modes
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  fun ~ ( once_ x ) -> X
+                ^
+  ```
+
+
+### Item `nonempty_list(mode_legacy): . LOCAL nonempty_list(mode_legacy)` (in 3 errors)
+
+- Derivation (1 occurrence):
+  ```
+  nonempty_list(mode_legacy): ONCE . nonempty_list(mode_legacy)
+    nonempty_list(mode_legacy): . LOCAL nonempty_list(mode_legacy)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  let once_ local_ local_ x = X
+            ^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  nonempty_list(mode_legacy): UNIQUE . nonempty_list(mode_legacy)
+    nonempty_list(mode_legacy): . LOCAL nonempty_list(mode_legacy)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  let unique_ local_ local_ x = X
+              ^^^^^^
+  ```
+- Derivation (1 occurrence):
+  ```
+  nonempty_list(mode_legacy): LOCAL . nonempty_list(mode_legacy)
+    nonempty_list(mode_legacy): . LOCAL nonempty_list(mode_legacy)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  let local_ local_ local_ x = X
+             ^^^^^^
+  ```
+
+
+### Item `attr_id: . single_attr_id` (in 1 error)
+
+- Derivation (1 occurrence):
+  ```
+  ext: PERCENT . attr_id
+    attr_id: . single_attr_id
+      single_attr_id: . AND
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  overwrite_ % and X with X
+               ^^^
+  ```
+
+
+### Item `fun_expr: MATCH ext list(attribute) seq_expr . WITH reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 1 error)
+
+- Derivation (1 occurrence):
+  ```
+  fun_expr: MATCH ext list(attribute) seq_expr . WITH reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  match overwrite_ X with X with false -> X
+                            ^^^^
+  ```
+
+
+### Item `fun_expr: TRY ext list(attribute) seq_expr . WITH reversed_preceded_or_separated_nonempty_llist(BAR,match_case)` (in 1 error)
+
+- Derivation (1 occurrence):
+  ```
+  fun_expr: TRY ext list(attribute) seq_expr . WITH reversed_preceded_or_separated_nonempty_llist(BAR,match_case)
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  try overwrite_ X with X with false -> X
+                          ^^^^
+  ```
+
+
+### Item `payload: QUESTION pattern . WHEN seq_expr` (in 1 error)
+
+- Derivation (1 occurrence):
+  ```
+  payload: QUESTION pattern . WHEN seq_expr
+  ```
+  Sample sentence (implementation):
+  ```ocaml
+  [@@@ and ?# x when X ]
+                ^^^^
+  ```
+
 ## Error: Syntax error: A parenthesis here can only follow one of: 
   ., .L, .l, .n, .:, .:L, .:l, .:n, .idx_imm, .idx_mut.
 
