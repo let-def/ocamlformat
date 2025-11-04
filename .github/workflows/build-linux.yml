@@ -8,6 +8,7 @@ on:
       - main
       - jane
       - jane-fuzz
+      - def-local-patches
   pull_request:
   workflow_dispatch:
 
