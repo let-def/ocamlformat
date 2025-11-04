@@ -1,5 +1,4 @@
 (rule
- (alias fuzzer)
  (deps state.dat)
  (targets report_new.md state_new.dat)
  (action
@@ -11,14 +10,15 @@
     --comments
     --ocamlformat
     %{exe:../../bin/ocamlformat/main.exe}
+    --regressions-not-fatal
     --track-regressions-from state.dat
     --track-regressions-to state_new.dat
     --save-report-to report_new.md)))
 
 (rule
  (alias fuzzer)
-  (action (cmp state.dat state_new.dat)))
+ (action (cmp state.dat state_new.dat)))
 
 (rule
- (alias fuzzer)
+ (alias fuzzer-report)
   (action (diff report.md report_new.md)))
