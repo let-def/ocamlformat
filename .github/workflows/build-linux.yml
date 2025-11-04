@@ -7,6 +7,7 @@ on:
     branches:
       - main
       - jane
+      - def-local-patches
   pull_request:
   workflow_dispatch:
 
