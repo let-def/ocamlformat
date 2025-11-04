@@ -1,17 +1,24 @@
 (rule
  (alias fuzzer)
- (mode promote)
- (targets state.dat report.md)
+ (deps state.dat)
+ (targets report_new.md state_new.dat)
  (action
   (run
-   %{bin:ocamlgrammarfuzzer}
-   --ocamlformat-check
-   --exhaust
-   --oxcaml
-   --comments
-   --ocamlformat
-   %{exe:../../bin/ocamlformat/main.exe}
-   --track-regressions-in
-   state.dat
-   --save-report-to
-   report.md)))
+    %{bin:ocamlgrammarfuzzer}
+    --ocamlformat-check
+    --exhaust
+    --oxcaml
+    --comments
+    --ocamlformat
+    %{exe:../../bin/ocamlformat/main.exe}
+    --track-regressions-from state.dat
+    --track-regressions-to state_new.dat
+    --save-report-to report_new.md)))
+
+(rule
+ (alias fuzzer)
+  (action (cmp state.dat state_new.dat)))
+
+(rule
+ (alias fuzzer)
+  (action (diff report.md report_new.md)))
