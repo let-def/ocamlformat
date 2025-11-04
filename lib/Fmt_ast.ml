@@ -688,13 +688,12 @@ let rec fmt_extension_aux c ctx ~key (ext, pld) =
       (*assert (not (Cmts.has_after c.cmts pexp_loc)) ;*)
       (*assert (not (Cmts.has_before c.cmts pstr_loc)) ;*)
       (*assert (not (Cmts.has_after c.cmts pstr_loc)) ;*)
-      hvbox 0 (Cmts.fmt_before c pstr_loc $
-               Cmts.fmt_before c pexp_loc $
-               fmt_quoted_string (Ext.Key.to_string key) ext str delim $
-               Cmts.fmt_after c loc $
-               Cmts.fmt_after c pexp_loc $
-               Cmts.fmt_after c pstr_loc)
-
+      hvbox 0
+        ( Cmts.fmt_before c pstr_loc
+        $ Cmts.fmt_before c pexp_loc
+        $ fmt_quoted_string (Ext.Key.to_string key) ext str delim
+        $ Cmts.fmt_after c loc $ Cmts.fmt_after c pexp_loc
+        $ Cmts.fmt_after c pstr_loc )
   | _, PStr [({pstr_loc; _} as si)], (Pld _ | Str _ | Top)
     when Source.extension_using_sugar ~name:ext ~payload:pstr_loc ->
       fmt_structure_item c ~last:true ~ext ~semisemi:false (sub_str ~ctx si)
@@ -840,7 +839,7 @@ and type_constr_and_body c xbody =
   let body = xbody.ast in
   match xbody.ast.pexp_desc with
   | Pexp_constraint (exp, typ, ([] as modes))
-  | Pexp_constraint (exp, (None as typ), modes)
+   |Pexp_constraint (exp, (None as typ), modes)
   (* [fun x : ret_t @ ret_mode ->] is banned in the parser, so don't move the
      constraint if there are both a type and modes. *) ->
       Cmts.relocate c.cmts ~src:body.pexp_loc ~before:exp.pexp_loc
@@ -1627,11 +1626,12 @@ and fmt_pattern ?ext c ?pro ?parens ?(box = false)
         $ char ' ' $ fmt_str_loc_opt c name )
   | Ppat_exception pat ->
       let parens =
-        (* An exception pattern inside a `let`-binding would be
-           parsed as a `let exception` if not parenthesized. *)
+        (* An exception pattern inside a `let`-binding would be parsed as a
+           `let exception` if not parenthesized. *)
         match ctx0 with
-        | Exp {pexp_desc= Pexp_let _; _}
-        | Str {pstr_desc= Pstr_value _; _} -> true
+        | Exp {pexp_desc= Pexp_let _; _} | Str {pstr_desc= Pstr_value _; _}
+          ->
+            true
         | _ -> parens
       in
       cbox 2
@@ -3713,11 +3713,15 @@ and fmt_class_field_kind c ctx = function
       in
       let ty, modes, e =
         match (xbody.ast, poly) with
-        | {pexp_desc= Pexp_constraint (e, Some t, modes); pexp_loc; _}, None ->
+        | {pexp_desc= Pexp_constraint (e, Some t, modes); pexp_loc; _}, None
+          ->
             Cmts.relocate c.cmts ~src:pexp_loc ~before:t.ptyp_loc
-              ~after:e.pexp_loc;
+              ~after:e.pexp_loc ;
             (Some t, modes, sub_exp ~ctx e)
-        | {pexp_desc= Pexp_constraint (e, None, (_ ::_ as modes)); pexp_loc=_; _}, None ->
+        | ( { pexp_desc= Pexp_constraint (e, None, (_ :: _ as modes))
+            ; pexp_loc= _
+            ; _ }
+          , None ) ->
             (None, modes, sub_exp ~ctx e)
         | {pexp_desc= Pexp_constraint _; _}, Some _ -> (poly, [], xbody)
         | _, poly -> (poly, [], xbody)
