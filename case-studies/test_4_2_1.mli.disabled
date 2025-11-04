@@ -1,0 +1,2 @@
+include functor functor () -> ABCDEFGHIJKLMNOPQRSTUVWXYZ012345
+(*E*) @@ lident
