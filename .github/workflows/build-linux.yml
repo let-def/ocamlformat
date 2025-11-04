@@ -39,9 +39,7 @@ jobs:
         run: opam install --deps-only -t .
 
       - name: Install ocamlgrammarfuzzer
-        run: |
-          opam install cmon -y
-          opam pin add ocamlgrammarfuzzer https://github.com/shogan-ai/ocamlgrammarfuzzer.git -y
+        run: opam pin add ocamlgrammarfuzzer https://github.com/shogan-ai/ocamlgrammarfuzzer.git -y
 
       - name: Self-formatting test
         run: opam exec -- dune build @fmt
