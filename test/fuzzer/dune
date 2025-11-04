@@ -5,7 +5,13 @@
  (action
   (run
    %{bin:ocamlgrammarfuzzer}
-   --ocamlformat-check --exhaust --oxcaml --comments
-   --ocamlformat %{exe:../../bin/ocamlformat/main.exe}
-   --track-regressions-in state.dat
-   --save-report-to report.md)))
+   --ocamlformat-check
+   --exhaust
+   --oxcaml
+   --comments
+   --ocamlformat
+   %{exe:../../bin/ocamlformat/main.exe}
+   --track-regressions-in
+   state.dat
+   --save-report-to
+   report.md)))
