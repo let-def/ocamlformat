@@ -1,8 +1,7 @@
 OCAMLGRAMMARFUZZER0
 695f9eae8022d7985de9b6fca429f72c
 139970
-valid:120909 syntax_errors:7095 with_comments_dropped:4288 comments_dropped:4391 internal_errors:7936
-2
+valid:120910 syntax_errors:7094 with_comments_dropped:4288 comments_dropped:4391 internal_errors:7936
 14
 22
 25
