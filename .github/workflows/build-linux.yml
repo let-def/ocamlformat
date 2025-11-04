@@ -38,6 +38,9 @@ jobs:
       - name: Opam dependencies
         run: opam install --deps-only -t .
 
+      - name: Install ocamlgrammarfuzzer
+        run: opam pin add ocamlgrammarfuzzer https://github.com/shogan-ai/ocamlgrammarfuzzer.git -y
+
       - name: Self-formatting test
         run: opam exec -- dune build @fmt
 
@@ -48,6 +51,9 @@ jobs:
 
       - name: Runtest
         run: opam exec -- dune runtest
+
+      - name: Deterministic fuzzing
+        run: opam exec -- ocamlgrammarfuzzer --exhaust --oxcaml --comments --ocamlformat-check --ocamlformat _build/default/bin/ocamlformat/main.exe --track-regressions-in test/ocamlgrammarfuzzer.dat
 
       - name: Check manpages
         run: opam exec -- dune build @gen_manpage --auto-promote
