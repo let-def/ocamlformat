@@ -55,7 +55,7 @@ jobs:
         run: opam exec -- dune runtest
 
       - name: Deterministic fuzzing
-        run: opam exec -- ocamlgrammarfuzzer --exhaust --oxcaml --comments --ocamlformat-check --ocamlformat _build/default/bin/ocamlformat/main.exe --track-regressions-in test/ocamlgrammarfuzzer.dat
+        run: opam exec -- ocamlgrammarfuzzer --exhaust --oxcaml --comments --ocamlformat-check --ocamlformat _build/default/bin/ocamlformat/main.exe --track-regressions-in test/ocamlgrammarfuzzer.dat --save-report-to /dev/null
 
       - name: Check manpages
         run: opam exec -- dune build @gen_manpage --auto-promote
