@@ -245,19 +245,19 @@ The beginning of the `state.dat` file contains metadata that summarizes the run:
 
 ```
 version: OCAMLGRAMMARFUZZER0
-grammar hash: 1f9752ec82afce3e0946465b84a6e5f2
+hash: 1f9752ec82afce3e0946465b84a6e5f2
 sentences: 490799
 valid sentences: 391730
 syntax errors: 59851
 comment errors: 8552
 comments dropped: 8638
 internal errors: 32723
-failures:
+---
 ...
 ```
 
-The initial lines (`version: ...`, `grammar hash: ...`, `sentences: ...`) identify
-the **fuzzer version** and the **grammar** being tested, to ensure consistency.
+The initial lines (`version: ...`, `hash: ...`, `sentences: ...`) identify
+the **fuzzer version** and the sentence set being tested, to ensure consistency.
 The subsequent lines summarize `ocamlformat`'s behavior against the generated
 sentences by counting the number of successes and failures per error class.
 
