@@ -5,7 +5,6 @@
   (run menhir --unused-tokens --table --cmly --lalr parser.mly)))
 
 (rule
- (alias fuzzer)
  (deps parser.cmly state.dat)
  (targets state_new.dat report.md regressions_report.md)
  (action
@@ -42,6 +41,10 @@
     sh
     -c
     "if test -s %{dep:regressions_report.md}; then echo '- '$PWD'/%{dep:regressions_report.md} for regressions'; fi"))))
+
+(rule
+ (alias fuzzer-no-regression)
+ (action run test -s %{dep:regressions_report.md}))
 
 (rule
  (alias fuzzer-update-state)
