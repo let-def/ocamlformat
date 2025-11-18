@@ -194,3 +194,92 @@ sequence of commits and it's all ready to merge, just run
 `git rebase <starting commit> --signoff`, where `<starting commit>` is the
 commit before any of your edits. You can often say something like `origin/jane`
 or `HEAD~4` or similar.
+
+Fuzzing
+-------
+
+[OCamlgrammarfuzzer](https://github.com/shogan-ai/ocamlgrammarfuzzer) is used by
+the CI to ensure that syntax coverage does not regress.
+
+## Fuzzing locally
+
+Fuzzing ocamlformat needs `ocamlgrammarfuzzer` to be installed.
+The CI runs version `v0.1`, to reproduce the results it is better to use the same version:
+
+```bash
+opam pin add ocamlgrammarfuzzer https://github.com/shogan-ai/ocamlgrammarfuzzer.git#v0.1
+```
+
+FIXME: update the documentation when the CI is updated; how to ensure versions are kept synchronized?
+
+The fuzzer is integrated to the fuzz target of the Makefile:
+```
+make fuzz
+```
+
+This target should build ocamlformat, run the fuzzer, output some statistics and produce two files:
+- [_build/default/test/fuzzer/report.md](_build/default/test/fuzzer/report.md),
+  which classify failures of the current version of ocamlformat
+- [_build/default/test/fuzzer/regressions_report.md](_build/default/test/fuzzer/regressions_report.md)
+  which classify regressions of the current version compared to the previous one
+
+(For convenience, the paths of the report are repeated in the output of `make fuzz`)
+
+## Updating coverage state
+
+```
+make fuzz-update-state
+```
+
+Detecting regressions is done by comparing the fuzzing results with a previous run.
+The state of the previous run is stored in a `test/fuzzer/state.dat`.
+
+To set a new reference to which results should be compared, this file has to be updated.
+This is done by the `fuzz-update-state` target.
+
+The first few lines of the state file can be read to get an idea of its content:
+```
+version: OCAMLGRAMMARFUZZER0
+grammar hash: 1f9752ec82afce3e0946465b84a6e5f2
+sentences: 490799
+valid sentences: 391730
+syntax errors: 59851
+comment errors: 8552
+comments dropped: 8638
+internal errors: 32723
+failures: 
+...
+```
+
+The first lines are used to identify the grammar being fuzzed:
+- `version: ...` is an header to verify that a compatible version of the fuzzer is used.
+- `grammar hash: ...` is a hash of the grammar (actually the `*.cmly` file) to make sure we are testing against the same grammar 
+- `sentences: ...` is the number of sentences that the fuzzer generated to compute a representative coverage of the grammar
+The other lines summarize the behavior of ocamlformat against these sentences:
+number of successes and number of failures per error class.
+
+When merging a pull request that update the state, a quick look at these lines can be used to visually verify the absence of regressions.
+
+The rest of the file is not directly interpretable, it is used by the fuzzer.
+
+## Updating grammar
+
+```
+make fuzz-update-grammar
+```
+
+Fuzzing is done against a fixed grammar saved in `test/fuzzer/parser.mly`.
+The `fuzz-update-grammar` target update this file from `vendor/parser-jane/for-parser-standard/parser.mly`.
+After
+
+## Dune aliases
+
+The `test/fuzzer/dune` file setups a few aliases that can be used to access the
+fuzzer from dune.
+
+You can use:
+- `dune build @fuzzer` to run the fuzzer locally and access the reports
+- `dune build @fuzzer-no-regression` to get a summary and a non-zero exit code
+  if there has been a regression
+- `dune build @fuzzer-update-state` to check if the state is up to date;
+  you then have to `dune promote` 
