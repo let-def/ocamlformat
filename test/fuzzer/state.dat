@@ -1,7 +1,12 @@
-OCAMLGRAMMARFUZZER0
-7fbf3483ecf1b00a7002aaa99fd3dea1
-490799
-valid:391730 syntax_errors:59851 with_comments_dropped:8552 comments_dropped:8638 internal_errors:32723
+version: OCAMLGRAMMARFUZZER0
+hash: 1f9752ec82afce3e0946465b84a6e5f2
+sentences: 490799
+valid sentences: 391730
+with syntax errors: 59851
+with comment errors: 8552
+total comments dropped: 8638
+internal errors: 32723
+regressions: 
 2
 15
 23
@@ -99071,4 +99076,4 @@ valid:391730 syntax_errors:59851 with_comments_dropped:8552 comments_dropped:863
 490759
 490762
 490795
-END
+.

@@ -1,12 +1,23 @@
 (rule
- (deps state.dat)
- (targets report_new.md state_new.dat)
+  (targets parser.cmly parser.ml parser.mli)
+  (deps parser.mly)
+  (action (run menhir --table --cmly --lalr parser.mly)))
+
+(rule
+ (alias fuzz-regressions)
+ (deps parser.cmly state.dat)
+ (targets state_new.dat report_new.md regressions_report.md)
  (action
   (run
    %{bin:ocamlgrammarfuzzer}
    --ocamlformat-check
+   --cmly
+   parser.cmly
+   --entrypoint
+   implementation
+   --entrypoint
+   interface
    --exhaust
-   --oxcaml
    --comments
    --ocamlformat
    %{exe:../../bin/ocamlformat/main.exe}
@@ -16,7 +27,10 @@
    --track-regressions-to
    state_new.dat
    --save-report-to
-   report_new.md)))
+   report_new.md
+   --regressions-report-to
+   regressions_report.md))
+  (mode (promote (only regressions_report.md))))
 
 (rule
  (alias fuzzer)
