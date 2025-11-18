@@ -42,12 +42,12 @@ coverage:
 fuzz:
 	dune build @fuzzer
 
+fuzz-update-state:
+	dune build @fuzzer-update-state || dune promote
+
 fuzz-update-grammar:
 	cp -f vendor/parser-jane/for-parser-standard/parser.mly test/fuzzer/parser.mly
 	$(MAKE) fuzz-update-state
-
-fuzz-update-state:
-	dune build @fuzzer-update-state || dune promote
 
 .PHONY: bench
 bench:
