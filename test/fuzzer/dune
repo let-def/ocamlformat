@@ -8,33 +8,36 @@
  (deps parser.cmly state.dat)
  (targets state_new.dat report.md regressions_report.md)
  (action
+  (run
+    %{bin:ocamlgrammarfuzzer}
+    --ocamlformat-check
+    --cmly
+    parser.cmly
+    --entrypoint
+    implementation
+    --entrypoint
+    interface
+    --exhaust
+    --comments
+    --ocamlformat
+    %{exe:../../bin/ocamlformat/main.exe}
+    --regressions-not-fatal
+    --track-regressions-from
+    state.dat
+    --track-regressions-to
+    state_new.dat
+    --save-report-to
+    report.md
+    --regressions-report-to
+    regressions_report.md)))
+
+(rule
+ (alias fuzzer)
+ (action
   (progn
-   (run
-     %{bin:ocamlgrammarfuzzer}
-     --ocamlformat-check
-     --cmly
-     parser.cmly
-     --entrypoint
-     implementation
-     --entrypoint
-     interface
-     --exhaust
-     --comments
-     --ocamlformat
-     %{exe:../../bin/ocamlformat/main.exe}
-     --regressions-not-fatal
-     --track-regressions-from
-     state.dat
-     --track-regressions-to
-     state_new.dat
-     --save-report-to
-     report.md
-     --regressions-report-to
-     regressions_report.md)
-   (echo "Reported all errors in `test/fuzzer/report.md`.\n")
-   (echo "Reported regressions in `test/fuzzer/regressions_report.md`.\n")
-   (echo "Use `dune promote` to copy them to the repository.\n")))
- (mode (promote (only report.md regressions_report.md))))
+   (run sh -c "echo Check:")
+   (run sh -c "echo '- '$PWD'/%{dep:report.md} for all errors'")
+   (run sh -c "if test -s %{dep:regressions_report.md}; then echo '- '$PWD'/%{dep:regressions_report.md} for regressions'; fi"))))
 
 (rule
  (alias fuzzer-update-state)
