@@ -1,12 +1,12 @@
 version: OCAMLGRAMMARFUZZER0
-hash: 1f9752ec82afce3e0946465b84a6e5f2
+grammar hash: 976a2d8b189b808280b33e7c8734f559
 sentences: 490799
-valid sentences: 391728
-syntax errors: 59852
-comment errors: 8553
+valid sentences: 391730
+syntax errors: 59851
+comment errors: 8552
 comments dropped: 8638
 internal errors: 32723
-regressions: 
+failures:
 2
 15
 23
@@ -24,7 +24,6 @@ regressions:
 99
 100
 106
-115
 116
 124
 133
