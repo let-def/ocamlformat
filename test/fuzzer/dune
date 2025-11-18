@@ -2,7 +2,7 @@
  (targets parser.cmly parser.ml parser.mli)
  (deps parser.mly)
  (action
-  (run menhir --table --cmly --lalr parser.mly)))
+  (run menhir --unused-tokens --table --cmly --lalr parser.mly)))
 
 (rule
  (alias fuzzer)
