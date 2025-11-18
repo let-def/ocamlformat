@@ -44,7 +44,7 @@
 
 (rule
  (alias fuzzer-no-regression)
- (action run test -s %{dep:regressions_report.md}))
+ (action (run test -s %{dep:regressions_report.md})))
 
 (rule
  (alias fuzzer-update-state)

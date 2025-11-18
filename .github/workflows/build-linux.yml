@@ -53,7 +53,7 @@ jobs:
         run: opam exec -- dune runtest
 
       - name: Deterministic fuzzing
-        run: opam exec -- dune build @fuzzer
+        run: opam exec -- dune build @fuzzer-no-regression
 
       - name: Check manpages
         run: opam exec -- dune build @gen_manpage --auto-promote
