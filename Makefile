@@ -40,13 +40,13 @@ coverage:
 	echo " => open _coverage/index.html"
 
 fuzz:
-	dune build @fuzzer
+	WITH_FUZZER=true dune build @fuzzer
 
 fuzz-update-grammar:
 	cp -f vendor/parser-jane/for-parser-standard/parser.mly test/fuzzer/parser.mly
 
 fuzz-update-state:
-	dune build @fuzzer-update-state || dune promote
+	WITH_FUZZER=true dune build @fuzzer-update-state || WITH_FUZZER=true dune promote
 
 .PHONY: bench
 bench:

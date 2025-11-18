@@ -285,9 +285,12 @@ This should be run **after** any upstream changes to the parser.
 The [`test/fuzzer/dune`](test/fuzzer/dune) file defines several aliases for
 accessing the fuzzer through `dune`:
 
-* `dune build @fuzzer` runs the fuzzer and generates the report files.
-* `dune build @fuzzer-no-regression` provides a summary and exits with a
+* `WITH_FUZZER=true dune build @fuzzer` runs the fuzzer and generates the report files.
+* `WITH_FUZZER=true dune build @fuzzer-no-regression` provides a summary and exits with a
   **non-zero code** if any regressions are detected.
-* `dune build @fuzzer-update-state` checks if the current fuzzer state is
-  up-to-date. If a new state is generated, you must run `dune promote` to apply
+* `WITH_FUZZER=true dune build @fuzzer-update-state` checks if the current fuzzer state is
+  up-to-date. If a new state is generated, you must run `WITH_FUZZER=true dune promote` to apply
   the changes to `test/fuzzer/state.dat`.
+
+Note: the rules related to fuzzing are enabled only if `WITH_FUZZER=true` to
+prevent dune from executing them in default builds (e.g. `dune build`).

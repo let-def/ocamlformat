@@ -1,10 +1,12 @@
 (rule
+ (enabled_if %{env:WITH_FUZZER=false})
  (targets parser.cmly parser.ml parser.mli)
  (deps parser.mly)
  (action
   (run menhir --unused-tokens --table --cmly --lalr parser.mly)))
 
 (rule
+ (enabled_if %{env:WITH_FUZZER=false})
  (deps parser.cmly state.dat)
  (targets state_new.dat report.md regressions_report.md)
  (action
@@ -32,6 +34,7 @@
    regressions_report.md)))
 
 (rule
+ (enabled_if %{env:WITH_FUZZER=false})
  (alias fuzzer)
  (action
   (progn
@@ -43,11 +46,13 @@
     "if test -s %{dep:regressions_report.md}; then echo '- '$PWD'/%{dep:regressions_report.md} for regressions'; fi"))))
 
 (rule
+ (enabled_if %{env:WITH_FUZZER=false})
  (alias fuzzer-no-regression)
  (action
   (run test ! -s %{dep:regressions_report.md})))
 
 (rule
+ (enabled_if %{env:WITH_FUZZER=false})
  (alias fuzzer-update-state)
  (action
   (cmp state.dat state_new.dat)))
