@@ -39,6 +39,19 @@ coverage:
 	echo "Coverage report generated in _coverage/"
 	echo " => open _coverage/index.html"
 
+fuzz:
+	dune build @fuzzer
+
+fuzz-report:
+	dune build @fuzzer
+	dune promote
+
+fuzz-update-grammar:
+	cp -f vendor/parser-jane/for-parser-standard/parser.mly test/fuzzer/parser.mly
+
+fuzz-update-state:
+	dune build @fuzzer-update-state
+
 .PHONY: bench
 bench:
 	@dune build bench/test/source_bench.ml
