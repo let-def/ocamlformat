@@ -229,6 +229,9 @@ generate two key report files:
   classifies regressions in the current version compared to the previously saved
   state.
 
+If there were no regressions, it update the state file.
+This logic is implemented in [`test/fuzzer/run.sh`](test/fuzzer/run.sh).
+
 ### Updating Coverage State
 
 Regression detection is performed by comparing the latest fuzzing run against a
