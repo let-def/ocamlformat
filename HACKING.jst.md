@@ -198,46 +198,49 @@ or `HEAD~4` or similar.
 Fuzzing
 -------
 
-[OCamlgrammarfuzzer](https://github.com/shogan-ai/ocamlgrammarfuzzer) is used by
-the CI to ensure that syntax coverage does not regress.
+The continuous integration (CI) process uses
+[OCamlgrammarfuzzer](https://github.com/shogan-ai/ocamlgrammarfuzzer.git) to
+prevent regressions in syntax coverage.
 
-## Fuzzing locally
+### Fuzzing Locally
 
-Fuzzing ocamlformat needs `ocamlgrammarfuzzer` to be installed.
-The CI runs version `v0.1`, to reproduce the results it is better to use the same version:
+To fuzz `ocamlformat` locally, you must first install **`ocamlgrammarfuzzer`**.
+It's recommended to use the same version as the CI (v0.1) to ensure reproducible
+results:
 
 ```bash
 opam pin add ocamlgrammarfuzzer https://github.com/shogan-ai/ocamlgrammarfuzzer.git#v0.1
 ```
 
-FIXME: update the documentation when the CI is updated; how to ensure versions are kept synchronized?
+The fuzzer is integrated into the Makefile's **`fuzz`** target:
 
-The fuzzer is integrated to the fuzz target of the Makefile:
-```
+```bash
 make fuzz
 ```
 
-This target should build ocamlformat, run the fuzzer, output some statistics and produce two files:
-- [_build/default/test/fuzzer/report.md](_build/default/test/fuzzer/report.md),
-  which classify failures of the current version of ocamlformat
-- [_build/default/test/fuzzer/regressions_report.md](_build/default/test/fuzzer/regressions_report.md)
-  which classify regressions of the current version compared to the previous one
+This target will build `ocamlformat`, run the fuzzer, display statistics, and
+generate two key report files:
 
-(For convenience, the paths of the report are repeated in the output of `make fuzz`)
+* [build/default/test/fuzzer/report.md](build/default/test/fuzzer/report.md):
+  classifies failures in the current version of `ocamlformat`.
+* [build/default/test/fuzzer/regressions_report.md](build/default/test/fuzzer/regressions_report.md):
+  classifies regressions in the current version compared to the previously saved
+  state.
 
-## Updating coverage state
+### Updating Coverage State
 
-```
+Regression detection is performed by comparing the latest fuzzing run against a
+previous run, saved in `test/fuzzer/state.dat`.
+
+To set a new baseline (reference state) for comparison, this file must be
+updated using the `fuzz-update-state` target:
+
+```bash
 make fuzz-update-state
 ```
 
-Detecting regressions is done by comparing the fuzzing results with a previous run.
-The state of the previous run is stored in a `test/fuzzer/state.dat`.
+The beginning of the `state.dat` file contains metadata that summarizes the run:
 
-To set a new reference to which results should be compared, this file has to be updated.
-This is done by the `fuzz-update-state` target.
-
-The first few lines of the state file can be read to get an idea of its content:
 ```
 version: OCAMLGRAMMARFUZZER0
 grammar hash: 1f9752ec82afce3e0946465b84a6e5f2
@@ -251,35 +254,38 @@ failures:
 ...
 ```
 
-The first lines are used to identify the grammar being fuzzed:
-- `version: ...` is an header to verify that a compatible version of the fuzzer is used.
-- `grammar hash: ...` is a hash of the grammar (actually the `*.cmly` file) to make sure we are testing against the same grammar 
-- `sentences: ...` is the number of sentences that the fuzzer generated to compute a representative coverage of the grammar
-The other lines summarize the behavior of ocamlformat against these sentences:
-number of successes and number of failures per error class.
+The initial lines (`version: ...`, `grammar hash: ...`, `sentences: ...`) identify
+the **fuzzer version** and the **grammar** being tested, to ensure consistency.
+The subsequent lines summarize `ocamlformat`'s behavior against the generated
+sentences by counting the number of successes and failures per error class.
 
-When merging a pull request that update the state, a quick look at these lines can be used to visually verify the absence of regressions.
+When reviewing a pull request that updates the state, a quick look at these
+lines can help visually confirm the absence of regressions. The remainder of the
+file is fuzzer-specific data.
 
-The rest of the file is not directly interpretable, it is used by the fuzzer.
+### Updating Grammar
 
-## Updating grammar
+The fuzzer operates against a fixed grammar saved in
+[`test/fuzzer/parser.mly`](test/fuzzer/parser.mly).
 
-```
+To update this fixed grammar file from the source
+([`vendor/parser-jane/for-parser-standard/parser.mly`(vendor/parser-jane/for-parser-standard/parser.mly)),
+use the **`fuzz-update-grammar`** target:
+
+```bash
 make fuzz-update-grammar
 ```
 
-Fuzzing is done against a fixed grammar saved in `test/fuzzer/parser.mly`.
-The `fuzz-update-grammar` target update this file from `vendor/parser-jane/for-parser-standard/parser.mly`.
-After
+This should be run **after** any upstream changes to the parser.
 
-## Dune aliases
+### Dune Aliases
 
-The `test/fuzzer/dune` file setups a few aliases that can be used to access the
-fuzzer from dune.
+The [`test/fuzzer/dune`](test/fuzzer/dune) file defines several aliases for
+accessing the fuzzer through `dune`:
 
-You can use:
-- `dune build @fuzzer` to run the fuzzer locally and access the reports
-- `dune build @fuzzer-no-regression` to get a summary and a non-zero exit code
-  if there has been a regression
-- `dune build @fuzzer-update-state` to check if the state is up to date;
-  you then have to `dune promote` 
+* `dune build @fuzzer` runs the fuzzer and generates the report files.
+* `dune build @fuzzer-no-regression` provides a summary and exits with a
+  **non-zero code** if any regressions are detected.
+* `dune build @fuzzer-update-state` checks if the current fuzzer state is
+  up-to-date. If a new state is generated, you must run `dune promote` to apply
+  the changes to `test/fuzzer/state.dat`.
