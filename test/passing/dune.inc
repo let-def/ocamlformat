@@ -4935,6 +4935,42 @@
  (deps tests/.ocamlformat )
  (package ocamlformat)
  (action
+  (with-stdout-to fuzzer_case_1.ml.stdout
+   (with-stderr-to fuzzer_case_1.ml.stderr
+     (setenv TERM dumb (run %{bin:ocamlformat} --margin-check %{dep:tests/fuzzer_case_1.ml}))))))
+
+(rule
+ (alias runtest)
+ (package ocamlformat)
+ (action (diff tests/fuzzer_case_1.ml fuzzer_case_1.ml.stdout)))
+
+(rule
+ (alias runtest)
+ (package ocamlformat)
+ (action (diff tests/fuzzer_case_1.ml.err fuzzer_case_1.ml.stderr)))
+
+(rule
+ (deps tests/.ocamlformat )
+ (package ocamlformat)
+ (action
+  (with-stdout-to fuzzer_case_1.ml.js-stdout
+   (with-stderr-to fuzzer_case_1.ml.js-stderr
+     (setenv TERM dumb (run %{bin:ocamlformat} --profile=janestreet --enable-outside-detected-project --disable-conf-files %{dep:tests/fuzzer_case_1.ml}))))))
+
+(rule
+ (alias runtest)
+ (package ocamlformat)
+ (action (diff tests/fuzzer_case_1.ml.js-ref fuzzer_case_1.ml.js-stdout)))
+
+(rule
+ (alias runtest)
+ (package ocamlformat)
+ (action (diff tests/fuzzer_case_1.ml.js-err fuzzer_case_1.ml.js-stderr)))
+
+(rule
+ (deps tests/.ocamlformat )
+ (package ocamlformat)
+ (action
   (with-stdout-to gadt.ml.stdout
    (with-stderr-to gadt.ml.stderr
      (setenv TERM dumb (run %{bin:ocamlformat} --margin-check --max-iters 3 %{dep:tests/gadt.ml}))))))

@@ -1,0 +1,3 @@
+lident (* X *)#(* X *) lident
+
+(* `#(` used to be parsed as a single token rather than as a `#` followed by a comment. *)
